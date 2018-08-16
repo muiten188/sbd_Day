@@ -130,6 +130,8 @@ export default {
   tabBarUnderlineStyle: { backgroundColor: '#007db7' },
   tabHeading: {
     backgroundColor: '#fff',
+    borderTopWidth:1,
+    borderTopColor:'#cecece'
   },
   iconTab: { justifyContent: 'center', alignItems: 'center', height: 22,marginTop:3 },
   textHeadingTab:{ justifyContent: 'center', alignItems: 'center',marginTop:-8 }

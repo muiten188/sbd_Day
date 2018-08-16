@@ -166,7 +166,7 @@ export function search_Museum(values, currentPage, pageSize, user) {
 
     return dispatch => {
         dispatch(_searching_Museum());
-        fetch(`${AppConfig.GET_MUSEUMLIST}?${helper.getQueryString(dataPost)}`, {
+        fetch(`${AppConfig.GET_Eventlist}?${helper.getQueryString(dataPost)}`, {
             headers: helper.buildHeader(user),
             method: "GET"
         })

@@ -2,10 +2,10 @@ import * as types from "../../constants/action_types";
 import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
 
-export function get_MuseumDetail(values, user) {
+export function get_Schedule(values, user) {
     return dispatch => {
         //dispatch(_searching_Antifact());
-        fetch(`${AppConfig.GET_MUSEUM_DETAIL}${values.museumId}`, {
+        fetch(`${AppConfig.GET_Schedule}${values.museumId}`, {
             headers: helper.buildHeader(user),
             method: "GET"
         })
@@ -14,7 +14,7 @@ export function get_MuseumDetail(values, user) {
                     //dispatch(_logout());
                 } else if (response.status != 200) {
                     error = true;
-                    dispatch(_seach_MuseumDetailError());
+                    dispatch(_seach_ScheduleError());
                 } else {
                     return response.json();
                 }
@@ -22,16 +22,16 @@ export function get_MuseumDetail(values, user) {
             .then((responseJson) => {
                 if (responseJson) {
                     data = responseJson;
-                    dispatch(_search_MuseumDetail(data));
+                    dispatch(_search_Schedule(data));
                 }
                 else {
                     if (!error) {
-                        dispatch(_seach_MuseumDetailError());
+                        dispatch(_seach_ScheduleError());
                     }
                 }
             })
             .catch(function (error) {
-                dispatch(_seach_MuseumDetailError());
+                dispatch(_seach_ScheduleError());
             });
     };
 }
@@ -92,32 +92,32 @@ function _searching_Antifact() {
     };
 }
 
-function _search_MuseumDetail(data, valuesForm) {
+function _search_Schedule(data, valuesForm) {
     return {
-        type: types.SEARCH_MUSEUMDETAIL,
+        type: types.SEARCH_Schedule,
         data: data,
         isLoading: false,
         valuesForm: valuesForm
     };
 }
 
-function _searching_MuseumDetail() {
+function _searching_Schedule() {
     return {
-        type: types.SEARCHING_MUSEUMDETAIL,
+        type: types.SEARCHING_Schedule,
         isLoading: true
     };
 }
 
-function _seach_MuseumDetailError() {
+function _seach_ScheduleError() {
     return {
-        type: types.SEARCH_MUSEUMDETAIL_ERROR,
+        type: types.SEARCH_Schedule_ERROR,
         searchErorr: true,
         isLoading: false
     };
 }
-export function clearMuseumDetailError() {
+export function clearScheduleError() {
     return {
-        type: types.SEARCH_MUSEUMDETAIL_CLEAR_ERROR
+        type: types.SEARCH_Schedule_CLEAR_ERROR
     };
 }
 

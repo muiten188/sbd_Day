@@ -69,7 +69,7 @@ export default class extends PureComponent {
           styles.item_container_half
         }
         onPress={() => {
-          Actions.museumProduct({ paramPassAction: item });
+          Actions.Parties({ paramPassAction: item });
         }}
       >
         <ItemResultProduct

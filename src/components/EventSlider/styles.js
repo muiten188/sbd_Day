@@ -8,7 +8,8 @@ export default {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    flex:1
+    flex:1,
+    padding:5
   },
   item: {
     width: 240,

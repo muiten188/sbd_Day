@@ -2,8 +2,8 @@ import * as types from "../../constants/action_types";
 const initState = {
   isLoading: true,
   listAntifact: [],
-  museumDetail: {},
-  museumDetailError: false,
+  Schedule: {},
+  ScheduleError: false,
   searchAntifactErorr: false,
   valuesForm: {},
   currentPage: 1,
@@ -40,29 +40,29 @@ export default function (state = initState, action = {}) {
         searchAntifactErorr: initState.searchErorr
       };
     //museum detail
-    case types.SEARCH_MUSEUMDETAIL:
+    case types.SEARCH_Schedule:
     
       return {
         ...state,
-        museumDetail: action.data,
+        Schedule: action.data,
         isLoading: action.isLoading,
-        museumDetailError: initState.museumDetailError,
+        ScheduleError: initState.ScheduleError,
       };
-    case types.SEARCHING_MUSEUMDETAIL:
+    case types.SEARCHING_Schedule:
       return {
         ...state,
         isLoading: action.isLoading,
       };
-    case types.SEARCH_MUSEUMDETAIL_ERROR:
+    case types.SEARCH_Schedule_ERROR:
       return {
         ...state,
-        museumDetailError: action.museumDetailError,
+        ScheduleError: action.ScheduleError,
         isLoading: false
       };
-    case types.SEARCH_MUSEUMDETAIL_CLEAR_ERROR:
+    case types.SEARCH_Schedule_CLEAR_ERROR:
       return {
         ...state,
-        museumDetailError: initState.museumDetailError
+        ScheduleError: initState.ScheduleError
       };
 
     default:

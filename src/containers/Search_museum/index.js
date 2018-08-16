@@ -306,7 +306,7 @@ class SearchMuseum extends Component {
                     styles.item_container_half
                 }
                 onPress={() => {
-                    Actions.museumDetail({ paramPassAction: item });
+                    Actions.Schedule({ paramPassAction: item });
                 }}
             >
                 <ItemSearchMuseum data={item}></ItemSearchMuseum>
@@ -340,7 +340,7 @@ class SearchMuseum extends Component {
                     styles.item_container_half
                 }
                 onPress={() => {
-                    Actions.museumProduct({ paramPassAction: item });
+                    Actions.Parties({ paramPassAction: item });
                 }}
             >
                 <ItemSearchArtifact data={item}></ItemSearchArtifact>

@@ -28,7 +28,7 @@ export function get_AntifactByQRCODE(values, user) {
                     data = responseJson
                     //dispatch(_search_ANTIFACT_BY_QRCODE(data));
                     Actions.pop();
-                    Actions.museumProduct({ paramPassAction: data });
+                    Actions.Parties({ paramPassAction: data });
                 }
                 else {
                     dispatch(_seach_ANTIFACT_BY_QRCODEError());

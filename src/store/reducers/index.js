@@ -2,23 +2,23 @@
 import loginReducer from "../../authen/reducers/login_reducer";
 import registerReducer from "../../authen/reducers/register_reducer";
 //app
-import homeReducer from "../../store/reducers/containers/home_reducer";
-import museumListReducer from "../../store/reducers/containers/museumList_reducer";
-import museumDetailReducer from "../../store/reducers/containers/museumDetail_reducer";
-import productListReducer from "../../store/reducers/containers/productList_reducer";
-import museumProductReducer from "../../store/reducers/containers/museumProduct_reducer";
-import findGuiderReducer from "../../store/reducers/containers/findGuider_reducer";
-import profileReducer from "../../store/reducers/containers/profile_reducer";
-import commentReducer from "../../store/reducers/component/comment_reducer";
-import searchHistoryReducer from "../../store/reducers/containers/searchHistory_reducer";
-import guiderReducer from "../../store/reducers/containers/guider_reducer";
-import guiderRatingReducer from "../../store/reducers/containers/guider_rating_reducer";
-import app_Reducer from "../../store/reducers/app_reducer";
-import qrCodeScannerReducer from '../../store/reducers/containers/qrCodeScanner_reducer';
-import searchMuseumReducer from '../../store/reducers/containers/searchMuseum_reducer';
-import museumMapReducer from '../../store/reducers/containers/MuseumMap_reducer';
-import router_Reducer from "../../store/reducers/router/router_reducer";
-import * as types from "../../store/constants/action_types";
+import homeReducer from "./containers/home_reducer";
+import EventlistReducer from "./containers/eventList_reducer";
+import ScheduleReducer from "./containers/schedule_reducer";
+import newsReducer from "./containers/news_reducer";
+import partiesReducer from "./containers/parties_reducer";
+import findGuiderReducer from "./containers/findGuider_reducer";
+import profileReducer from "./containers/profile_reducer";
+import commentReducer from "./component/comment_reducer";
+import searchHistoryReducer from "./containers/searchHistory_reducer";
+import guiderReducer from "./containers/guider_reducer";
+import guiderRatingReducer from "./containers/guider_rating_reducer";
+import app_Reducer from "./app_reducer";
+import qrCodeScannerReducer from './containers/qrCodeScanner_reducer';
+import searchMuseumReducer from './containers/searchMuseum_reducer';
+import museumMapReducer from './containers/MuseumMap_reducer';
+import router_Reducer from "./router/router_reducer";
+import * as types from "../constants/action_types";
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 
@@ -26,10 +26,10 @@ const appReducer = combineReducers({
   loginReducer,
   registerReducer,
   homeReducer,
-  museumListReducer,
-  museumDetailReducer,
-  productListReducer,
-  museumProductReducer,
+  EventlistReducer,
+  ScheduleReducer,
+  newsReducer,
+  partiesReducer,
   searchHistoryReducer,
   guiderReducer,
   guiderRatingReducer,

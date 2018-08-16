@@ -32,8 +32,8 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 import { InputField } from "../../components/Element/Form/index";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Field, reduxForm } from "redux-form";
-import { DateField } from "../../components/Element/Form";
+import Schedule from '../Schedule';
+import Parties from '../Parties';
 import ItemResult from "../../components/Item_result";
 import * as homeAction from "../../store/actions/containers/home_action";
 import Loading from "../../components/Loading";
@@ -42,7 +42,7 @@ import * as loginAction from "../../authen/actions/login_action";
 import * as helper from '../../helper';
 import Beacons from 'react-native-beacons-manager'
 import IconVector from 'react-native-vector-icons/FontAwesome';
-import MuseumList from '../Museum_list';
+import Eventlist from '../Event_List';
 import Profile from '../Profile';
 import FindGuider from '../Find_guider';
 const blockAction = false;
@@ -75,10 +75,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     // Print a log of the detected iBeacons (1 per second)
-
-
     this.state = {
-      languageSelect:'vi'
+      languageSelect: 'vi'
     };
     I18n.defaultLocale = "vi";
     I18n.locale = "vi";
@@ -89,6 +87,7 @@ class Home extends Component {
   async loadSetting() {
     var lang = await helper.getLangSetting();
     if (lang != null) {
+      I18n.locale = lang;
       this.setState({
         languageSelect: lang
       })
@@ -107,15 +106,15 @@ class Home extends Component {
       })
     })
     eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
-       console.log('Tìm thấy beacon:', data)
+      console.log('Tìm thấy beacon:', data)
       if (data.beacons && data.beacons.length > 0) {
 
         if (data.beacons[0].uuid != current_uuid) {
           current_uuid = data.beacons[0].uuid;
-          if (Actions.currentScene == 'productList') {
+          if (Actions.currentScene == 'News') {
             Actions.pop();
           }
-          Actions.productList({ beaconUUID: current_uuid })
+          Actions.News({ beaconUUID: current_uuid })
           //get_AntifactByUUID({ beaconUUID: current_uuid });
           //blockUUID = true;
           // if (timeoutUUID) {
@@ -125,7 +124,7 @@ class Home extends Component {
           //   current_uuid = null;
           // }, 30000);
         }
-         console.log('Tìm thấy beacon:', data.beacons[0].uuid)
+        console.log('Tìm thấy beacon:', data.beacons[0].uuid)
       }
     })
     this.detectBeacons();
@@ -206,9 +205,14 @@ class Home extends Component {
                   this.smallLoading = ref;
                 }} />
               </View>
-              <HeaderContent />
+              <HeaderContent headerTitle={this.getTextHeader()} showButtonLeft={this.showButtonLeft()} />
               <View style={styles.listResult_container}>
-                <Tabs initialPage={0} locked={true} tabBarUnderlineStyle={styles.tabBarUnderlineStyle} style={{ backgroundColor: 'transparent' }}>
+                <Tabs initialPage={0} locked={true} onChangeTab={(io) => {
+                  if (io.i == 0 && io.from == 0) {
+                    Actions.reset('home', { screenId: 'eventList' })
+                    return;
+                  }
+                }} tabBarPosition="bottom" tabBarUnderlineStyle={styles.tabBarUnderlineStyle} style={{ backgroundColor: 'transparent' }}>
                   <Tab
                     heading={<TabHeading style={styles.tabHeading}>
                       <Grid>
@@ -216,39 +220,32 @@ class Home extends Component {
                           <IconVector name="home" size={20} />
                         </Row>
                         <Row style={styles.textHeadingTab}>
-                          <Text style={styles.textHeaderTab}>{I18n.t("home", {
-                            locale: this.state.languageSelect?this.state.languageSelect:"vn"
-                          })}</Text>
+                          <Text style={styles.textHeaderTab}>{I18n.t("home")}</Text>
                         </Row>
                       </Grid>
                     </TabHeading>}>
-                    <MuseumList />
-                  </Tab>
-                  {/* <Tab heading={<TabHeading style={[styles.tabHeading, { width: 100 }]}>
-                    <Grid>
-                      <Row style={styles.iconTab}>
-                        <IconVector name="users" size={20} />
-                      </Row>
-                      <Row style={styles.textHeadingTab}>
-                        <Text style={styles.textHeaderTab}>
-                          {I18n.t("findGuider", {
-                            locale: "vn"
-                          })}</Text>
-                      </Row>
-                    </Grid>
+                    {this.renderEventTab()}
 
-                  </TabHeading>}>
-                    <FindGuider />
-                  </Tab> */}
+                  </Tab>
                   <Tab heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>
                         <IconVector name="user" size={20} />
                       </Row>
                       <Row style={styles.textHeadingTab}>
-                        <Text style={styles.textHeaderTab}>{I18n.t("profile", {
-                          locale:  this.state.languageSelect?this.state.languageSelect:"vn"
-                        })}</Text>
+                        <Text style={styles.textHeaderTab}>{I18n.t("notification")}</Text>
+                      </Row>
+                    </Grid>
+                  </TabHeading>}>
+                    <Profile />
+                  </Tab>
+                  <Tab heading={<TabHeading style={styles.tabHeading}>
+                    <Grid>
+                      <Row style={styles.iconTab}>
+                        <IconVector name="user" size={20} />
+                      </Row>
+                      <Row style={styles.textHeadingTab}>
+                        <Text style={styles.textHeaderTab}>{I18n.t("profile")}</Text>
                       </Row>
                     </Grid>
                   </TabHeading>}>
@@ -267,6 +264,58 @@ class Home extends Component {
         </KeyboardAvoidingView>
       </Container >
     );
+  }
+
+  renderEventTab() {
+    switch (this.props.screenId) {
+      case "eventList":
+      case null:
+      case undefined:
+        return (
+          <Eventlist />
+        )
+        break;
+      case "schedule":
+        return (<Schedule></Schedule>)
+        break;
+      case "parties":
+        return (<Parties></Parties>)
+        break;
+      default:
+        return (<Text>abchasu</Text>)
+        break;
+    }
+  }
+
+  getTextHeader() {
+    switch (this.props.screenId) {
+      case "eventList":
+      case null:
+      case undefined:
+        return I18n.t("sdb_day")
+        break;
+      case "schedule":
+        return I18n.t("Schedule")
+      case "parties":
+        return I18n.t("Parties")
+        break;
+      default:
+        return I18n.t("sdb_day")
+        break;
+    }
+  }
+
+  showButtonLeft() {
+    switch (this.props.screenId) {
+      case "eventList":
+      case null:
+      case undefined:
+        return false
+        break;
+      default:
+        return true
+        break;
+    }
   }
 
   renderFlatListItem(dataItem) {

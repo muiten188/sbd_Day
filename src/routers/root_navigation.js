@@ -7,11 +7,11 @@ import { Router, Scene, Stack } from 'react-native-router-flux';
 import Login from '../authen/containers/Login';
 import Register from '../authen/containers/Register';
 import Home from '../containers/Home';
-import Museumlist from '../containers/Museum_list';
+import Eventlist from '../containers/Event_List';
 import Profile from '../containers/Profile';
-import Museum_detail from '../containers/Museum_detail';
-import ProductList from '../containers/Product_list';
-import Museum_product from '../containers/Museum_product';
+import Schedule from '../containers/Schedule';
+import News from '../containers/News';
+import Parties from '../containers/Parties';
 import Search_history from '../containers/Search_history';
 import Guider from '../containers/Guider';
 import GuiderRating from '../containers/Guider_rating';
@@ -19,7 +19,6 @@ import QrCodeScanner from '../containers/QrScanner';
 import NewsPreview from '../containers/NewsPreview';
 import SearchMuseum from '../containers/Search_museum';
 import MuseumMap from '../containers/Museum_map';
-import PropTypes from 'prop-types';
 
 class RootNavigation extends React.Component {
     //Life cycle component
@@ -54,7 +53,7 @@ class RootNavigation extends React.Component {
                     <Scene key="login"
                         component={Login}
                         title="Login"
-                        initial={true}
+                        initial={false}
                     />
                     <Scene
                         key="register"
@@ -64,20 +63,20 @@ class RootNavigation extends React.Component {
                     <Scene key="home"
                         component={Home}
                         title="Home"
-                        initial={false}
+                        initial={true}
                     />
-                    <Scene key="museumDetail"
-                        component={Museum_detail}
-                        title="museum Detail"
+                    <Scene key="Schedule"
+                        component={Schedule}
+                        title="Schedule"
                         initial={false}>
                     </Scene>
-                    <Scene key="productList"
-                        component={ProductList}
+                    <Scene key="News"
+                        component={News}
                         title="product list"
                         initial={false}>
                     </Scene>
-                    <Scene key="museumProduct"
-                        component={Museum_product}
+                    <Scene key="Parties"
+                        component={Parties}
                         title="museum product"
                         initial={false}>
                     </Scene>

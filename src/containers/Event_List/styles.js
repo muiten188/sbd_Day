@@ -6,6 +6,10 @@ export default {
     },
     rowNews:{
     },
+    center:{
+        justifyContent: "center",
+        alignItems: "center",
+    },
     textSide: {
         marginTop: 13,
         fontWeight: 'bold', paddingLeft: 6
