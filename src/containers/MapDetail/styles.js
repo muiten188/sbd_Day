@@ -18,6 +18,13 @@ export default {
         height: 150,
         backgroundColor: 'black'
     },
+    Item: {
+        borderBottomWidth: 0,
+        marginTop:5,
+        marginBottom:5,
+        paddingLeft:6,
+        paddingRight:6,
+    },
     rowBar: {
         height: 35,
         backgroundColor: '#007db7'

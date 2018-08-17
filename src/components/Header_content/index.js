@@ -21,7 +21,7 @@ import { Grid, Col, Row } from "react-native-easy-grid/";
 import styles from "./styles";
 import I18n from "../../i18n/i18n";
 import { Actions } from 'react-native-router-flux';
-//import SearchMuseum from '../../containers/Search_museum';
+//import Presentation from '../../containers/Presentation';
 export default class extends Component {
   static navigationOptions = {
     header: null
@@ -88,7 +88,7 @@ export default class extends Component {
                   onSearch(this.state.textSearch)
                 }
                 else {
-                  Actions.searchMuseum();
+                  Actions.Presentation();
                 }
               }}>
                 <IconVector name="search" size={20} style={{ color: '#fff' }} />

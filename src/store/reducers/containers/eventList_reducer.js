@@ -69,7 +69,7 @@ export default function (state = initState, action = {}) {
         isLoadingNews: initState.isLoadingNews
       };
 
-    case types.SEARCH_MUSEUM:
+    case types.Presentation:
       return {
         ...state,
         listMuseum: action.data,
@@ -84,12 +84,12 @@ export default function (state = initState, action = {}) {
         ...state,
         isLoading: action.isLoading,
       };
-    case types.SEARCH_MUSEUM_ERROR:
+    case types.Presentation_ERROR:
       return {
         ...state,
         searchErorr: action.searchErorr,
       };
-    case types.SEARCH_MUSEUM_CLEAR_ERROR:
+    case types.Presentation_CLEAR_ERROR:
       return {
         ...state,
         searchErorr: initState.searchErorr,

@@ -80,24 +80,24 @@ export default class extends PureComponent {
           ref={ref => {
             this.list = ref;
           }}
-          style={{ width: '100%', height: 95 }}
+          style={{ width: '100%', height: 70 }}
           data={[...listNews]}
           keyExtractor={this._keyExtractor}
           renderItem={this.buildMenuItem.bind(this)}
           horizontal={true}
           scrollEnabled={true}
         />
-        <Button transparent style={{ width: 40, position: 'absolute', right: 0, top: 25, justifyContent: 'center', alignItems: 'center' }}
+        <Button transparent style={{ width: 30, position: 'absolute', right: 0, top: 13, justifyContent: 'center', alignItems: 'center' }}
           onPress={() => {
             this.list.scrollToEnd()
           }}>
-          <Icon size={20} name="arrow-right"></Icon>
+          <Icon style={{opacity:0.6}} size={17} name="arrow-right"></Icon>
         </Button>
-        <Button transparent style={{ width: 40, position: 'absolute', left: 0, top: 25, justifyContent: 'center', alignItems: 'center' }}
+        <Button transparent style={{ width: 30, position: 'absolute', left: 0, top: 13, justifyContent: 'center', alignItems: 'center' }}
           onPress={() => {
             this.list.scrollToIndex({ index: 0 })
           }}>
-          <Icon size={20} name="arrow-left"></Icon>
+          <Icon style={{opacity:0.6}} size={17} name="arrow-left"></Icon>
         </Button>
       </View>
     );
@@ -107,7 +107,7 @@ export default class extends PureComponent {
     var index = dataItem.index;
     const { listNews } = this.props;
     return (
-      <TouchableOpacity style={{ padding: 5, borderRadius: 5, marginRight: 10, height: 90, width: 90, backgroundColor: index == this.state.indexSlider ? '#007db7' : '#cecece' }}
+      <TouchableOpacity style={{ padding: 5, borderRadius: 5, marginRight: 10, height: 60, width: 60, backgroundColor: index == this.state.indexSlider ? '#007db7' : '#cecece' }}
         onPress={() => { Actions.home({ screenId: 'eventList' }) }}>
         <Image style={{ flex: 1 }} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
       </TouchableOpacity>

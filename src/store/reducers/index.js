@@ -10,12 +10,17 @@ import partiesReducer from "./containers/parties_reducer";
 import findGuiderReducer from "./containers/findGuider_reducer";
 import profileReducer from "./containers/profile_reducer";
 import commentReducer from "./component/comment_reducer";
-import searchHistoryReducer from "./containers/searchHistory_reducer";
+import newsDetailReducer from "./containers/newsDetail_reducer";
 import guiderReducer from "./containers/guider_reducer";
 import guiderRatingReducer from "./containers/guider_rating_reducer";
 import app_Reducer from "./app_reducer";
 import qrCodeScannerReducer from './containers/qrCodeScanner_reducer';
-import searchMuseumReducer from './containers/searchMuseum_reducer';
+import presentationReducer from './containers/presentation_reducer';
+import presentationDetailReducer from './containers/presentationDetail_reducer';
+import productReducer from './containers/product_reducer';
+import productDetail_reducer from './containers/productDetail_reducer';
+import mapReducer from './containers/map_reducer';
+import mapDetailReducer from './containers/mapDetail_reducer';
 import museumMapReducer from './containers/MuseumMap_reducer';
 import router_Reducer from "./router/router_reducer";
 import * as types from "../constants/action_types";
@@ -30,14 +35,19 @@ const appReducer = combineReducers({
   ScheduleReducer,
   newsReducer,
   partiesReducer,
-  searchHistoryReducer,
+  newsDetailReducer,
   guiderReducer,
   guiderRatingReducer,
   findGuiderReducer,
   profileReducer,
   commentReducer,
   qrCodeScannerReducer,
-  searchMuseumReducer,
+  presentationReducer,
+  presentationDetailReducer,
+  productReducer,
+  productDetail_reducer,
+  mapReducer,
+  mapDetailReducer,
   museumMapReducer,
   app_Reducer,
   router_Reducer,

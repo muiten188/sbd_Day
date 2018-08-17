@@ -64,7 +64,7 @@ class FindGuider extends Component {
     const locale = "vn";
     return (
       <Container style={styles.container}>
-        <Button full block transparent onPress={() => { Actions.searchHistory() }}>
+        <Button full block transparent onPress={() => { Actions.NewsDetail() }}>
           <IconVector name='history' size={16} style={styles.colorHeader} />
           <Text uppercase={false} style={styles.colorHeader}>{I18n.t("historyView", {
             locale: "vn"

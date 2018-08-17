@@ -12,12 +12,12 @@ import Profile from '../containers/Profile';
 import Schedule from '../containers/Schedule';
 import News from '../containers/News';
 import Parties from '../containers/Parties';
-import Search_history from '../containers/Search_history';
+import NewsDetail from '../containers/NewsDetail';
 import Guider from '../containers/Guider';
 import GuiderRating from '../containers/Guider_rating';
 import QrCodeScanner from '../containers/QrScanner';
-import NewsPreview from '../containers/NewsPreview';
-import SearchMuseum from '../containers/Search_museum';
+import PresentationDetail from '../containers/PresentationDetail';
+import Presentation from '../containers/Presentation';
 import MuseumMap from '../containers/Museum_map';
 
 class RootNavigation extends React.Component {
@@ -80,13 +80,13 @@ class RootNavigation extends React.Component {
                         title="museum product"
                         initial={false}>
                     </Scene>
-                    <Scene key="searchHistory"
-                        component={Search_history}
+                    <Scene key="NewsDetail"
+                        component={NewsDetail}
                         title="search History"
                         initial={false}>
                     </Scene>
-                    <Scene key="newsPreview"
-                        component={NewsPreview}
+                    <Scene key="PresentationDetail"
+                        component={PresentationDetail}
                         title="News History"
                         initial={false}>
                     </Scene>
@@ -105,8 +105,8 @@ class RootNavigation extends React.Component {
                         title="qrScanner"
                         initial={false}>
                     </Scene>
-                    <Scene key="searchMuseum"
-                        component={SearchMuseum}
+                    <Scene key="Presentation"
+                        component={Presentation}
                         title="Search Museum"
                         initial={false}>
                     </Scene>

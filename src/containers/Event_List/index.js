@@ -37,6 +37,7 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import EventSlider from '../../components/EventSlider';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as values from '../../helper/values';
+import * as helper from '../../helper';
 const blockAction = false;
 const blockLoadMoreAction = false;
 
@@ -69,10 +70,10 @@ class Eventlist extends Component {
 
 
     componentDidMount() {
-        const { search_Museum, get_Area, search_News, search_HOT_NEWS } = this.props.meseumListAction;
+        const { Presentation, get_Area, search_News, search_HOT_NEWS } = this.props.meseumListAction;
         get_Area(null, 1, 1000, null);
         search_HOT_NEWS(null, 1, 1000, null)
-        search_Museum(null, 1, 1000, null);
+        Presentation(null, 1, 1000, null);
         search_News(null, 1, 1000, null)
     }
     componentDidUpdate(prevProps, prevState) {
@@ -82,7 +83,7 @@ class Eventlist extends Component {
     render() {
         const locale = "vn";
         const { listMuseum, listArea, searchErorr, isLoading, listNews, isLoadingNews, listHotNews, isLoadingHotNews } = this.props.EventlistReducer;
-        const { search_Museum, clearMuseumError, clearAreaError, search_News } = this.props.meseumListAction;
+        const { Presentation, clearMuseumError, clearAreaError, search_News } = this.props.meseumListAction;
         if (searchErorr == true) {
             Alert.alert(
                 "Thông báo",
@@ -102,7 +103,7 @@ class Eventlist extends Component {
             <Container style={styles.container}>
                 <Grid>{/* marginBottom: 45 */}
 
-                    <Row style={{ height: 120, borderBottomWidth: 1, borderBottomColor: '#cecece' }}>
+                    <Row style={{ height: 100, borderBottomWidth: 1, borderBottomColor: '#cecece' }}>
                         <EventSlider listNews={listHotNews}></EventSlider>
                     </Row>
                     <Row>

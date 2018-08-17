@@ -19,10 +19,10 @@ export const REGISTING = "REGISTING";
 export const REGISTER_CLEAR = "REGISTER_CLEAR";
 export const DEFAULT = "DEFAULT";
 //QUICK actions
-export const SEARCH_MUSEUM = "SEARCH_MUSEUM";
+export const Presentation = "Presentation";
 export const SEARCHING_MUSEUM = "SEARCHING_MUSEUM";
-export const SEARCH_MUSEUM_ERROR = "SEARCH_MUSEUM_ERROR";
-export const SEARCH_MUSEUM_CLEAR_ERROR = "SEARCH_MUSEUM_CLEAR_ERROR";
+export const Presentation_ERROR = "Presentation_ERROR";
+export const Presentation_CLEAR_ERROR = "Presentation_CLEAR_ERROR";
 //Hot News actions
 export const SEARCH_HOT_NEWS = "SEARCH_HOT_NEWS";
 export const SEARCHING_HOT_NEWS = "SEARCHING_HOT_NEWS";

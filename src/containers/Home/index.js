@@ -40,11 +40,19 @@ import Loading from "../../components/Loading";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as loginAction from "../../authen/actions/login_action";
 import * as helper from '../../helper';
+import News from '../News';
 import Beacons from 'react-native-beacons-manager'
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import Eventlist from '../Event_List';
 import Profile from '../Profile';
 import FindGuider from '../Find_guider';
+import NewsDetail from "../NewsDetail";
+import Presentation from "../Presentation";
+import PresentationDetail from "../PresentationDetail";
+import Product from "../Product";
+import ProductDetail from "../ProductDetail";
+import Map from "../Map";
+import MapDetail from "../MapDetail";
 const blockAction = false;
 const blockLoadMoreAction = false;
 const blockUUID = false;
@@ -78,9 +86,6 @@ class Home extends Component {
     this.state = {
       languageSelect: 'vi'
     };
-    I18n.defaultLocale = "vi";
-    I18n.locale = "vi";
-    I18n.currentLocale();
     this.loadSetting();
   }
 
@@ -281,6 +286,30 @@ class Home extends Component {
       case "parties":
         return (<Parties></Parties>)
         break;
+      case "news":
+        return (<News></News>)
+        break;
+      case "newsDetaill":
+        return (<NewsDetail></NewsDetail>)
+        break;
+      case "presentation":
+        return (<Presentation></Presentation>)
+        break;
+      case "presentationDetail":
+        return (<PresentationDetail></PresentationDetail>)
+        break;
+      case "product":
+        return (<Product></Product>)
+        break;
+      case "productDetail":
+        return (<ProductDetail></ProductDetail>)
+        break;
+        case "location":
+        return (<Map></Map>)
+        break;
+      case "locationDetail":
+        return (<MapDetail></MapDetail>)
+        break;
       default:
         return (<Text>abchasu</Text>)
         break;
@@ -298,6 +327,30 @@ class Home extends Component {
         return I18n.t("Schedule")
       case "parties":
         return I18n.t("Parties")
+        break;
+      case "news":
+        return I18n.t("News")
+        break;
+      case "newsDetaill":
+        return I18n.t("News")
+        break;
+      case "presentation":
+        return I18n.t("Speech")
+        break;
+      case "presentationDetail":
+        return I18n.t("Speech")
+        break;
+      case "product":
+        return I18n.t("Product")
+        break;
+      case "productDetail":
+        return I18n.t("Product")
+        break;
+      case "location":
+        return I18n.t("Location")
+        break;
+      case "locationDetail":
+        return I18n.t("Location")
         break;
       default:
         return I18n.t("sdb_day")

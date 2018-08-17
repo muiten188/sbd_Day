@@ -38,7 +38,6 @@ import { InputField } from "../../../components/Element/Form";
 import Loading from "../../../components/Loading";
 import { Actions } from "react-native-router-flux";
 const { LoginButton, LoginManager, ShareDialog, AccessToken, GraphRequestManager, GraphRequest } = FBSDK;
-import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import * as helper from "../../../helper";
 import PropTypes from 'prop-types';
 const username = "";
@@ -154,17 +153,13 @@ class login extends React.Component {
 
 
   componentWillMount() {
-    GoogleSignin.hasPlayServices({ autoResolve: true });
-    GoogleSignin.configure({
-      iosClientId: '229107549229-aqk0kgvqoa6ke3e7il56mcrvtqh3q3n8.apps.googleusercontent.com',
-      webClientId: '229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com'
-    })
+    
   }
 
   componentDidMount() {
     const { loginAction } = this.props;
     const { loginReducer } = this.props;
-    //this._setupGoogleSignin();
+
     const { setUser } = this.props.loginAction;
     helper.getAsyncStorage("@userLogin", (promise) => {
       promise.done((value) => {
@@ -185,56 +180,9 @@ class login extends React.Component {
     helper.setAsyncStorage('@lang',value);
   }
 
-  async _setupGoogleSignin() {
-    try {
-      await GoogleSignin.hasPlayServices({ autoResolve: true })
-      // const configPlatform = {
-      //   ...Platform.select({
-      //     ios: {
-      //       iosClientId: config.iosClientId
-      //     },
-      //     android: {}
-      //   })
-      // }
+ 
 
-      await GoogleSignin.configure({
-        //...configPlatform,
-        webClientId: '229107549229-mqe085vtq1s6pt07frl00ptcnjb0c7t7.apps.googleusercontent.com',
-        offlineAccess: false
-      })
 
-      const user = await GoogleSignin.currentUserAsync()
-
-      console.log(user)
-      this.setState({ user })
-    } catch (err) {
-      console.warn('Google signin error', err.code, err.message)
-    }
-  }
-
-  _googleSignIn() {
-    const { loginAction } = this.props;
-    GoogleSignin.signIn()
-      .then(user => {
-        console.log(user)
-        this.setState({ user: user })
-        loginAction.login_Socail(user, "GOOGLE");
-      })
-      .catch(err => {
-
-        console.warn(err)
-      })
-      .done()
-  }
-
-  _googleSignOut() {
-    GoogleSignin.revokeAccess()
-      .then(() => GoogleSignin.signOut())
-      .then(() => {
-        this.setState({ user: null })
-      })
-      .done()
-  }
 
   componentDidUpdate() {
     const { loginReducer } = this.props;

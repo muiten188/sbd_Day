@@ -35,5 +35,13 @@ export default {
   Speech:'Speech',
   Product:'Product',
   Location:'Location',
-  Survey:'Survey'
+  Survey:'Survey',
+  Topic:'Topic',
+  Presenter:'Presenter',
+  Date:'Date',
+  Time:'Time',
+  Summary:'Summary',
+  Company:'Company',
+  Introduce:'Introduce',
+  Map:'Map'
 };

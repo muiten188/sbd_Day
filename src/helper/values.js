@@ -21,25 +21,25 @@ export const list_Menu = [
         mName:'News',
         IconName:'newspaper-o',
         mID:'news',
-        routerName:''
+        routerName:'news'
     },
     {
         mName:'Speech',
         IconName:'microphone',
         mID:'speech',
-        routerName:''
+        routerName:'presentation'
     },
     {
         mName:'Product',
         IconName:'windows',
         mID:'product',
-        routerName:''
+        routerName:'product'
     },
     {
         mName:'Location',
         IconName:'location-arrow',
         mID:'location',
-        routerName:''
+        routerName:'location'
     },
     {
         mName:'Survey',

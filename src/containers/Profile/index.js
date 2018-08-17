@@ -9,7 +9,6 @@ import {
 } from "react-native";
 const FBSDK = require('react-native-fbsdk');
 const { LoginManager } = FBSDK;
-import { GoogleSignin } from 'react-native-google-signin';
 import {
   Container,
   Text,
@@ -95,7 +94,6 @@ class Profile extends Component {
     loginAction.logout();
     try {
       LoginManager.logOut();
-      GoogleSignin.signOut();
     } catch (error) {
 
     }

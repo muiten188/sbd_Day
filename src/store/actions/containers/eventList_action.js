@@ -159,7 +159,7 @@ export function get_Area(values, currentPage, pageSize, user) {
     };
 }
 
-export function search_Museum(values, currentPage, pageSize, user) {
+export function Presentation(values, currentPage, pageSize, user) {
     let data = [];
     let dataPost = values || {};
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
@@ -183,7 +183,7 @@ export function search_Museum(values, currentPage, pageSize, user) {
                 if (responseJson) {
                     if (responseJson.data) {
                         data = _buildListMuseum(responseJson.data);
-                        dispatch(_search_Museum(data, dataPost));
+                        dispatch(_Presentation(data, dataPost));
                     } else {
                         dispatch(_seach_MuseumError());
                     }
@@ -197,9 +197,9 @@ export function search_Museum(values, currentPage, pageSize, user) {
             });
     };
 }
-function _search_Museum(data, valuesForm) {
+function _Presentation(data, valuesForm) {
     return {
-        type: types.SEARCH_MUSEUM,
+        type: types.Presentation,
         data: data,
         isLoading: false,
         valuesForm: valuesForm
@@ -215,7 +215,7 @@ function _searching_Museum() {
 
 function _seach_MuseumError() {
     return {
-        type: types.SEARCH_MUSEUM_ERROR,
+        type: types.Presentation_ERROR,
         searchErorr: true,
         isLoading: false
     };
@@ -271,7 +271,7 @@ function _buildListMuseum(data) {
 
 export function clearMuseumError() {
     return {
-        type: types.SEARCH_MUSEUM_CLEAR_ERROR
+        type: types.Presentation_CLEAR_ERROR
     };
 }
 
