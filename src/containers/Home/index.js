@@ -45,7 +45,8 @@ import Beacons from 'react-native-beacons-manager'
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import Eventlist from '../Event_List';
 import Profile from '../Profile';
-import FindGuider from '../Find_guider';
+import Notification from '../Notification';
+import NotificationDetail from '../Notification_Detail';
 import NewsDetail from "../NewsDetail";
 import Presentation from "../Presentation";
 import PresentationDetail from "../PresentationDetail";
@@ -53,6 +54,9 @@ import Product from "../Product";
 import ProductDetail from "../ProductDetail";
 import Map from "../Map";
 import MapDetail from "../MapDetail";
+import Survey from "../Survey";
+import SurveyDetail from "../SurveyDetail";
+
 const blockAction = false;
 const blockLoadMoreAction = false;
 const blockUUID = false;
@@ -242,7 +246,8 @@ class Home extends Component {
                       </Row>
                     </Grid>
                   </TabHeading>}>
-                    <Profile />
+                    {this.renderNotifiTab()}
+                    {/* <Notification /> */}
                   </Tab>
                   <Tab heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
@@ -269,6 +274,26 @@ class Home extends Component {
         </KeyboardAvoidingView>
       </Container >
     );
+  }
+
+  renderNotifiTab() {
+    switch (this.props.screenId) {
+      case "notification":
+      case null:
+      case undefined:
+        return (
+          <Notification />
+        )
+        break;
+      case 'notifiDetail':
+        return (
+          <NotificationDetail />
+        )
+        break;
+      default:
+        return (<Text>abchasu</Text>)
+        break;
+    }
   }
 
   renderEventTab() {
@@ -304,12 +329,19 @@ class Home extends Component {
       case "productDetail":
         return (<ProductDetail></ProductDetail>)
         break;
-        case "location":
+      case "location":
         return (<Map></Map>)
         break;
       case "locationDetail":
         return (<MapDetail></MapDetail>)
         break;
+      case "survey":
+        return (<Survey></Survey>)
+        break;
+      case "surveyDetail":
+        return (<SurveyDetail></SurveyDetail>)
+        break;
+
       default:
         return (<Text>abchasu</Text>)
         break;
@@ -351,6 +383,18 @@ class Home extends Component {
         break;
       case "locationDetail":
         return I18n.t("Location")
+        break;
+      case "survey":
+        return I18n.t("Survey")
+        break;
+      case "surveyDetail":
+        return I18n.t("Survey")
+        break;
+      case "notification":
+        return I18n.t("notification")
+        break;
+      case 'notifiDetail':
+        return I18n.t("notification")
         break;
       default:
         return I18n.t("sdb_day")

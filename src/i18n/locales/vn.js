@@ -43,5 +43,12 @@ export default {
   Summary:'Summary',
   Company:'Company',
   Introduce:'Introduce',
-  Map:'Map'
+  Map:'Map',
+  Sent_update:'Sent/Update',
+  good:'good',
+  normal:'normal',
+  bad:'bad',
+  Quatity:'Quatity',
+  comment:'Comment',
+  helpful:'Helpful'
 };

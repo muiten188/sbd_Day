@@ -45,6 +45,6 @@ export const list_Menu = [
         mName:'Survey',
         IconName:'hand-paper-o',
         mID:'survey',
-        routerName:''
+        routerName:'survey'
     }
 ]

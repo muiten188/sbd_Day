@@ -13,9 +13,11 @@ export default {
     paddingLeft:6,
     
   },
+  row:{
+    height:50
+  },
   Grid: {
-    borderTopColor: '#e8eff5',
-    borderTopWidth: 2.5
+    
   },
   gridContent: {
     height: 200,

@@ -7,7 +7,8 @@ import EventlistReducer from "./containers/eventList_reducer";
 import ScheduleReducer from "./containers/schedule_reducer";
 import newsReducer from "./containers/news_reducer";
 import partiesReducer from "./containers/parties_reducer";
-import findGuiderReducer from "./containers/findGuider_reducer";
+import notificationReducer from "./containers/notification_reducer";
+import notificationDetailReducer from "./containers/notificationDetail_reducer";
 import profileReducer from "./containers/profile_reducer";
 import commentReducer from "./component/comment_reducer";
 import newsDetailReducer from "./containers/newsDetail_reducer";
@@ -17,6 +18,8 @@ import app_Reducer from "./app_reducer";
 import qrCodeScannerReducer from './containers/qrCodeScanner_reducer';
 import presentationReducer from './containers/presentation_reducer';
 import presentationDetailReducer from './containers/presentationDetail_reducer';
+import surveyReducer from './containers/survey_reducer';
+import surveyDetailReducer from './containers/surveyDetail_reducer';
 import productReducer from './containers/product_reducer';
 import productDetail_reducer from './containers/productDetail_reducer';
 import mapReducer from './containers/map_reducer';
@@ -38,12 +41,15 @@ const appReducer = combineReducers({
   newsDetailReducer,
   guiderReducer,
   guiderRatingReducer,
-  findGuiderReducer,
+  notificationReducer,
+  notificationDetailReducer,
   profileReducer,
   commentReducer,
   qrCodeScannerReducer,
   presentationReducer,
   presentationDetailReducer,
+  surveyReducer,
+  surveyDetailReducer,
   productReducer,
   productDetail_reducer,
   mapReducer,

@@ -39,12 +39,35 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as profileAction from "../../store/actions/containers/profile_action";
 import Loading from "../../components/Loading";
 import User from "../../components/User";
+import { Field, reduxForm, change } from "redux-form";
+import { InputAreaField, CheckBoxField, DropdownField } from "../../components/Element/Form";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as loginAction from "../../authen/actions/login_action";
 // import { RNCamera, FaceDetector } from 'react-native-camera';
 import * as helper from '../../helper';
 const blockAction = false;
 const blockLoadMoreAction = false;
+
+const validateProfile = values => {
+  const error = {};
+  error.username = "";
+  error.password = "";
+  var username = values.username;
+  var password = values.password;
+  if (values.username === undefined) {
+    username = "";
+  }
+  if (values.password === undefined) {
+    password = "";
+  }
+  if (username.length == 0 || username == "") {
+    error.username = "trống";
+  }
+  if (password.length == 0 || password == "") {
+    error.password = "trống";
+  }
+  return error;
+};
 
 class Profile extends Component {
 
@@ -57,29 +80,35 @@ class Profile extends Component {
     this.state = {
       backgroundVideo: false,
       notification: false,
+      languageSelect: 'vi'
     }
-    I18n.defaultLocale = "vi";
-    I18n.locale = "vi";
-    I18n.currentLocale();
+    this.loadSetting();
   }
 
   componentDidMount() {
     const { user } = this.props.loginReducer;
-    this.loadSetting();
+
   }
 
   async loadSetting() {
-    var backgroundVideoSetting = await helper.getBackgroundVideoSetting();
-    var notifiSetting = await helper.getnotifiSetting()
+    // var backgroundVideoSetting = await helper.getBackgroundVideoSetting();
+    // var notifiSetting = await helper.getnotifiSetting()
 
-    if (backgroundVideoSetting != null) {
+    // if (backgroundVideoSetting != null) {
+    //   this.setState({
+    //     backgroundVideo: backgroundVideoSetting
+    //   })
+    // }
+    // if (notifiSetting != null) {
+    //   this.setState({
+    //     notification: notifiSetting
+    //   })
+    // }
+    var lang = await helper.getLangSetting();
+    if (lang != null) {
+      I18n.locale = lang;
       this.setState({
-        backgroundVideo: backgroundVideoSetting
-      })
-    }
-    if (notifiSetting != null) {
-      this.setState({
-        notification: notifiSetting
+        languageSelect: lang
       })
     }
   }
@@ -100,28 +129,29 @@ class Profile extends Component {
     // Actions.reset('login');
   }
 
-  settingVideoChange() {
-    this.setState({
-      backgroundVideo: !this.state.backgroundVideo
-    })
-    helper.setAsyncStorage("@backgroundVideo", !this.state.backgroundVideo);
-    helper.backgroundVideoSetting = !this.state.backgroundVideo
-  }
+  // settingVideoChange() {
+  //   this.setState({
+  //     backgroundVideo: !this.state.backgroundVideo
+  //   })
+  //   helper.setAsyncStorage("@backgroundVideo", !this.state.backgroundVideo);
+  //   helper.backgroundVideoSetting = !this.state.backgroundVideo
+  // }
 
-  settingNotifiChange() {
-    this.setState({
-      notification: !this.state.notification
-    })
-    helper.setAsyncStorage("@notifi", !this.state.notification);
-    helper.notifiSetting = !this.state.notification
-  }
+  // settingNotifiChange() {
+  //   this.setState({
+  //     notification: !this.state.notification
+  //   })
+  //   helper.setAsyncStorage("@notifi", !this.state.notification);
+  //   helper.notifiSetting = !this.state.notification
+  // }
 
   render() {
     const locale = "vn";
     const { user } = this.props.loginReducer;
+    const { handleSubmit } = this.props;
     return (
       <Container style={styles.container}>
-        {user ? <User user={user} onLogout={this.onLogout.bind(this)}></User> :
+        {true ? <User user={user} onLogout={this.onLogout.bind(this)}></User> :
           <Button full
             onPress={() => {
               Actions.login();
@@ -130,112 +160,23 @@ class Profile extends Component {
             <Text>Đăng nhập</Text>
           </Button>}
         <Grid style={styles.Grid}>
-          <Row style={styles.gridTitleRow}>
-            <Text style={{ fontWeight: '500' }}>{I18n.t("setting", {
-              locale: "vn"
-            })}</Text>
-          </Row>
-          <Row>
-            <Content>
-              <ListItem icon>
-                <Left>
-                  <Button onPress={this.settingVideoChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
-                    <Icon type="Foundation" active name="play-video" />
-                  </Button>
-                </Left>
-                <Body>
-                  <Text>Chạy video ngầm</Text>
-                </Body>
-                <Right>
-                  <CheckBox onPress={this.settingVideoChange.bind(this)} style={{ width: 25, height: 25, justifyContent: 'center', alignItems: 'center' }} checked={this.state.backgroundVideo} />
-                </Right>
-              </ListItem>
-              <ListItem icon >
-                <Left>
-                  <Button disabled onPress={this.settingNotifiChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
-                    <Icon type="MaterialIcons" active name="notifications" />
-                  </Button>
-                </Left>
-                <Body>
-                  <Text>Thông báo</Text>
-                </Body>
-                <Right>
-                  <CheckBox disabled onPress={this.settingNotifiChange.bind(this)} style={{
-                    width: 25,
-                    height: 25,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderColor: '#cecece'
-                  }} checked={this.state.notification} />
-                </Right>
-              </ListItem>
-              <ListItem icon >
-                <Left>
-                  <Button disabled onPress={this.settingNotifiChange.bind(this)} style={{ backgroundColor: "#FF9501" }}>
-                    <Icon type="FontAwesome" active name="language" />
-                  </Button>
-                </Left>
-                <Body>
-                  <Text>Ngôn ngữ</Text>
-                </Body>
-                <Right>
-                  <Picker
-                    note
-                    mode="dropdown"
-                    iosIcon={<Icon name="ios-arrow-down-outline" />}
-                    style={{ width: 135, marginRight: -20 }}
-                    selectedValue={'vn'}
-                  >
-                    <Picker.Item label="Tiếng việt" value="vn" />
-                  </Picker>
-                </Right>
-              </ListItem>
-            </Content>
-          </Row>
-          {/* <Row style={styles.gridContent}>
+          <Row style={styles.row}>
             <Col>
-              <Row style={styles.gridContentItem}>
-                <Col>
-                  <Button block full transparent style={styles.heightFull}>
-                    <IconVector name="qrcode" size={40}></IconVector>
-                  </Button>
-                  <View style={styles.textItem}>
-                    <Text uppercase={false}>{I18n.t("qrcode", {
-                      locale: "vn"
-                    })}</Text>
-                  </View>
-                </Col>
-                <Col>
-                  <Button block full transparent style={styles.heightFull}>
-                    <IconVector name="credit-card" size={40}></IconVector>
-                  </Button>
-                  <View style={styles.textItem}>
-                    <Text uppercase={false}>{I18n.t("atm_visa", {
-                      locale: "vn"
-                    })}</Text>
-                  </View>
-                </Col>
-              </Row>
-              <Row style={styles.gridContentItem}>
-                <Col>
-                  <Button block full transparent style={styles.heightFull}>
-                    <Ionicons name="ios-cash" size={40}></Ionicons>
-                  </Button>
-                  <View style={styles.textItem}>
-                    <Text uppercase={false}>{I18n.t("cash", {
-                      locale: "vn"
-                    })}</Text>
-                  </View>
-                </Col>
-                <Col>
-                  <Button block full transparent style={styles.heightFull}>
-                    <Ionicons name="ios-more" size={40}></Ionicons>
-                  </Button>
-                </Col>
-              </Row>
+              <Field
+                icon="user-circle-o"
+                name="quatityNormal"
+                placeholder={I18n.t("normal")}
+                label={I18n.t("normal")}
+                selected={0}
+                items={["bach1", "bach2", "bach3", "bach4", "bach5"]}
+                component={DropdownField}
+              />
             </Col>
-          </Row> */}
-
+            <Col>
+            </Col>
+            <Col>
+            </Col>
+          </Row>
         </Grid>
       </Container>
     );
@@ -255,6 +196,10 @@ function mapToDispatch(dispatch) {
     loginAction: bindActionCreators(loginAction, dispatch)
   };
 }
-
+Profile = reduxForm({
+  form: "profileForm",
+  validate: validateProfile,
+  enableReinitialize: true
+})(Profile);
 Profile = connect(mapStateToProps, mapToDispatch)(Profile);
 export default Profile;

@@ -53,56 +53,15 @@ class user extends React.Component {
   render() {
     const { state } = this;
     const { user, onLogout } = this.props;
-    var oUser = user.user;
+    // var oUser = user.user;
     return (
       <View style={styles.viewContain}>
         <Grid>
-          <Col style={styles.avartarCol}>
-            <Thumbnail style={{ width: 100, height: 100, borderRadius: 50 }} source={{ uri: 'https://cdn.washingtoncitypaper.com/files/base/scomm/wcp/image/2009/04/640w/__contexts.org_socimages_files_2009_04_d_silhouette.jpg' }} />
-          </Col>
-          <Col style={{
-            justifyContent: "center",
-            alignItems: "flex-start",
-            paddingTop: 10
-          }}>
-            <Row>
-              <Text>{`${oUser.firstName} ${oUser.lastName}`}</Text>
-            </Row>
-            <Row>
-              <Badge primary>
-                <Text>{oUser.accountType?oUser.accountType:'NORMAL'}</Text>
-              </Badge>
-            </Row>
-            <Row style={{ marginTop: 10 }}>
-              {/* <Text>Ngày hết hạn:10/10/2018</Text> */}
-              <Button onPress={onLogout} small={true}><Text>Đăng xuất</Text></Button>
-            </Row>
-            <Row>
-
-            </Row>
-          </Col>
-          {/* <Col style={styles.editCol}>
-            <Row style={{ height: 15 }}>
-
-            </Row>
-            <Row>
-              <Button block full transparent>
-                <IconVector name="edit" size={18} />
-              </Button>
-            </Row>
-            <Row>
-
-            </Row>
-            <Row>
-              <Button block full transparent>
-                <IconVector name="sign-out" size={18} />
-              </Button>
-            </Row>
-            <Row>
-
-            </Row>
-          </Col> */}
+          <Row style={styles.center}>
+            <Thumbnail style={{ width: 130, height: 130, borderRadius: 100,borderWidth:1 }} source={{ uri: 'https://cdn.washingtoncitypaper.com/files/base/scomm/wcp/image/2009/04/640w/__contexts.org_socimages_files_2009_04_d_silhouette.jpg' }} />
+          </Row>
         </Grid>
+        <Button style={styles.logoutButton} onPress={onLogout} small={true}><Text>Đăng xuất</Text></Button>
       </View>
     );
   }

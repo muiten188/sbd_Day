@@ -14,6 +14,12 @@ export default {
     height:40, 
     width:'100%',    
   },
+  inputTextArea:{
+    minHeight:40, 
+    width:'100%', 
+    borderWidth:0.5,
+    borderColor:'#cecece'
+  },
   inputIcon: {
     paddingRight:6,
     fontSize:22
