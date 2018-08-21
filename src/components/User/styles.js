@@ -1,6 +1,6 @@
 export default {
     viewContain: {
-        height: 180,
+        height: 160,
         width:'100%',
         backgroundColor: '#fff',
     },

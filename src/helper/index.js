@@ -27,10 +27,18 @@ export function clearAsyncStorage() {
   }
 }
 
-export function buildHeader(user) {
-  return {
-    //JSESSIONID: user ? user.jSessionId : null
-  };
+export async function buildHeader(user) {
+  var _lang =await this.getLangSetting();
+  var header = {};
+  if (_lang == 'vn') {
+    _lang = 'VI';
+    header.CURRENT_LANGUAGE = _lang;
+  }
+  return header;
+  // {
+  //   CURRENT_LANGUAGE:
+  //   //JSESSIONID: user ? user.jSessionId : null
+  // };
 }
 
 export function formatDate(date) {
@@ -165,14 +173,16 @@ export async function getLangSetting() {
     return this.lang;
   }
   else {
+
     var _lang = await AsyncStorage.getItem("@lang");
     if (_lang) {
+      debugger;
       var olang = JSON.parse(_lang);
       lang = olang;
       return lang;
     }
     else {
-      return null;
+      return 'vn';
     }
   }
 }

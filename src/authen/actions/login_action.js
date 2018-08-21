@@ -3,7 +3,7 @@ import { Keyboard } from "react-native";
 import * as types from "../../store/constants/action_types";
 import * as AppConfig from "../../config/app_config";
 import { Actions } from 'react-native-router-flux';
-
+import * as helper from '../../helper/index';
 export function login_Socail(user, typeSocail) {
   return dispatch => {
     dispatch(_loging());
@@ -59,19 +59,20 @@ export function login_Socail(user, typeSocail) {
 
 export function login(user) {
 
-  return dispatch => {
+  return async (dispatch) => {
     //dispatch(_login(true, user));
     Keyboard.dismiss();
     //Actions.home()
     dispatch(_loging());
+    var _header=await  helper.buildHeader();
     let error = false;
-    fetch(`${AppConfig.LOGIN}`, {
+    fetch(`${AppConfig.LOGIN}?${helper.getQueryString(user)}`, {
       method: "POST",
       headers: {
+        headers: _header,
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify(user)
+      }
     })
       .then(function (response) {
         if (response.status != 200) {
@@ -82,10 +83,9 @@ export function login(user) {
         }
       })
       .then(function (responseJson) {
-        if (responseJson && responseJson.user) {
+        if (responseJson) {
           var oUser = responseJson;
           dispatch(_login(true, oUser));
-
         }
         else {
           if (!error) {

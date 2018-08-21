@@ -8,35 +8,36 @@ export function search_HOT_NEWS(values, currentPage, pageSize, user) {
     dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
     return dispatch => {
         dispatch(_searching_HOT_NEWS());
-        fetch(`${AppConfig.GET_HOT_NEWS}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
-            method: "GET"
-        })
-            .then(function (response) {
-                if (response.status == 401) {
-                    //dispatch(_logout());
-                } else if (response.status != 200) {
-                    dispatch(_seach_HOT_NEWSError());
-                } else {
-                    return response.json();
-                }
-            })
-            .then((responseJson) => {
-                if (responseJson) {
-                    if (responseJson.data) {
-                        data = responseJson.data;
-                        dispatch(_search_HOT_NEWS(data, dataPost));
-                    } else {
-                        dispatch(_seach_HOT_NEWSError());
-                    }
-                }
-                else {
-                    dispatch(_seach_HOT_NEWSError());
-                }
-            })
-            .catch(function (error) {
-                dispatch(_seach_HOT_NEWSError());
-            });
+        dispatch(_search_HOT_NEWS([{},{},{}], dataPost));
+        // fetch(`${AppConfig.GET_HOT_NEWS}?${helper.getQueryString(dataPost)}`, {
+        //     headers: helper.buildHeader(user),
+        //     method: "GET"
+        // })
+        //     .then(function (response) {
+        //         if (response.status == 401) {
+        //             //dispatch(_logout());
+        //         } else if (response.status != 200) {
+        //             dispatch(_seach_HOT_NEWSError());
+        //         } else {
+        //             return response.json();
+        //         }
+        //     })
+        //     .then((responseJson) => {
+        //         if (responseJson) {
+        //             if (responseJson.data) {
+        //                 data = responseJson.data;
+        //                 dispatch(_search_HOT_NEWS(data, dataPost));
+        //             } else {
+        //                 dispatch(_seach_HOT_NEWSError());
+        //             }
+        //         }
+        //         else {
+        //             dispatch(_seach_HOT_NEWSError());
+        //         }
+        //     })
+        //     .catch(function (error) {
+        //         dispatch(_seach_HOT_NEWSError());
+        //     });
     };
 }
 function _search_HOT_NEWS(data, valuesForm) {

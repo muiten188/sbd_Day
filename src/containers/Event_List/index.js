@@ -50,11 +50,8 @@ class Eventlist extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            languageSelect: 'vi'
+            languageSelect: 'vn'
         };
-        I18n.defaultLocale = "vi";
-        I18n.locale = "vi";
-        I18n.currentLocale();
         this.loadSetting();
     }
 
@@ -71,10 +68,10 @@ class Eventlist extends Component {
 
     componentDidMount() {
         const { Presentation, get_Area, search_News, search_HOT_NEWS } = this.props.meseumListAction;
-        get_Area(null, 1, 1000, null);
-        search_HOT_NEWS(null, 1, 1000, null)
-        Presentation(null, 1, 1000, null);
-        search_News(null, 1, 1000, null)
+        // get_Area(null, 1, 1000, null);
+         search_HOT_NEWS(null, 1, 1000, null)
+        // Presentation(null, 1, 1000, null);
+        // search_News(null, 1, 1000, null)
     }
     componentDidUpdate(prevProps, prevState) {
 

@@ -29,6 +29,7 @@ String.prototype.replaceAll = function (search, replacement) {
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+let _intervalSlider=null;
 let currentListIndex = 0;
 export default class extends PureComponent {
 
@@ -43,7 +44,7 @@ export default class extends PureComponent {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    _intervalSlider = setInterval(() => {
       this.setState({ indexSlider: this.state.indexSlider == this.props.listNews.length - 1 ? 0 : this.state.indexSlider + 1 })
       try {
         this.list.scrollToItem({ item: this.props.listNews[this.state.indexSlider], animated: true })
@@ -55,8 +56,8 @@ export default class extends PureComponent {
   }
 
   componentWillUnmount() {
-    if (intervalSlider) {
-      clearInterval(intervalSlider);
+    if (_intervalSlider) {
+      clearInterval(_intervalSlider);
     }
   }
 

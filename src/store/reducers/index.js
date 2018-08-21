@@ -10,6 +10,7 @@ import partiesReducer from "./containers/parties_reducer";
 import notificationReducer from "./containers/notification_reducer";
 import notificationDetailReducer from "./containers/notificationDetail_reducer";
 import profileReducer from "./containers/profile_reducer";
+import changePasswordReducer from "./containers/changePassword_reducer";
 import commentReducer from "./component/comment_reducer";
 import newsDetailReducer from "./containers/newsDetail_reducer";
 import guiderReducer from "./containers/guider_reducer";
@@ -29,6 +30,7 @@ import router_Reducer from "./router/router_reducer";
 import * as types from "../constants/action_types";
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
+import { Actions } from "react-native-router-flux";
 
 const appReducer = combineReducers({
   loginReducer,
@@ -44,6 +46,7 @@ const appReducer = combineReducers({
   notificationReducer,
   notificationDetailReducer,
   profileReducer,
+  changePasswordReducer,
   commentReducer,
   qrCodeScannerReducer,
   presentationReducer,
@@ -63,6 +66,7 @@ const appReducer = combineReducers({
 const rootReducer = (state, action) => {
   if (action.type === types.LOGGED_OUT) {
     state.loginReducer = undefined;
+    Actions.reset('login');
   }
   return appReducer(state, action);
 };

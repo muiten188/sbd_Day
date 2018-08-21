@@ -56,6 +56,7 @@ import Map from "../Map";
 import MapDetail from "../MapDetail";
 import Survey from "../Survey";
 import SurveyDetail from "../SurveyDetail";
+import ChangePassword from "../ChangePassword";
 
 const blockAction = false;
 const blockLoadMoreAction = false;
@@ -259,7 +260,8 @@ class Home extends Component {
                       </Row>
                     </Grid>
                   </TabHeading>}>
-                    <Profile />
+                  {this.renderProfileTab()}
+                   
                   </Tab>
                 </Tabs>
                 <Loading
@@ -274,6 +276,26 @@ class Home extends Component {
         </KeyboardAvoidingView>
       </Container >
     );
+  }
+
+  renderProfileTab(){
+    switch (this.props.screenId) {
+      case "notification":
+      case null:
+      case undefined:
+        return (
+          <Profile />
+        )
+        break;
+      case 'changePassword':
+        return (
+          <ChangePassword />
+        )
+        break;
+      default:
+        return (<Profile />)
+        break;
+    }
   }
 
   renderNotifiTab() {
@@ -291,7 +313,9 @@ class Home extends Component {
         )
         break;
       default:
-        return (<Text>abchasu</Text>)
+        return (
+          <Notification />
+        )
         break;
     }
   }

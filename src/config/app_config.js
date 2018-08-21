@@ -1,4 +1,4 @@
-export const API_HOST = 'http://tourist.easylink.vn/smart-tourist/';
+export const API_HOST = 'http://113.171.23.144/event-manager-api/mobile/';
 
 export const GET_Eventlist = `${API_HOST}api/mobile/museum/`;
 export const GET_NEWS = `${API_HOST}api/mobile/news/top4`;
@@ -14,7 +14,7 @@ export const GET_ANTIFACT_BYTAG = `${API_HOST}api/mobile/artifact/get-by-tag`;
 export const GET_ANTIFACT_BY_UUID = `${API_HOST}api/mobile/artifact/get/code`;
 export const GET_ANTIFACT_BY_QRCODE = `${API_HOST}api/mobile/artifact/get/code`;
 export const MAP_NO_FRAME = `${API_HOST}api/mobile/view-map-no-frame?`;
-export const LOGIN = `${API_HOST}api/mobile/login`;
+export const LOGIN = `${API_HOST}authenticate/login`;
 export const LOGIN_SOCAIL = `${API_HOST}api/mobile/login/social`;
 export const REGISTER = `${API_HOST}api/mobile/users/register`;
 export const GET_MAPID_ARTID=`${API_HOST}api/mobile/beacon/get/`;

@@ -2,7 +2,7 @@ export default {
   greeting: 'Xin Chào!',
   account: "Tài khoản",
   password: "Mật khẩu",
-  login: "Đăng nhập",
+  login: "Login",
   forgotPassword: "Quên mật khẩu?",
   userinfo: "Thông tin tài khoản",
   birthday: "Ngày sinh",

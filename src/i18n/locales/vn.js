@@ -41,7 +41,7 @@ export default {
   Date:'Date',
   Time:'Time',
   Summary:'Summary',
-  Company:'Company',
+  Company:'Công ty',
   Introduce:'Introduce',
   Map:'Map',
   Sent_update:'Sent/Update',
@@ -50,5 +50,14 @@ export default {
   bad:'bad',
   Quatity:'Quatity',
   comment:'Comment',
-  helpful:'Helpful'
+  helpful:'Helpful',
+  fullName:'Tên',
+  phone:'Điện thoại',
+  email:'email',
+  position:'vị trí',
+  changePassword:'Thay đổi mật khẩu',
+  userName:'Tên đăng nhập',
+  oldPassword:'Mật khẩu',
+  newPassword:'Mật khẩu mới',
+  confirmPassword:'Xác nhận mật khẩu'
 };

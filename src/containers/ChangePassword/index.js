@@ -35,7 +35,8 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 import IconVector from "react-native-vector-icons/FontAwesome";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import * as profileAction from "../../store/actions/containers/profile_action";
+import HeaderContent from "../../components/Header_content";
+import * as changePasswordAction from "../../store/actions/containers/changePassword_action";
 import Loading from "../../components/Loading";
 import User from "../../components/User";
 import { Field, reduxForm, change } from "redux-form";
@@ -47,28 +48,46 @@ import * as helper from '../../helper';
 const blockAction = false;
 const blockLoadMoreAction = false;
 
-const validateProfile = values => {
+const validateChangePassword = values => {
   const error = {};
-  error.username = "";
+  // 
   error.password = "";
-  var username = values.username;
+  error.newPassword = "";
+  error.rePassword = "";
   var password = values.password;
-  if (values.username === undefined) {
-    username = "";
-  }
+  var newPassword = values.newPassword;
+  var rePassword = values.rePassword;
   if (values.password === undefined) {
     password = "";
   }
-  if (username.length == 0 || username == "") {
-    error.username = "trống";
+  if (values.newPassword === undefined) {
+    newPassword = "";
+  }
+  if (values.rePassword === undefined) {
+    rePassword = "";
   }
   if (password.length == 0 || password == "") {
     error.password = "trống";
   }
+  if (newPassword.length == 0 || newPassword == "") {
+    error.newPassword = "trống";
+  }
+  if (rePassword.length == 0 || rePassword == "") {
+    error.rePassword = "trống";
+  }
+  if (newPassword.length > 0 && newPassword.length < 6) {
+    error.newPassword = "ít nhất 6 ký tự";
+  }
+  if (rePassword.length > 0 && rePassword.length < 6) {
+    error.rePassword = "ít nhất 6 ký tự";
+  }
+  if (!(rePassword.length == 0 || rePassword == "") && rePassword != newPassword) {
+    error.rePassword = "Không khớp";
+  }
   return error;
 };
 
-class Profile extends Component {
+class ChangePassword extends Component {
 
   static navigationOptions = {
     header: null
@@ -128,77 +147,29 @@ class Profile extends Component {
     // Actions.reset('login');
   }
 
-  // settingVideoChange() {
-  //   this.setState({
-  //     backgroundVideo: !this.state.backgroundVideo
-  //   })
-  //   helper.setAsyncStorage("@backgroundVideo", !this.state.backgroundVideo);
-  //   helper.backgroundVideoSetting = !this.state.backgroundVideo
-  // }
-
-  // settingNotifiChange() {
-  //   this.setState({
-  //     notification: !this.state.notification
-  //   })
-  //   helper.setAsyncStorage("@notifi", !this.state.notification);
-  //   helper.notifiSetting = !this.state.notification
-  // }
-
   render() {
     const locale = "vn";
     const { user } = this.props.loginReducer;
     const { handleSubmit } = this.props;
     return (
       <Container style={styles.container}>
-        {true ? <User user={user} onLogout={this.onLogout.bind(this)}></User> :
-          <Button full
-            onPress={() => {
-              Actions.login();
-            }}
-            style={{ margin: 15 }}>
-            <Text>Đăng nhập</Text>
-          </Button>}
+        <HeaderContent headerTitle={I18n.t("changePassword")} showButtonLeft={true} />
         <Grid style={styles.Grid}>
-          <Row style={styles.row}>
-            <Col size={1}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
-                <Field
-                  name="mr"
-                  placeholder={I18n.t("normal")}
-                  label={I18n.t("normal")}
-                  selected={0}
-                  items={["bach1", "bach2", "bach3", "bach4", "bach5"]}
-                  component={DropdownField}
-                  disabled
-                />
-              </View>
-            </Col>
-            <Col size={2}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
-                <Field
-                  name="fullName"
-                  placeholder={I18n.t("fullName")}
-                  label={I18n.t("fullName")}
-                  component={InputField}
-                  disabled
-                />
-              </View>
-            </Col>
-          </Row>
+
           <Row style={styles.row}>
             <Col size={1}>
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>{I18n.t("phone")}</Text>
+                <Text>{I18n.t("userName")}</Text>
               </View>
             </Col>
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="phone"
-                  placeholder={I18n.t("phone")}
-                  label={I18n.t("phone")}
+                  name="userName"
+                  placeholder={I18n.t("userName")}
+                  label={I18n.t("userName")}
                   component={InputField}
-                  disabled
+                  
                 />
               </View>
             </Col>
@@ -207,17 +178,17 @@ class Profile extends Component {
           <Row style={styles.row}>
             <Col size={1}>
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>{I18n.t("email")}</Text>
+                <Text>{I18n.t("oldPassword")}</Text>
               </View>
             </Col>
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="phone"
-                  placeholder={I18n.t("email")}
-                  label={I18n.t("email")}
+                  name="password"
+                  placeholder={I18n.t("oldPassword")}
+                  label={I18n.t("oldPassword")}
                   component={InputField}
-                  disabled
+                  
                 />
               </View>
             </Col>
@@ -226,17 +197,17 @@ class Profile extends Component {
           <Row style={styles.row}>
             <Col size={1}>
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>{I18n.t("Company")}</Text>
+                <Text>{I18n.t("newPassword")}</Text>
               </View>
             </Col>
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="phone"
-                  placeholder={I18n.t("Company")}
-                  label={I18n.t("Company")}
+                  name="newPassword"
+                  placeholder={I18n.t("newPassword")}
+                  label={I18n.t("newPassword")}
                   component={InputField}
-                  disabled
+                  
                 />
               </View>
             </Col>
@@ -245,42 +216,26 @@ class Profile extends Component {
           <Row style={styles.row}>
             <Col size={1}>
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>{I18n.t("position")}</Text>
+                <Text>{I18n.t("confirmPassword")}</Text>
               </View>
             </Col>
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="phone"
-                  placeholder={I18n.t("position")}
-                  label={I18n.t("position")}
+                  name="rePassword"
+                  placeholder={I18n.t("confirmPassword")}
+                  label={I18n.t("confirmPassword")}
                   component={InputField}
-                  disabled
-                />
-              </View>
-            </Col>
-          </Row>
-
-          <Row style={styles.row}>
-            <Col size={1}>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>{I18n.t("position")}</Text>
-              </View>
-            </Col>
-            <Col size={2}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
-                <Field
-                  name="phone"
-                  placeholder={I18n.t("position")}
-                  label={I18n.t("position")}
-                  component={InputField}
-                  disabled
+                  
                 />
               </View>
             </Col>
           </Row>
           <Button block style={{ marginTop: 10, marginRight: 10, marginLeft: 10 }}
-            onPress={() => { Actions.changePassword() }}>
+            onPress={() => {
+              handleSubmit((values) => { alert(JSON.stringify(values)) });
+            }}
+          >
             <Text>{I18n.t("changePassword")}</Text>
           </Button>
         </Grid>
@@ -292,20 +247,20 @@ class Profile extends Component {
 }
 function mapStateToProps(state, props) {
   return {
-    profileReducer: state.profileReducer,
+    changePasswordReducer: state.changePasswordReducer,
     loginReducer: state.loginReducer
   };
 }
 function mapToDispatch(dispatch) {
   return {
-    profileAction: bindActionCreators(profileAction, dispatch),
+    changePasswordAction: bindActionCreators(changePasswordAction, dispatch),
     loginAction: bindActionCreators(loginAction, dispatch)
   };
 }
-Profile = reduxForm({
-  form: "profileForm",
-  validate: validateProfile,
+ChangePassword = reduxForm({
+  form: "changePwForm",
+  validate: validateChangePassword,
   enableReinitialize: true
-})(Profile);
-Profile = connect(mapStateToProps, mapToDispatch)(Profile);
-export default Profile;
+})(ChangePassword);
+ChangePassword = connect(mapStateToProps, mapToDispatch)(ChangePassword);
+export default ChangePassword;

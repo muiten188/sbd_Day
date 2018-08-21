@@ -197,7 +197,7 @@ class login extends React.Component {
     else if (loginReducer.Logged == true) {
       helper.setAsyncStorage("@userLogin", loginReducer.user);
       // Actions.reset('home');
-      Actions.pop();
+      Actions.home();
     }
   }
   render() {
@@ -347,8 +347,8 @@ function mapStateToProps(state, props) {
     initialValues: state.loginReducer.userForm
       ? state.loginReducer.userForm
       : {
-        username: "",//admin
-        password: ""//"123456a@"
+        username: "manhnv",//admin
+        password: "123456a@"//"123456a@"
       }
   };
 }

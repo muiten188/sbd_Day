@@ -19,6 +19,8 @@ import QrCodeScanner from '../containers/QrScanner';
 import PresentationDetail from '../containers/PresentationDetail';
 import Presentation from '../containers/Presentation';
 import MuseumMap from '../containers/Museum_map';
+import ChangePassword from '../containers/ChangePassword';
+import NotificationDetail from '../containers/Notification_Detail';
 
 class RootNavigation extends React.Component {
     //Life cycle component
@@ -53,7 +55,7 @@ class RootNavigation extends React.Component {
                     <Scene key="login"
                         component={Login}
                         title="Login"
-                        initial={false}
+                        initial={true}
                     />
                     <Scene
                         key="register"
@@ -63,7 +65,7 @@ class RootNavigation extends React.Component {
                     <Scene key="home"
                         component={Home}
                         title="Home"
-                        initial={true}
+                        initial={false}
                     />
                     <Scene key="Schedule"
                         component={Schedule}
@@ -90,9 +92,9 @@ class RootNavigation extends React.Component {
                         title="News History"
                         initial={false}>
                     </Scene>
-                    <Scene key="guider"
-                        component={Guider}
-                        title="Guider"
+                    <Scene key="changePassword"
+                        component={ChangePassword}
+                        title="changePassword"
                         initial={false}>
                     </Scene>
                     <Scene key="guiderRating"
@@ -110,9 +112,9 @@ class RootNavigation extends React.Component {
                         title="Search Museum"
                         initial={false}>
                     </Scene>
-                    <Scene key="museumMap"
-                        component={MuseumMap}
-                        title="Museum Map"
+                    <Scene key="notificationDetail"
+                        component={NotificationDetail}
+                        title="NotificationDetail"
                         initial={false}>
                     </Scene>
                 </Stack>

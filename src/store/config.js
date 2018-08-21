@@ -15,22 +15,22 @@ const middleware = [thunk]
 // }
 
 export default function storeConfig(callback) {
-    const store = createStore(reducers,
-        initialState,
-        compose(
-            applyMiddleware(...middleware)
-        )
-    )
     // const store = createStore(reducers,
     //     initialState,
     //     compose(
-    //         autoRehydrate(),
-    //         applyMiddleware(...middleware),
-    //         window.devToolsExtension ? window.devToolsExtension() : x => x
+    //         applyMiddleware(...middleware)
     //     )
     // )
-     callback(store)
-    // persistStore(store, { storage: AsyncStorage }, () => callback(store))
+    const store = createStore(reducers,
+        initialState,
+        compose(
+            autoRehydrate(),
+            applyMiddleware(...middleware),
+            window.devToolsExtension ? window.devToolsExtension() : x => x
+        )
+    )
+    //callback(store)
+    persistStore(store, { storage: AsyncStorage }, () => callback(store))
     // let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
     // let store1 = createStoreWithMiddleware(reducers, initialState);
     //return store;
