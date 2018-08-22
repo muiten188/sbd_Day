@@ -34,7 +34,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 import { InputField } from "../../components/Element/Form/index";
 import Icon from "react-native-vector-icons/FontAwesome";
-import * as meseumListAction from "../../store/actions/containers/schedule_action";
+import * as scheduleAction from "../../store/actions/containers/schedule_action";
 import Loading from "../../components/Loading";
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
@@ -60,35 +60,43 @@ class Schedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSummary: true,
-            backgroundVideo: false
+            languageSelect: 'vn'
         }
-        I18n.defaultLocale = "vi";
-        I18n.locale = "vi";
-        I18n.currentLocale();
+        this.loadSetting();
     }
 
     componentDidMount() {
-        const { } = this.props.meseumListAction;
-
-        this.loadSetting();
+        const { get_Schedule } = this.props.scheduleAction;
+        const { user } = this.props.loginReducer;
+        get_Schedule({}, user)
     }
     componentDidUpdate(prevProps, prevState) {
-
+        const { scheduleError } = this.props.ScheduleReducer;
+        const { clearScheduleError } = this.props.scheduleAction;
+        if (scheduleError) {
+            Alert.alert(I18n.t('report'), I18n.t('getScheduleFail'), [{
+                text: 'Ok',
+                onPress: (e) => {
+                    clearScheduleError();
+                }
+            }],
+                { cancelable: false })
+        }
     }
 
     async loadSetting() {
-        var backgroundVideoSetting = await helper.getBackgroundVideoSetting();
-        if (backgroundVideoSetting != null) {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
             this.setState({
-                backgroundVideo: backgroundVideoSetting
+                languageSelect: lang
             })
         }
     }
     render() {
         const locale = "vn";
         const { paramPassAction } = this.props;
-        const { listAntifact, searchAntifactErorr, isLoading, Schedule } = this.props.ScheduleReducer;
+        const { scheduleError, isLoading, schedule } = this.props.ScheduleReducer;
         return (
             <Container style={styles.container}>
                 <FlatList
@@ -96,26 +104,27 @@ class Schedule extends Component {
                         this.list = ref;
                     }}
                     style={{ flex: 1, padding: 4 }}
-                    data={[{}, {}, {}]}
+                    data={schedule ? schedule : []}
                     keyExtractor={this._keyExtractor}
                     renderItem={this.renderFlatListItem.bind(this)}
                     horizontal={false}
                     numColumns={1}
                 />
+                <Loading isShow={isLoading}></Loading>
             </Container>
         );
     }
 
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
-        return (<View>
-            <Text style={{ fontWeight: '500' }}>Day 1 - 20/04/2018 -Digital Transformation</Text>
+        return (<View style={{ marginBottom: 6 }}>
+            <Text style={{ fontWeight: '500' }}>{item.eventTitle}</Text>
             <FlatList
                 ref={ref => {
                     this.list = ref;
                 }}
                 style={{ flex: 1, padding: 4 }}
-                data={[{}, {}, {}, {}, {}]}
+                data={item.listSchedule}
                 keyExtractor={this._keyExtractor}
                 renderItem={this.renderFlatListItemDetail.bind(this)}
                 horizontal={false}
@@ -126,7 +135,22 @@ class Schedule extends Component {
 
     renderFlatListItemDetail(dataItem) {
         const item = dataItem.item;
-        return (<Text>     -detail item</Text>)
+        return (
+            <View style={{ marginBottom: 10 }}>
+                <Grid>
+                    <Row>
+                        <Col style={{ marginTop: 6, width: 115, justifyContent: 'flex-start', alignItems: 'center' }}>
+                            <Text style={{ borderWidth: 0.5, paddingLeft: 4, paddingRight: 4 }}>{item.fromTime}-{item.toTime}</Text>
+                        </Col>
+                        <Col>
+                            <Text><Text style={{ fontWeight: '500' }}>{I18n.t('Presentation')}: </Text>{item.title}</Text>
+                            <Text><Text style={{ fontWeight: '500' }}>{I18n.t('Presenter')}: </Text>{item.author}</Text>
+                            <Text><Text style={{ fontWeight: '500' }}>{I18n.t('Location')}: </Text>{item.location}</Text>
+                        </Col>
+                    </Row>
+                </Grid>
+            </View >
+        )
     }
 
     _keyExtractor(item, index) {
@@ -147,7 +171,7 @@ function mapStateToProps(state, props) {
 }
 function mapToDispatch(dispatch) {
     return {
-        meseumListAction: bindActionCreators(meseumListAction, dispatch)
+        scheduleAction: bindActionCreators(scheduleAction, dispatch)
     };
 }
 

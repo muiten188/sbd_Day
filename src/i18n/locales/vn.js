@@ -38,6 +38,7 @@ export default {
   Survey:'Survey',
   Topic:'Topic',
   Presenter:'Presenter',
+  Presentation:'Presentation',
   Date:'Date',
   Time:'Time',
   Summary:'Summary',
@@ -59,5 +60,8 @@ export default {
   userName:'Tên đăng nhập',
   oldPassword:'Mật khẩu',
   newPassword:'Mật khẩu mới',
-  confirmPassword:'Xác nhận mật khẩu'
+  confirmPassword:'Xác nhận mật khẩu',
+  report:'Thông báo',
+  getScheduleFail:'Không thể lấy danh sách lịch trình. Vui lòng kiếm tra lại kết nối!',
+  getPartiesFail:'Không thể lấy danh sách Parties. Vui lòng kiếm tra lại kết nối!'
 };

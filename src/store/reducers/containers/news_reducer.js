@@ -1,41 +1,34 @@
 import * as types from "../../constants/action_types";
 const initState = {
   isLoading: true,
-  listAntifact: [],
-  searchAntifactErorr: false,
-  valuesForm: {},
-  currentPage: 1,
-  pageSize: 10,
-  loadEnd: false
+  listNews: [],
+  searchNewsErorr: false,
 };
 
 export default function (state = initState, action = {}) {
   switch (action.type) {
-    case types.SEARCH_ANTIFACT:
+    case types.SEARCH_NEWS:
       return {
         ...state,
-        listAntifact: action.data,
+        listNews: action.data,
         isLoading: action.isLoading,
-        currentPage: initState.currentPage,
-        searchAntifactErorr: initState.searchErorr,
-        valuesForm: action.valuesForm,
-        loadEnd: initState.loadEnd
+        searchNewsErorr: initState.searchErorr,
       };
-    case types.SEARCHING_ANTIFACT:
+    case types.SEARCHING_NEWS:
       return {
         ...state,
         isLoading: action.isLoading,
       };
-    case types.SEARCH_ANTIFACT_ERROR:
+    case types.SEARCH_NEWS_ERROR:
       return {
         ...state,
-        searchAntifactErorr: action.searchErorr,
+        searchNewsErorr: action.searchErorr,
         isLoading:false
       };
-    case types.SEARCH_ANTIFACT_CLEAR_ERROR:
+    case types.SEARCH_NEWS_CLEAR_ERROR:
       return {
         ...state,
-        searchAntifactErorr: initState.searchErorr
+        searchNewsErorr: initState.searchErorr
       };
 
     default:

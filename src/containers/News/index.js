@@ -58,7 +58,7 @@ class News extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            languageSelect: 'vi'
+            languageSelect: 'vn'
         }
         this.loadSetting();
     }
@@ -72,7 +72,9 @@ class News extends Component {
         }
     }
     componentDidMount() {
-        const { get_Antifact } = this.props.newsAction;
+        const { get_News } = this.props.newsAction;
+        const {user }=this.props.loginReducer;
+        get_News({},user);
     }
     componentDidUpdate(prevProps, prevState) {
 

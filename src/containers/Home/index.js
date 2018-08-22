@@ -116,7 +116,7 @@ class Home extends Component {
       })
     })
     eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
-      console.log('Tìm thấy beacon:', data)
+      //console.log('Tìm thấy beacon:', data)
       if (data.beacons && data.beacons.length > 0) {
 
         if (data.beacons[0].uuid != current_uuid) {

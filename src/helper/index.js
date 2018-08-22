@@ -1,5 +1,6 @@
 import { AsyncStorage } from "react-native";
 import { Alert } from "react-native";
+import * as types from '../store/constants/action_types';
 export function setAsyncStorage(key, value) {
   try {
     Jsovalue = JSON.stringify(value);
@@ -8,6 +9,13 @@ export function setAsyncStorage(key, value) {
     alert("set error");
   }
 }
+
+export function logout() {
+  return {
+    type: types.LOGGED_OUT
+  };
+}
+
 
 export function getAsyncStorage(key, callback) {
   try {
@@ -28,17 +36,16 @@ export function clearAsyncStorage() {
 }
 
 export async function buildHeader(user) {
-  var _lang =await this.getLangSetting();
+  var _lang = await this.getLangSetting();
   var header = {};
   if (_lang == 'vn') {
     _lang = 'VI';
     header.CURRENT_LANGUAGE = _lang;
   }
+  if (user) {
+    header.JSESSIONID = user.jSessionId
+  }
   return header;
-  // {
-  //   CURRENT_LANGUAGE:
-  //   //JSESSIONID: user ? user.jSessionId : null
-  // };
 }
 
 export function formatDate(date) {

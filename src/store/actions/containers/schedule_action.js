@@ -3,15 +3,16 @@ import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
 
 export function get_Schedule(values, user) {
-    return dispatch => {
-        //dispatch(_searching_Antifact());
-        fetch(`${AppConfig.GET_Schedule}${values.museumId}`, {
-            headers: helper.buildHeader(user),
+    return async (dispatch) => {
+        dispatch(_searching_Schedule());
+        var _header = await helper.buildHeader(user);
+        fetch(`${AppConfig.GET_SCHEDULE}`, {
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {
                 if (response.status == 401) {
-                    //dispatch(_logout());
+                    dispatch(helper.logout());
                 } else if (response.status != 200) {
                     error = true;
                     dispatch(_seach_ScheduleError());
@@ -21,7 +22,7 @@ export function get_Schedule(values, user) {
             })
             .then((responseJson) => {
                 if (responseJson) {
-                    data = responseJson;
+                    data = responseJson.listData;
                     dispatch(_search_Schedule(data));
                 }
                 else {

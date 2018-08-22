@@ -2,8 +2,8 @@ import * as types from "../../constants/action_types";
 const initState = {
   isLoading: true,
   listAntifact: [],
-  Schedule: {},
-  ScheduleError: false,
+  schedule: {},
+  scheduleError: false,
   searchAntifactErorr: false,
   valuesForm: {},
   currentPage: 1,
@@ -44,25 +44,26 @@ export default function (state = initState, action = {}) {
     
       return {
         ...state,
-        Schedule: action.data,
+        schedule: action.data,
         isLoading: action.isLoading,
-        ScheduleError: initState.ScheduleError,
+        scheduleError: initState.scheduleError,
       };
     case types.SEARCHING_Schedule:
       return {
         ...state,
-        isLoading: action.isLoading,
+        isLoading: true,
       };
     case types.SEARCH_Schedule_ERROR:
       return {
         ...state,
-        ScheduleError: action.ScheduleError,
+        scheduleError: true,
         isLoading: false
       };
     case types.SEARCH_Schedule_CLEAR_ERROR:
       return {
         ...state,
-        ScheduleError: initState.ScheduleError
+        scheduleError: initState.scheduleError,
+        isLoading: false
       };
 
     default:
