@@ -21,7 +21,7 @@ import Presentation from '../containers/Presentation';
 import MuseumMap from '../containers/Museum_map';
 import ChangePassword from '../containers/ChangePassword';
 import NotificationDetail from '../containers/Notification_Detail';
-
+import Preview from '../components/Preview';
 class RootNavigation extends React.Component {
     //Life cycle component
     constructor(props) {
@@ -117,6 +117,12 @@ class RootNavigation extends React.Component {
                         title="NotificationDetail"
                         initial={false}>
                     </Scene>
+                    <Scene key="preview"
+                        component={Preview}
+                        title="preview"
+                        initial={false}>
+                    </Scene>
+                    
                 </Stack>
             </Router>
         );

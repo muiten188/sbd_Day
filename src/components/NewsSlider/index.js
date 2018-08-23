@@ -66,14 +66,6 @@ export default class extends PureComponent {
 
   render() {
     const { key, avatarUrl, item, listNews } = this.props;
-    var urlAvartar = null;
-    var _item = null;
-    if (listNews.length > 0) {
-      _item = listNews[this.state.indexSlider];
-      if (_item && _item.thumbnail) {
-        urlAvartar = AppConfig.API_HOST + _item.thumbnail.replaceAll("\\\\", "/")
-      }
-    }
     return (
       <View key={key} style={styles.itemList}>
         <FlatList
@@ -81,7 +73,7 @@ export default class extends PureComponent {
             this.list = ref;
           }}
           style={{ width: '100%', height: 70 }}
-          data={[...listNews]}
+          data={listNews}
           keyExtractor={this._keyExtractor}
           renderItem={this.buildMenuItem.bind(this)}
           horizontal={true}
@@ -91,13 +83,13 @@ export default class extends PureComponent {
           onPress={() => {
             this.list.scrollToEnd()
           }}>
-          <Icon style={{opacity:0.6}} size={17} name="arrow-right"></Icon>
+          <Icon style={{ opacity: 0.6 }} size={17} name="arrow-right"></Icon>
         </Button>
         <Button transparent style={{ width: 30, position: 'absolute', left: 0, top: 13, justifyContent: 'center', alignItems: 'center' }}
           onPress={() => {
             this.list.scrollToIndex({ index: 0 })
           }}>
-          <Icon style={{opacity:0.6}} size={17} name="arrow-left"></Icon>
+          <Icon style={{ opacity: 0.6 }} size={17} name="arrow-left"></Icon>
         </Button>
       </View>
     );
@@ -105,11 +97,16 @@ export default class extends PureComponent {
 
   buildMenuItem(dataItem) {
     var index = dataItem.index;
-    const { listNews } = this.props;
+    var item = dataItem.item;
+    const { listAllNews } = this.props;
+    let _avartar = null;
+    if (item.avatar) {
+      _avartar = `${AppConfig.API_HOST_BASE}${item.avatar}`;
+    }
     return (
       <TouchableOpacity style={{ padding: 5, borderRadius: 5, marginRight: 10, height: 60, width: 60, backgroundColor: index == this.state.indexSlider ? '#007db7' : '#cecece' }}
-        onPress={() => { Actions.home({ screenId: 'eventList' }) }}>
-        <Image style={{ flex: 1 }} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
+        onPress={() => { Actions.pop(), Actions.home({ screenId: 'newsDetaill', newsItem: item, listAllNews: listAllNews }) }}>
+        <Image style={{ flex: 1 }} source={{ uri: _avartar ? _avartar : 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
       </TouchableOpacity>
     )
   }

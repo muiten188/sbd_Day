@@ -108,7 +108,6 @@ class SurveyDetail extends Component {
                                             placeholder={I18n.t("bad")}
                                             label={I18n.t("bad")}
                                             onChange={(values)=>{
-                                                debugger;
                                                 this.props.changeFieldValue('quatityNormal', false)
                                                 this.props.changeFieldValue('quatityGood', false)
                                             }}

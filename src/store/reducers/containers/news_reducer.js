@@ -28,7 +28,8 @@ export default function (state = initState, action = {}) {
     case types.SEARCH_NEWS_CLEAR_ERROR:
       return {
         ...state,
-        searchNewsErorr: initState.searchErorr
+        searchNewsErorr: initState.searchErorr,
+        isLoading:false
       };
 
     default:

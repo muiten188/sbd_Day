@@ -107,14 +107,18 @@ class Home extends Component {
   componentDidMount() {
     const { get_AntifactByUUID } = this.props.homeAction;
     const { setUser } = this.props.loginAction;
-    helper.getAsyncStorage("@userLogin", (promise) => {
-      promise.done((value) => {
-        if (value != '' && value != null) {
-          var user = JSON.parse(value);
-          setUser(user);
-        }
+    const { user } = this.props.loginReducer;
+    if (!user) {
+      helper.getAsyncStorage("@userLogin", (promise) => {
+        promise.done((value) => {
+          if (value != '' && value != null) {
+            var user = JSON.parse(value);
+            setUser(user);
+          }
+        })
       })
-    })
+    }
+
     eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
       //console.log('Tìm thấy beacon:', data)
       if (data.beacons && data.beacons.length > 0) {
@@ -260,8 +264,8 @@ class Home extends Component {
                       </Row>
                     </Grid>
                   </TabHeading>}>
-                  {this.renderProfileTab()}
-                   
+                    {this.renderProfileTab()}
+
                   </Tab>
                 </Tabs>
                 <Loading
@@ -278,7 +282,7 @@ class Home extends Component {
     );
   }
 
-  renderProfileTab(){
+  renderProfileTab() {
     switch (this.props.screenId) {
       case "notification":
       case null:
@@ -339,13 +343,13 @@ class Home extends Component {
         return (<News></News>)
         break;
       case "newsDetaill":
-        return (<NewsDetail></NewsDetail>)
+        return (<NewsDetail newsItem={this.props.newsItem} listAllNews={this.props.listAllNews}></NewsDetail>)
         break;
       case "presentation":
         return (<Presentation></Presentation>)
         break;
       case "presentationDetail":
-        return (<PresentationDetail></PresentationDetail>)
+        return (<PresentationDetail scheduleItem={this.props.scheduleItem} scheduleAllItem={this.props.scheduleAllItem}></PresentationDetail>)
         break;
       case "product":
         return (<Product></Product>)

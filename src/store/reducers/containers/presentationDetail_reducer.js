@@ -1,43 +1,35 @@
 import * as types from "../../constants/action_types";
 const initState = {
-  isLoading: false,
-  listArtifacts: [],
-  listMuseums: [],
-  listNews: [],
-  searchErorr: false,
-  valuesForm: {},
-  loadEnd: false
+  isLoading: true,
+  presentationDetail: {},
+  searchPresentationDetailErorr: false,
 };
 
 export default function (state = initState, action = {}) {
   switch (action.type) {
-    case types.QUICK_SEARCH_ALL:
+    case types.SEARCH_PRESENTATION_DETAIL:
       return {
         ...state,
-        listArtifacts: action.listArtifacts,
-        listMuseums: action.listMuseums,
-        listNews: action.listNews,
+        presentationDetail: action.data,
         isLoading: action.isLoading,
-        currentPage: initState.currentPage,
-        searchErorr: initState.searchErorr,
-        valuesForm: action.valuesForm,
-        loadEnd: initState.loadEnd
+        searchPresentationDetailErorr: initState.searchErorr,
       };
-    case types.QUICK_SEARCHING_ALL:
+    case types.SEARCHING_PRESENTATION_DETAIL:
       return {
         ...state,
         isLoading: action.isLoading,
       };
-    case types.QUICK_SEARCH_ALL_ERROR:
+    case types.SEARCH_PRESENTATION_DETAIL_ERROR:
       return {
         ...state,
-        searchErorr: action.searchErorr,
+        searchPresentationDetailErorr: action.searchErorr,
+        isLoading: false
       };
-    case types.QUICK_SEARCH_ALL_CLEAR_ERROR:
+    case types.SEARCH_PRESENTATION_DETAIL_CLEAR_ERROR:
       return {
         ...state,
-        searchErorr: initState.searchErorr,
-        isLoading: initState.isLoading
+        searchPresentationDetailErorr: initState.searchErorr,
+        isLoading: false
       };
 
     default:

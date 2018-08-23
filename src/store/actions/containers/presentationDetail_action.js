@@ -1,68 +1,68 @@
 import * as types from "../../constants/action_types";
 import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
-export function QUICK_SEARCH_ALL(values, user) {
-    let listArtifacts = [];
-    let listMuseums=[];
-    let listNews=[];
+export function get_presentationDetail(values, user) {
+    let data = [];
     let dataPost = values || {};
-    return dispatch => {
-        dispatch(_QUICK_SEARCHing_ALL());
-        fetch(`${AppConfig.GET_ALLLIST}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+    var error = false;
+    return async (dispatch) => {
+        dispatch(_searching_presentationDetail());
+        var _header = await helper.buildHeader(user);
+        fetch(`${AppConfig.GET_PRESENTATION_DETAIL}?${helper.getQueryString(dataPost)}`, {
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {
                 if (response.status == 401) {
-                    //dispatch(_logout());
+                    dispatch(helper.logout());
                 } else if (response.status != 200) {
-                    dispatch(_seach_ALLError());
+                    error = true;
+                    dispatch(_seach_presentationDetailError());
                 } else {
                     return response.json();
                 }
             })
             .then((responseJson) => {
                 if (responseJson) {
-                    listArtifacts=responseJson.artifacts;
-                    listMuseums=responseJson.museums;
-                    listNews=responseJson.news;
-                    dispatch(_QUICK_SEARCH_ALL(listArtifacts,listMuseums,listNews));
+                    data = responseJson;
+                    dispatch(_search_presentationDetail(data, dataPost));
                 }
                 else {
-                    dispatch(_seach_ALLError());
+                    if (!error) {
+                        dispatch(_seach_presentationDetailError());
+                    }
                 }
             })
             .catch(function (error) {
-                dispatch(_seach_ALLError());
+                dispatch(_seach_presentationDetailError());
             });
     };
 }
-function _QUICK_SEARCH_ALL(listArtifacts,listMuseums,listNews) {
+
+function _search_presentationDetail(data, valuesForm) {
     return {
-        type: types.QUICK_SEARCH_ALL,
-        listArtifacts: listArtifacts,
-        listMuseums:listMuseums,
-        listNews:listNews,
+        type: types.SEARCH_PRESENTATION_DETAIL,
+        data: data,
         isLoading: false,
     };
 }
 
-function _QUICK_SEARCHing_ALL() {
+function _searching_presentationDetail() {
     return {
-        type: types.QUICK_SEARCHING_ALL,
+        type: types.SEARCHING_PRESENTATION_DETAIL,
         isLoading: true
     };
 }
 
-function _seach_ALLError() {
+function _seach_presentationDetailError() {
     return {
-        type: types.QUICK_SEARCH_ALL_ERROR,
+        type: types.SEARCH_PRESENTATION_DETAIL_ERROR,
         searchErorr: true,
         isLoading: false
     };
 }
-export function clearErrorSearch(){
+export function clearpresentationDetailError() {
     return {
-        type: types.QUICK_SEARCH_ALL_CLEAR_ERROR,
+        type: types.SEARCH_PRESENTATION_DETAIL_CLEAR_ERROR
     };
 }

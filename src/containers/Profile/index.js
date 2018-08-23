@@ -118,7 +118,7 @@ class Profile extends Component {
 
   onLogout() {
     const { loginAction } = this.props;
-    helper.clearAsyncStorage();
+    //helper.clearAsyncStorage();
     loginAction.logout();
     try {
       LoginManager.logOut();

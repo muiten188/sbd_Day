@@ -63,5 +63,7 @@ export default {
   confirmPassword:'Xác nhận mật khẩu',
   report:'Thông báo',
   getScheduleFail:'Không thể lấy danh sách lịch trình. Vui lòng kiếm tra lại kết nối!',
-  getPartiesFail:'Không thể lấy danh sách Parties. Vui lòng kiếm tra lại kết nối!'
+  getPartiesFail:'Không thể lấy danh sách Parties. Vui lòng kiếm tra lại kết nối!',
+  getNewsFail:'Không thể lấy danh sách Tin tức. Vui lòng kiếm tra lại kết nối!',
+  getTopicFail:'Không thể lấy chi tiết lịch trình. Vui lòng kiếm tra lại kết nối!',
 };

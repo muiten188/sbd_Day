@@ -9,7 +9,6 @@ const initState = {
 };
 
 export default function(state = initState, action = {}) {
-  debugger;
   switch (action.type) {
     case types.LOGIN_SUCCESS:
       return {

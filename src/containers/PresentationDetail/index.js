@@ -27,6 +27,7 @@ import AutoHeightWebView from 'react-native-autoheight-webview';
 import * as PresentationDetailAction from '../../store/actions/containers/presentationDetail_action';
 import TopicSlider from '../../components/TopicSlider';
 import * as helper from '../../helper';
+import Loading from "../../components/Loading";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 class PresentationDetail extends Component {
 
@@ -43,7 +44,10 @@ class PresentationDetail extends Component {
     }
 
     componentDidMount() {
-
+        const { get_presentationDetail } = this.props.PresentationDetailAction;
+        const { user } = this.props.loginReducer;
+        const { scheduleItem } = this.props;
+        get_presentationDetail({ scheduleId: scheduleItem.scheduleId }, user);
     }
 
     async loadSetting() {
@@ -56,11 +60,25 @@ class PresentationDetail extends Component {
         }
     }
     componentDidUpdate(prevProps, prevState) {
-
+        const { searchPresentationDetailErorr } = this.props.presentationDetailReducer;
+        const { clearpresentationDetailError } = this.props.PresentationDetailAction;
+        if (searchPresentationDetailErorr) {
+            Alert.alert(I18n.t('report'), I18n.t('getTopicFail'), [{
+                text: 'Ok',
+                onPress: (e) => {
+                    clearpresentationDetailError();
+                }
+            }],
+                { cancelable: false })
+        }
     }
 
     render() {
-        const { news } = this.props;
+        const { news, scheduleAllItem, scheduleItem } = this.props;
+        let listAllScheduleClone = scheduleAllItem ? scheduleAllItem.slice(0) : null;
+        const { isLoading, presentationDetail } = this.props.presentationDetailReducer;
+        let listTopicDif = this.getListTopic(listAllScheduleClone, scheduleItem);
+        
         return (
             <Container>
                 <Grid>{/* marginBottom: 45 */}
@@ -68,54 +86,85 @@ class PresentationDetail extends Component {
                         <ScrollView>
                             <View style={[styles.Item, { marginTop: 10 }]}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Topic') + " : "}</Text> Digital transformotion in SDC
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Topic') + " : "}</Text> {presentationDetail.title}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Presenter') + " : "}</Text> Digital transformotion in SDC
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Presenter') + " : "}</Text> {presentationDetail.author}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Date') + " : "}</Text> Digital transformotion in SDC
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Date') + " : "}</Text> {presentationDetail.targetDate ? new Date(presentationDetail.targetDate).toLocaleDateString() : ''}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Time') + " : "}</Text> Digital transformotion in SDC
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Time') + " : "}</Text> {presentationDetail.fromTime} - {presentationDetail.toTime}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Location') + " : "}</Text> Digital transformotion in SDC
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Location') + " : "}</Text> {presentationDetail.location}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Summary') + " : "}</Text>
                                 </Text>
-                                <Text>      -Digital transformotion in SDC</Text>
-                                <Text>      -Digital transformotion in SDC</Text>
-                                <Text>      -Digital transformotion in SDC</Text>
+                                
                             </View>
-                            <View style={styles.Item}>
+                            <AutoHeightWebView source={{
+                                    html: `${presentationDetail.description}`
+                                }}>
+
+                                </AutoHeightWebView>
+                            {/*<View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Presenter') + " : "}</Text> Mr ABC
                                 </Text>
                                 <Text>      -Digital transformotion in SDC</Text>
                                 <Text>      -Digital transformotion in SDC</Text>
                                 <Text>      -Digital transformotion in SDC</Text>
-                            </View>
+                            </View> */}
                         </ScrollView>
                     </Row>
-                    <Row style={{ height: 70, borderTopWidth: 1, borderTopColor: '#cecece' }}>
-                        <TopicSlider listNews={[{}, {}, {}]}></TopicSlider>
-                    </Row>
+                    {(listTopicDif && listTopicDif.length > 0) ?
+                        <Row style={{ height: 70, borderTopWidth: 1, borderTopColor: '#cecece' }}>
+                            <TopicSlider listTopic={listTopicDif} listTopicAll={scheduleAllItem}></TopicSlider>
+                        </Row> : null}
                 </Grid>
+                <Loading isShow={isLoading}></Loading>
             </Container>
         );
     }
+
+    getListTopic(topicArr, scheduleItem) {
+        var _arrTopic = [];
+        forTp:
+        for (var i = 0; i < topicArr.length; i++) {
+            for (var j = 0; j < topicArr[i].listSchedule.length; j++) {
+                if (topicArr[i].listSchedule[j].scheduleId == scheduleItem.scheduleId) {
+                    _arrTopic = topicArr[i].listSchedule;
+                    break forTp;
+                }
+            }
+        }
+        _arrTopic = this.remove(_arrTopic, scheduleItem);
+        return _arrTopic;
+    }
+
+    remove(array, element) {
+        var _arr=[];
+        for(var i=0;i<array.length;i++){
+            if(array[i]!=element){
+                _arr.push(array[i])
+            }
+        }
+        return _arr;
+    }
+
 }
 function mapStateToProps(state, props) {
     return {

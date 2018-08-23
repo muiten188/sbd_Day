@@ -135,6 +135,7 @@ class Schedule extends Component {
 
     renderFlatListItemDetail(dataItem) {
         const item = dataItem.item;
+        const { schedule } = this.props.ScheduleReducer;
         return (
             <View style={{ marginBottom: 10 }}>
                 <Grid>
@@ -143,7 +144,9 @@ class Schedule extends Component {
                             <Text style={{ borderWidth: 0.5, paddingLeft: 4, paddingRight: 4 }}>{item.fromTime}-{item.toTime}</Text>
                         </Col>
                         <Col>
-                            <Text><Text style={{ fontWeight: '500' }}>{I18n.t('Presentation')}: </Text>{item.title}</Text>
+                            <TouchableOpacity onPress={() => {
+                                Actions.home({ screenId: 'presentationDetail', scheduleItem: item, scheduleAllItem: schedule })
+                            }}><Text><Text style={{ fontWeight: '500' }}>{I18n.t('Presentation')}: </Text><Text style={{ textDecorationLine: 'underline' }}>{item.title}</Text></Text></TouchableOpacity>
                             <Text><Text style={{ fontWeight: '500' }}>{I18n.t('Presenter')}: </Text>{item.author}</Text>
                             <Text><Text style={{ fontWeight: '500' }}>{I18n.t('Location')}: </Text>{item.location}</Text>
                         </Col>

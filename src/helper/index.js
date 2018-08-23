@@ -183,7 +183,6 @@ export async function getLangSetting() {
 
     var _lang = await AsyncStorage.getItem("@lang");
     if (_lang) {
-      debugger;
       var olang = JSON.parse(_lang);
       lang = olang;
       return lang;
