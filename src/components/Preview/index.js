@@ -24,7 +24,7 @@ import * as AppConfig from "../../config/app_config";
 let intervalSlider = null;
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import VideoPlayer from "../../components/VideoPlayer";
-let _intervalSlider = null;
+import YouTube from 'react-native-youtube'
 let currentListIndex = 0;
 export default class Preview extends Component {
   constructor(props) {
@@ -41,9 +41,7 @@ export default class Preview extends Component {
   }
 
   componentWillUnmount() {
-    if (_intervalSlider) {
-      clearInterval(_intervalSlider);
-    }
+
   }
 
   static navigationOptions = {
@@ -66,11 +64,24 @@ export default class Preview extends Component {
           : null}
         {
           data.type == "VIDEO" && _video ?
-            <View style={{width:'100%',height:220}}>
-              <VideoPlayer video={{ uri: _video }}
+            <View style={{ width: '100%', minHeight: 220 }}>
+              {/* <VideoPlayer video={{ uri: _video }}
                 volume={0.7}
                 onClosePressed={() => { }}
                 playInBackground={false}
+              /> */}
+              <YouTube
+                videoId="vvvvcpwFw5o"   // The YouTube video ID
+                play={true}             // control playback of video with true/false
+                fullscreen={false}       // control whether the video should play in fullscreen or inline
+                loop={true}             // control whether the video should loop when ended
+                apiKey={"AIzaSyCpumcHqM6clMWURCg2hwW0MefeA11hpfA"}
+                //onReady={e => this.setState({ isReady: true })}
+                //onChangeState={e => this.setState({ status: e.state })}
+                //onChangeQuality={e => this.setState({ quality: e.quality })}
+                //onError={e => this.setState({ error: e.error })}
+                showFullscreenButton={false}
+                style={{ alignSelf: 'stretch', height: 250 }}
               />
             </View> : null
         }

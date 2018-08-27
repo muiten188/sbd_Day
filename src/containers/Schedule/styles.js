@@ -8,6 +8,9 @@ export default {
         marginTop: 13,
         fontWeight: 'bold', paddingLeft: 6
     },
+    smallText:{
+        fontSize:14
+    },
     item_container_half: {
         width: "48.5%",
         justifyContent: "center",

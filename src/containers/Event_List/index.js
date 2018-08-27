@@ -69,7 +69,7 @@ class Eventlist extends Component {
     componentDidMount() {
         const { Presentation, get_Area, search_News, search_HOT_NEWS } = this.props.meseumListAction;
         // get_Area(null, 1, 1000, null);
-         search_HOT_NEWS(null, 1, 1000, null)
+        search_HOT_NEWS(null, 1, 1000, null)
         // Presentation(null, 1, 1000, null);
         // search_News(null, 1, 1000, null)
     }
@@ -100,7 +100,7 @@ class Eventlist extends Component {
             <Container style={styles.container}>
                 <Grid>{/* marginBottom: 45 */}
 
-                    <Row style={{ height: 100, borderBottomWidth: 1, borderBottomColor: '#cecece' }}>
+                    <Row style={{ height: 160, borderBottomWidth: 1, borderBottomColor: '#cecece' }}>
                         <EventSlider listNews={listHotNews}></EventSlider>
                     </Row>
                     <Row>
@@ -108,12 +108,12 @@ class Eventlist extends Component {
                             ref={ref => {
                                 this.list = ref;
                             }}
-                            style={{ flex: 1, padding: 4 }}
+                            style={{ flex: 1, padding: 4, marginTop: 15 }}
                             data={values.list_Menu ? values.list_Menu : []}
                             keyExtractor={this._keyExtractor}
                             renderItem={this.buildMenuItem.bind(this)}
                             horizontal={false}
-                            numColumns={3}
+                            numColumns={2}
                         />
                     </Row>
                 </Grid>
@@ -127,17 +127,17 @@ class Eventlist extends Component {
         const { listNews } = this.props;
         return (
             <TouchableOpacity style={{
-                borderRadius: 5,
-                marginRight: 10,
                 height: 110,
-                width: 110,
+                width: '50%',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                borderWidth:  0.25,
+                borderColor:'#cecece',
             }}
                 onPress={() => { Actions.home({ screenId: item.routerName }) }}>
                 <Grid>
                     <Row style={styles.center}>
-                        <Icon style={{}} size={42} name={item.IconName}></Icon>
+                        <Icon style={{ color: '#007db7' }} size={35} name={item.IconName}></Icon>
                     </Row>
                     <Row style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
                         <Text>{I18n.t(item.mName)}</Text>

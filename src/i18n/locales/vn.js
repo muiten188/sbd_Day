@@ -66,4 +66,6 @@ export default {
   getPartiesFail:'Không thể lấy danh sách Parties. Vui lòng kiếm tra lại kết nối!',
   getNewsFail:'Không thể lấy danh sách Tin tức. Vui lòng kiếm tra lại kết nối!',
   getTopicFail:'Không thể lấy chi tiết lịch trình. Vui lòng kiếm tra lại kết nối!',
+  getProductFail:'Không thể lấy danh sách sản phẩm. Vui lòng kiếm tra lại kết nối!',
+  getProductDetailFail:'Không thể lấy chi tiết sản phẩm. Vui lòng kiếm tra lại kết nối!',
 };

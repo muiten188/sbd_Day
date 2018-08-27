@@ -355,7 +355,7 @@ class Home extends Component {
         return (<Product></Product>)
         break;
       case "productDetail":
-        return (<ProductDetail></ProductDetail>)
+        return (<ProductDetail product={this.props.product} listProduct={this.props.listProduct}></ProductDetail>)
         break;
       case "location":
         return (<Map></Map>)

@@ -140,15 +140,17 @@ class Schedule extends Component {
             <View style={{ marginBottom: 10 }}>
                 <Grid>
                     <Row>
-                        <Col style={{ marginTop: 6, width: 115, justifyContent: 'flex-start', alignItems: 'center' }}>
-                            <Text style={{ borderWidth: 0.5, paddingLeft: 4, paddingRight: 4 }}>{item.fromTime}-{item.toTime}</Text>
+                        <Col style={{ marginTop: 2, width: 115, justifyContent: 'flex-start', alignItems: 'center' }}>
+                            <Text style={[{ paddingLeft: 4, paddingRight: 4 }, styles.smallText]}>{item.fromTime} - {item.toTime}</Text>
                         </Col>
                         <Col>
                             <TouchableOpacity onPress={() => {
                                 Actions.home({ screenId: 'presentationDetail', scheduleItem: item, scheduleAllItem: schedule })
-                            }}><Text><Text style={{ fontWeight: '500' }}>{I18n.t('Presentation')}: </Text><Text style={{ textDecorationLine: 'underline' }}>{item.title}</Text></Text></TouchableOpacity>
-                            <Text><Text style={{ fontWeight: '500' }}>{I18n.t('Presenter')}: </Text>{item.author}</Text>
-                            <Text><Text style={{ fontWeight: '500' }}>{I18n.t('Location')}: </Text>{item.location}</Text>
+                            }}><Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Presentation')}: </Text>
+                                    <Text style={{ color: 'blue' }}>{item.title}</Text></Text>
+                                <Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Presenter')}: </Text>{item.author}</Text>
+                                <Text style={{ fontStyle: 'italic' }}><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Location')}: </Text>{item.location}</Text>
+                            </TouchableOpacity>
                         </Col>
                     </Row>
                 </Grid>

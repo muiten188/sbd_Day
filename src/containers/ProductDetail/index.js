@@ -25,7 +25,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 import AutoHeightWebView from 'react-native-autoheight-webview';
 import * as productDetailAction from '../../store/actions/containers/productDetail_action';
-import EventSlider from '../../components/EventSlider';
+import ProductDetailSlider from '../../components/ProductDetailSlider';
 import ProductSlider from '../../components/ProductSlider';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as helper from '../../helper';
@@ -44,7 +44,10 @@ class ProductDetail extends Component {
     }
 
     componentDidMount() {
-
+        const { getProductsById } = this.props.productDetailAction;
+        const { user } = this.props.loginReducer;
+        const { product } = this.props;
+        getProductsById({ productId: product.productId }, user)
     }
 
     async loadSetting() {
@@ -56,67 +59,90 @@ class ProductDetail extends Component {
             })
         }
     }
-    
-    componentDidUpdate(prevProps, prevState) {
 
+    componentDidUpdate(prevProps, prevState) {
+        const { searchErorr } = this.props.productDetailReducer;
+        const { clearErrorSearch } = this.props.productDetailAction;
+        if (searchErorr) {
+            Alert.alert(I18n.t('report'), I18n.t('getProductDetailFail'), [{
+                text: 'Ok',
+                onPress: (e) => {
+                    clearErrorSearch();
+                }
+            }],
+                { cancelable: false });
+        }
     }
 
     render() {
-        const { news } = this.props;
+        const { searchErorr, isLoading, productDetail } = this.props.productDetailReducer;
+        const {listProduct,product}=this.props;
         return (
             <Container>
                 <Grid>{/* marginBottom: 45 */}
-                    <Row style={{ height: 100 }}>
-                        <EventSlider listNews={[{}, {}, {}, {}, {}]}></EventSlider>
+                    <Row style={{ height: 160 }}>
+                        <ProductDetailSlider data={productDetail.profiles}></ProductDetailSlider>
                     </Row>
                     <Row>
                         <ScrollView>
                             <View style={[styles.Item, { marginTop: 10 }]}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Product') + " : "}</Text> Smart Tourist
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Product') + " : "}</Text> {productDetail.name}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Company') + " : "}</Text> Digital transformotion in SDC
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Company') + " : "}</Text> {productDetail.company}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Date') + " : "}</Text> Digital transformotion in SDC
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Date') + " : "}</Text> {productDetail.targetDate ? new Date(productDetail.targetDate).toLocaleDateString() : ''}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Time') + " : "}</Text> Digital transformotion in SDC
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Time') + " : "}</Text> {productDetail.fromTime} - {productDetail.toTime}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Location') + " : "}</Text> Digital transformotion in SDC
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Location') + " : "}</Text> {productDetail.location}
                                 </Text>
                             </View>
                             <View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Introduce') + " : "}</Text>
                                 </Text>
-                                <Text>      -Digital transformotion in SDC</Text>
-                                <Text>      -Digital transformotion in SDC</Text>
-                                <Text>      -Digital transformotion in SDC</Text>
+                                <AutoHeightWebView source={{
+                                    html: `${productDetail.description}`
+                                }}>
+
+                                </AutoHeightWebView>
                             </View>
                         </ScrollView>
                     </Row>
                     <Row style={{ height: 70, borderTopWidth: 1, borderTopColor: '#cecece' }}>
-                        <ProductSlider listNews={[{}, {}, {}]}></ProductSlider>
+                        <ProductSlider listProduct={this.remove(listProduct,product)} listAllProduct={listProduct}></ProductSlider>
                     </Row>
                 </Grid>
             </Container>
         );
     }
+
+    remove(array, element) {
+        var _arr=[];
+        for(var i=0;i<array.length;i++){
+            if(array[i]!=element){
+                _arr.push(array[i])
+            }
+        }
+        return _arr;
+    }
 }
 function mapStateToProps(state, props) {
     return {
-        productDetailReducer: state.productDetailReducer,
+        productDetailReducer: state.productDetail_reducer,
         loginReducer: state.loginReducer
     };
 }
