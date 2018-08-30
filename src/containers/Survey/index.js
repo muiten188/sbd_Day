@@ -37,6 +37,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as helper from '../../helper';
+import AutoHeightWebView from 'react-native-autoheight-webview';
 const blockAction = false;
 const blockLoadMoreAction = false;
 class Survey extends Component {
@@ -54,7 +55,9 @@ class Survey extends Component {
     }
 
     componentDidMount() {
-
+        const { getSurvey } = this.props.surveyAction;
+        const { user } = this.props.loginReducer;
+        getSurvey({ userId: user.userId }, user);
     }
 
     async loadSetting() {
@@ -84,9 +87,10 @@ class Survey extends Component {
 
     render() {
         const locale = "vn";
+        const { surveyUrl, isLoading, searchErorr } = this.props.surveyReducer;
         return (
             <Container>
-                <FlatList
+                {/* <FlatList
                     ref={ref => {
                         this.list = ref;
                     }}
@@ -96,7 +100,14 @@ class Survey extends Component {
                     renderItem={this.renderFlatListItem.bind(this)}
                     horizontal={false}
                     numColumns={1}
-                />
+                /> */}
+                <Content>
+                    <AutoHeightWebView source={{
+                        uri: surveyUrl
+                    }}>
+                    </AutoHeightWebView>
+                </Content>
+                <Loading isShow={isLoading}></Loading>
             </Container>
         );
     }
@@ -104,7 +115,7 @@ class Survey extends Component {
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
         return (<Grid style={{ width: '100%', height: 80, marginBottom: 6, paddingTop: 10 }}>
-            <Col style={{ width: 80,justifyContent: 'center', alignItems: 'center' }}>
+            <Col style={{ width: 80, justifyContent: 'center', alignItems: 'center' }}>
                 <IconEntypo size={35} name="help"></IconEntypo>
 
             </Col>

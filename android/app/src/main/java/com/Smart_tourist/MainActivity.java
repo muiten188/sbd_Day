@@ -14,7 +14,11 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "sdb_day";
     }
-    
+     @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

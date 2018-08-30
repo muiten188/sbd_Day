@@ -10,15 +10,14 @@ var EventEmitter = require('EventEmitter');
 
 import { Actions } from 'react-native-router-flux';
 import * as helper from '../helper';
-import * as signalr from '../helper/signalr';
 import moment from 'moment';
-
 class FcmClient {
   device_token = null;
   newEvent = new EventEmitter();
   userID = null;
   groupID = null;
   registerFCM() {
+    this.showLocalMsg();
     FCM.requestPermissions({
       badge: false,
       sound: true,
@@ -26,6 +25,7 @@ class FcmClient {
     }).then(() => console.log('fcm granted')).catch(() => console.log('notification permission rejected'));
     try {
       FCM.setBadgeNumber(0);
+      FCM.subscribeToTopic('topic1');
     } catch (e) {
       console.log(e);
     }
@@ -130,20 +130,20 @@ class FcmClient {
         }
 
         if (notif.body != '' && notif.body != undefined) {
-          try {
-            this.userID = notif.userID;
-            this.groupID = notif.groupID;
-            if (notif.userID) {
-              this.newEvent.emit('fcm-event-user-group', { isUser: true });
-              this.newEvent.emit('fcm-event-user', { es6rules: true, mixinsAreLame: true });
-            }
-            else if (notif.groupID) {
-              this.newEvent.emit('fcm-event-user-group', { isUser: false });
-              this.newEvent.emit('fcm-event-group', { es6rules: true, mixinsAreLame: true });
-            }
-          } catch (e) {
-            console.log(e);
-          }
+          // try {
+          //   this.userID = notif.userID;
+          //   this.groupID = notif.groupID;
+          //   if (notif.userID) {
+          //     this.newEvent.emit('fcm-event-user-group', { isUser: true });
+          //     this.newEvent.emit('fcm-event-user', { es6rules: true, mixinsAreLame: true });
+          //   }
+          //   else if (notif.groupID) {
+          //     this.newEvent.emit('fcm-event-user-group', { isUser: false });
+          //     this.newEvent.emit('fcm-event-group', { es6rules: true, mixinsAreLame: true });
+          //   }
+          // } catch (e) {
+          //   console.log(e);
+          // }
         }
       }
       // await someAsyncCall();
@@ -183,7 +183,7 @@ class FcmClient {
       auto_cancel: true,                                  // Android only (default true)
       //large_icon: 'ic_launcher',                           // Android only
       //icon: 'ic_notify',                                // as FCM payload, you can relace this with custom icon you put in mipmap
-      big_text: body,     // Android only
+      big_text: 'body',     // Android only
       //sub_text: body,                      // Android only
       color: 'red',                                       // Android only
       vibrate: 500,
@@ -191,7 +191,7 @@ class FcmClient {
       // tag: 'some_tag',                                    // Android only
       // group: 'group',                                     // Android only
       // image_link: image_link,
-      picture: "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png",                     // Android only bigPicture style
+      //picture: "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png",                     // Android only bigPicture style
       // my_custom_data:'my_custom_field_value',             // extra data you want to throw
       lights: true,                                       // Android only, LED blinking (default false)
       show_in_foreground: true                                  // notification when app is in foreground (local & remote)

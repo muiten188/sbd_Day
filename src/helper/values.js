@@ -23,12 +23,12 @@ export const list_Menu = [
         mID:'news',
         routerName:'news'
     },
-    {
-        mName:'Speech',
-        IconName:'microphone',
-        mID:'speech',
-        routerName:'presentation'
-    },
+    // {
+    //     mName:'Speech',
+    //     IconName:'microphone',
+    //     mID:'speech',
+    //     routerName:'presentation'
+    // },
     {
         mName:'Product',
         IconName:'windows',

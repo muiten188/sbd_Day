@@ -57,7 +57,7 @@ import MapDetail from "../MapDetail";
 import Survey from "../Survey";
 import SurveyDetail from "../SurveyDetail";
 import ChangePassword from "../ChangePassword";
-
+import FcmClient from '../../helper/fcmClient';
 const blockAction = false;
 const blockLoadMoreAction = false;
 const blockUUID = false;
@@ -104,6 +104,17 @@ class Home extends Component {
     }
   }
 
+  componentWillMount() {
+    FcmClient.registerFCM();
+    // FcmClient.newEvent.addListener('fcm-event-user-group', (obj) => {
+    //   if (obj.isUser) {
+    //     this.setState({ tabActivePosition: 0 })
+    //   } else {
+    //     this.setState({ tabActivePosition: 1 })
+    //   }
+    // });
+  }
+
   componentDidMount() {
     const { get_AntifactByUUID } = this.props.homeAction;
     const { setUser } = this.props.loginAction;
@@ -145,6 +156,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
+    FcmClient.unRegisterFCM();
     if (eventBeacons) {
       eventBeacons.remove();
     }
@@ -361,7 +373,7 @@ class Home extends Component {
         return (<Map></Map>)
         break;
       case "locationDetail":
-        return (<MapDetail></MapDetail>)
+        return (<MapDetail map={this.props.map}></MapDetail>)
         break;
       case "survey":
         return (<Survey></Survey>)

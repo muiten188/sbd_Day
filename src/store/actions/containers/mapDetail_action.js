@@ -1,20 +1,18 @@
 import * as types from "../../constants/action_types";
 import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
-export function QUICK_SEARCH_ALL(values, user) {
-    let listArtifacts = [];
-    let listMuseums=[];
-    let listNews=[];
+export function getMapsById(values, user) {
     let dataPost = values || {};
-    return dispatch => {
-        dispatch(_QUICK_SEARCHing_ALL());
-        fetch(`${AppConfig.GET_ALLLIST}?${helper.getQueryString(dataPost)}`, {
-            headers: helper.buildHeader(user),
+    return async (dispatch) => {
+        dispatch(_getingMap());
+        var _header = await helper.buildHeader(user);
+        fetch(`${AppConfig.GET_MAP_BY_ID}?${helper.getQueryString(dataPost)}`, {
+            headers: _header,
             method: "GET"
         })
             .then(function (response) {
                 if (response.status == 401) {
-                    //dispatch(_logout());
+                    dispatch(helper.logout());
                 } else if (response.status != 200) {
                     dispatch(_seach_ALLError());
                 } else {
@@ -23,10 +21,7 @@ export function QUICK_SEARCH_ALL(values, user) {
             })
             .then((responseJson) => {
                 if (responseJson) {
-                    listArtifacts=responseJson.artifacts;
-                    listMuseums=responseJson.museums;
-                    listNews=responseJson.news;
-                    dispatch(_QUICK_SEARCH_ALL(listArtifacts,listMuseums,listNews));
+                    dispatch(_getMapsById(responseJson));
                 }
                 else {
                     dispatch(_seach_ALLError());
@@ -37,32 +32,30 @@ export function QUICK_SEARCH_ALL(values, user) {
             });
     };
 }
-function _QUICK_SEARCH_ALL(listArtifacts,listMuseums,listNews) {
+function _getMapsById(data) {
     return {
-        type: types.QUICK_SEARCH_ALL,
-        listArtifacts: listArtifacts,
-        listMuseums:listMuseums,
-        listNews:listNews,
+        type: types.MAP_DETAIL_ALL,
+        data: data,
         isLoading: false,
     };
 }
 
-function _QUICK_SEARCHing_ALL() {
+function _getingMap() {
     return {
-        type: types.QUICK_SEARCHING_ALL,
+        type: types.MAP_DETAIL_SEARCHING_ALL,
         isLoading: true
     };
 }
 
 function _seach_ALLError() {
     return {
-        type: types.QUICK_SEARCH_ALL_ERROR,
+        type: types.MAP_DETAIL_ALL_ERROR,
         searchErorr: true,
         isLoading: false
     };
 }
 export function clearErrorSearch(){
     return {
-        type: types.QUICK_SEARCH_ALL_CLEAR_ERROR,
+        type: types.MAP_DETAIL_ALL_CLEAR_ERROR,
     };
 }

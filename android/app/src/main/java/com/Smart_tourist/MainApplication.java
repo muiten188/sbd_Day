@@ -7,7 +7,7 @@ import com.iou90.autoheightwebview.AutoHeightWebViewPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
-
+import com.evollu.react.fcm.FIRMessagingPackage;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -34,8 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    AppEventsLogger.activateApp(this);
-    // SoLoader.init(this, /* native exopackage */ false);
+    //AppEventsLogger.activateApp(this);
+    SoLoader.init(this, /* native exopackage */ false);
   }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -46,10 +46,9 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new AutoHeightWebViewPackage(),new RNCameraPackage(),  new ReactVideoPackage(),
-          new BeaconsAndroidPackage(), new ReactNativeYouTube(), new RNI18nPackage(),
-          new VectorIconsPackage(), new FBSDKPackage(mCallbackManager));
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new AutoHeightWebViewPackage(), new RNCameraPackage(),
+          new ReactVideoPackage(), new BeaconsAndroidPackage(), new ReactNativeYouTube(), new RNI18nPackage(),
+          new FIRMessagingPackage(), new VectorIconsPackage(), new FBSDKPackage(mCallbackManager));
     }
 
     // @Override

@@ -9,7 +9,8 @@ import {
     ScrollView,
     Linking,
     WebView,
-    Image
+    Image,
+    Dimensions
 } from "react-native";
 import {
     Container,
@@ -28,6 +29,8 @@ import AutoHeightWebView from 'react-native-autoheight-webview';
 import * as mapDetailAction from '../../store/actions/containers/mapDetail_action';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as helper from '../../helper';
+import * as appConfig from '../../config/app_config';
+import ImageZoom from 'react-native-image-pan-zoom';
 class MapDetail extends Component {
 
     static navigationOptions = {
@@ -43,7 +46,10 @@ class MapDetail extends Component {
     }
 
     componentDidMount() {
-
+        const { getMapsById } = this.props.mapDetailAction;
+        const { user } = this.props.loginReducer;
+        const { map } = this.props;
+        getMapsById({ mapsId: map.mapsId }, user);
     }
 
     async loadSetting() {
@@ -57,14 +63,35 @@ class MapDetail extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-
+        const { searchErorr } = this.props.mapDetailReducer;
+        const { clearErrorSearch } = this.props.mapDetailAction;
+        if (searchErorr) {
+            Alert.alert(I18n.t('report'), I18n.t('getMapDetailFail'), [{
+                text: 'Ok',
+                onPress: (e) => {
+                    clearErrorSearch();
+                }
+            }],
+                { cancelable: false })
+        }
     }
 
     render() {
         const { news } = this.props;
+        const { mapDetail, searchErorr, isLoading } = this.props.mapDetailReducer;
+        debugger
+        var mapImageUrl = null;
+        if (mapDetail.path && mapDetail.path != "") {
+            mapImageUrl = `${appConfig.API_HOST_BASE}${mapDetail.path}`;
+        }
         return (
             <Container>
-                <Image style={{ flex: 1,resizeMode:'contain' }} source={{ uri: 'http://www.uwgb.edu/UWGBCMS/media/Maps/images/map-icon.jpg' }}></Image>
+                <ImageZoom cropWidth={Dimensions.get('window').width}
+                    cropHeight={Dimensions.get('window').height}
+                    imageWidth={Dimensions.get('window').width}
+                    imageHeight={Dimensions.get('window').height}>
+                    <Image style={{ flex: 1, resizeMode: 'contain', marginTop: -100 }} source={{ uri: mapImageUrl ? mapImageUrl : 'http://www.uwgb.edu/UWGBCMS/media/Maps/images/map-icon.jpg' }}></Image>
+                </ImageZoom>
             </Container>
         );
     }

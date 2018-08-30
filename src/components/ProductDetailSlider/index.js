@@ -83,7 +83,7 @@ export default class extends PureComponent {
           horizontal={true}
           scrollEnabled={true}
         />
-        <Button transparent style={{ width: 40, position: 'absolute', right: 0, top: 25, justifyContent: 'center', alignItems: 'center' }}
+        {/* <Button transparent style={{ width: 40, position: 'absolute', right: 0, top: 25, justifyContent: 'center', alignItems: 'center' }}
           onPress={() => {
             this.list.scrollToEnd()
           }}>
@@ -94,7 +94,7 @@ export default class extends PureComponent {
             this.list.scrollToIndex({ index: 0 })
           }}>
           <Icon size={20} name="arrow-left"></Icon>
-        </Button>
+        </Button> */}
       </View>
     );
   }
@@ -109,7 +109,7 @@ export default class extends PureComponent {
     }
     return (
       <TouchableOpacity 
-        style={{ padding: 1, borderRadius: 5, marginRight: 10, height: 90, width: 90, backgroundColor: index == this.state.indexSlider ? '#007db7' : '#cecece' }}
+        style={{ padding: 1, borderRadius: 5, marginRight: 10, height: '100%', width:width }}
         onPress={() => { Actions.preview({ data: item }) }}>
         <Image style={{ flex: 1, borderRadius: 5 }} source={{ uri: _newsImage ? _newsImage : 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
       </TouchableOpacity>

@@ -68,12 +68,12 @@ export default class extends PureComponent {
     const { key, avatarUrl, item, listProduct } = this.props;
     var urlAvartar = null;
     var _item = null;
-    if (listProduct.length > 0) {
-      _item = listProduct[this.state.indexSlider];
-      if (_item && _item.thumbnail) {
-        urlAvartar = AppConfig.API_HOST + _item.thumbnail.replaceAll("\\\\", "/")
-      }
-    }
+    // if (listProduct.length > 0) {
+    //   _item = listProduct[this.state.indexSlider];
+    //   if (_item && _item.thumbnail) {
+    //     urlAvartar = AppConfig.API_HOST_BASE + _item.thumbnail.replaceAll("\\\\", "/")
+    //   }
+    // }
     return (
       <View key={key} style={styles.itemList}>
         <FlatList
@@ -105,15 +105,19 @@ export default class extends PureComponent {
 
   buildMenuItem(dataItem) {
     var index = dataItem.index;
-    var item=dataItem.item;
+    var item = dataItem.item;
     const { listAllProduct } = this.props;
+    var urlAvartar = null;
+    if (item && item.avatar) {
+      urlAvartar = AppConfig.API_HOST_BASE + item.avatar;
+    }
     return (
       <TouchableOpacity style={{ padding: 5, borderRadius: 5, marginRight: 10, height: 60, width: 60, backgroundColor: index == this.state.indexSlider ? '#007db7' : '#cecece' }}
         onPress={() => {
           Actions.pop();
           Actions.home({ screenId: 'productDetail', product: item, listProduct: listAllProduct })
         }}>
-        <Image style={{ flex: 1 }} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
+        <Image style={{ flex: 1 }} source={{ uri: urlAvartar ? urlAvartar : 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
       </TouchableOpacity>
     )
   }

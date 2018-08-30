@@ -11,5 +11,9 @@ export const GET_NEWS_DETAIL = `${API_HOST}news/getById`;
 export const GET_PRODUCTS = `${API_HOST}/product/getAll`;
 export const GET_PRODUCTS_BY_ID = `${API_HOST}/product/getById`;
 export const GET_PRESENTATION_DETAIL = `${API_HOST}schedule/getById`;
+export const GET_MAPS = `${API_HOST}maps/getAll`;
+export const GET_MAP_BY_ID = `${API_HOST}maps/getById`;
+export const GET_SURVEY=`${API_HOST}survey/getSurvey`;
+
 export const LOGIN_SOCAIL = `${API_HOST}api/mobile/login/social`;
 export const REGISTER = `${API_HOST}api/mobile/users/register`;
