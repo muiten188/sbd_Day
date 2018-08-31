@@ -112,8 +112,11 @@ export default class extends PureComponent {
       <TouchableOpacity
         style={{ padding: 1, borderRadius: 5, marginRight: 10, height: 180, width: width }}
         onPress={() => { Actions.preview({ data: item }) }}>
-        
-        <Image style={{ flex: 1, borderRadius: 5 }} source={{ uri: _newsImage ? _newsImage : 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
+        {item.type == "VIDEO" ?
+          <Image style={{ flex: 1, borderRadius: 5 }} source={{ uri: _newsImage ? _newsImage : 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
+          :
+          <Image style={{ flex: 1, borderRadius: 5 }} source={{ uri: _newsImage }}></Image>
+        }
       </TouchableOpacity>
     )
   }
