@@ -1,4 +1,4 @@
-package com.sdb_day;
+package com.saobacdau_event;
 import android.content.Intent;
 
 import com.facebook.react.ReactActivity;
@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "sdb_day";
+        return "saobacdau_event";
     }
      @Override
     public void onNewIntent(Intent intent) {

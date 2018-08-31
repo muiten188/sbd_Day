@@ -31,10 +31,10 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 
 import Icon from "react-native-vector-icons/FontAwesome";
-import * as meseumListAction from "../../store/actions/containers/eventList_action";
+import * as eventListAction from "../../store/actions/containers/eventList_action";
 import Loading from "../../components/Loading";
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import EventSlider from '../../components/EventSlider';
+import ProfileSlider from '../../components/ProfileSlider';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as values from '../../helper/values';
 import * as helper from '../../helper';
@@ -67,11 +67,9 @@ class Eventlist extends Component {
 
 
     componentDidMount() {
-        const { Presentation, get_Area, search_News, search_HOT_NEWS } = this.props.meseumListAction;
-        // get_Area(null, 1, 1000, null);
-        search_HOT_NEWS(null, 1, 1000, null)
-        // Presentation(null, 1, 1000, null);
-        // search_News(null, 1, 1000, null)
+        const {search_HOT_NEWS } = this.props.eventListAction;
+        const {user}=this.props.loginReducer;
+        search_HOT_NEWS(null, user)
     }
     componentDidUpdate(prevProps, prevState) {
 
@@ -79,29 +77,13 @@ class Eventlist extends Component {
 
     render() {
         const locale = "vn";
-        const { listMuseum, listArea, searchErorr, isLoading, listNews, isLoadingNews, listHotNews, isLoadingHotNews } = this.props.EventlistReducer;
-        const { Presentation, clearMuseumError, clearAreaError, search_News } = this.props.meseumListAction;
-        if (searchErorr == true) {
-            Alert.alert(
-                "Thông báo",
-                "Tìm kiếm lỗi kiểm tra lại đường truyền.",
-                [
-                    {
-                        text: "Ok",
-                        onPress: e => {
-                            clearMuseumError();
-                        }
-                    }
-                ],
-                { cancelable: false }
-            );
-        }
+        const {  isLoading,listHotNews,searchErorr } = this.props.EventlistReducer;
         return (
             <Container style={styles.container}>
                 <Grid>{/* marginBottom: 45 */}
 
                     <Row style={{ height: 160, borderBottomWidth: 1, borderBottomColor: '#cecece' }}>
-                        <EventSlider listNews={listHotNews}></EventSlider>
+                        <ProfileSlider data={listHotNews}></ProfileSlider>
                     </Row>
                     <Row>
                         <FlatList
@@ -160,7 +142,7 @@ function mapStateToProps(state, props) {
 }
 function mapToDispatch(dispatch) {
     return {
-        meseumListAction: bindActionCreators(meseumListAction, dispatch)
+        eventListAction: bindActionCreators(eventListAction, dispatch)
     };
 }
 

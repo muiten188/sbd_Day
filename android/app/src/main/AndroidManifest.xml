@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sdb_day"
+    package="com.saobacdau_event"
     android:versionCode="1"
     android:versionName="1.0">
 

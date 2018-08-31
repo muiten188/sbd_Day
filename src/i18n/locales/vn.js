@@ -12,7 +12,7 @@ export default {
   changePassword: 'Đổi mật khẩu',
   register: 'Đăng ký',
   result: "Kết quả",
-  sdb_day: 'SBD Day',
+  saobacdau_event: 'SBD Day',
   home: 'Trang chủ',
   profile: 'Cá nhân',
   qrcode: 'QR Code',
@@ -70,4 +70,6 @@ export default {
   getProductDetailFail: 'Không thể lấy chi tiết sản phẩm. Vui lòng kiếm tra lại kết nối!',
   getMapFail: "Không thể lấy danh sách vị trí. Vui lòng kiếm tra lại kết nối!",
   getMapDetailFail: "Không thể lấy chi tiết vị trí. Vui lòng kiếm tra lại kết nối!",
+  getSurveyFail:"Không thể lấy thông tin survey. Vui lòng kiếm tra lại kết nối!",
+  getNotificationFail:"Không thể lấy danh sách thông báo. Vui lòng kiếm tra lại kết nối!",
 };

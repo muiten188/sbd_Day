@@ -7,10 +7,12 @@ import FCM, {
 } from 'react-native-fcm';
 import * as AppConfig from '../config/app_config'
 var EventEmitter = require('EventEmitter');
-
+import { store } from '../store/config'
 import { Actions } from 'react-native-router-flux';
 import * as helper from '../helper';
 import moment from 'moment';
+export let homeRender = false;
+export let newMessage = false;
 class FcmClient {
   device_token = null;
   newEvent = new EventEmitter();
@@ -26,6 +28,12 @@ class FcmClient {
     try {
       FCM.setBadgeNumber(0);
       FCM.subscribeToTopic('topic1');
+      FCM.createNotificationChannel({
+        id: 'default',
+        name: 'Default',
+        description: 'used for example',
+        priority: 'high'
+      })
     } catch (e) {
       console.log(e);
     }
@@ -86,7 +94,6 @@ class FcmClient {
   async processNotification(notif) {
     if (notif == undefined) return;
     try {
-      //this.showLocalMsg('message', "title", "body");
       if (notif != undefined) {
         if (!notif.local_notification && !notif.opened_from_tray) {
           if (Platform.OS == 'android') {
@@ -128,7 +135,7 @@ class FcmClient {
         if (!image_link) {
           image_link = notif['image_link'];
         }
-
+        
         if (notif.body != '' && notif.body != undefined) {
           // try {
           //   this.userID = notif.userID;
@@ -144,6 +151,8 @@ class FcmClient {
           // } catch (e) {
           //   console.log(e);
           // }
+          Actions.home({ screenId: 'notification', notifiTabActive: true });
+          
         }
       }
       // await someAsyncCall();
@@ -180,6 +189,7 @@ class FcmClient {
       //badge: 1,                                          // as FCM payload IOS only, set 0 to clear badges
       //number: 0,                                         // Android only
       //ticker: title,                   // Android only
+      channel: 'default',
       auto_cancel: true,                                  // Android only (default true)
       //large_icon: 'ic_launcher',                           // Android only
       //icon: 'ic_notify',                                // as FCM payload, you can relace this with custom icon you put in mipmap
@@ -220,8 +230,8 @@ class FcmClient {
     this.refreshTokenListener.remove();
   }
 
-removeFcmTokenServer(user) {
-    if (user != null&& this.device_token!=null) {
+  removeFcmTokenServer(user) {
+    if (user != null && this.device_token != null) {
       var accessToken = user.access_token;
       var fcmToken = this.device_token;
       var osearch = {

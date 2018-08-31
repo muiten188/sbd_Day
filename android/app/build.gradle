@@ -100,7 +100,7 @@ android {
         jumboMode = true
     }
     defaultConfig {
-        applicationId "com.sdb_day"
+        applicationId "com.saobacdau_event"
         minSdkVersion 16
         targetSdkVersion 26
         multiDexEnabled true

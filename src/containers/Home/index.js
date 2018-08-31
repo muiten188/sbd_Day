@@ -89,7 +89,9 @@ class Home extends Component {
     super(props);
     // Print a log of the detected iBeacons (1 per second)
     this.state = {
-      languageSelect: 'vi'
+      languageSelect: 'vn',
+      currentTab: this.props.screenId == "notification" ? 1 : 0,
+      initialPage: this.props.screenId == "notification" ? 1 : 0
     };
     this.loadSetting();
   }
@@ -100,6 +102,7 @@ class Home extends Component {
       I18n.locale = lang;
       this.setState({
         languageSelect: lang
+
       })
     }
   }
@@ -113,46 +116,49 @@ class Home extends Component {
     //     this.setState({ tabActivePosition: 1 })
     //   }
     // });
+
   }
 
   componentDidMount() {
     const { get_AntifactByUUID } = this.props.homeAction;
     const { setUser } = this.props.loginAction;
     const { user } = this.props.loginReducer;
-    if (!user) {
-      helper.getAsyncStorage("@userLogin", (promise) => {
-        promise.done((value) => {
-          if (value != '' && value != null) {
-            var user = JSON.parse(value);
-            setUser(user);
-          }
-        })
-      })
-    }
+    // if (!user) {
+    //   helper.getAsyncStorage("@userLogin", (promise) => {
+    //     promise.done((value) => {
+    //       if (value != '' && value != null) {
+    //         var user = JSON.parse(value);
+    //         setUser(user);
+    //       }
+    //     })
+    //   })
+    // }
 
-    eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
-      //console.log('Tìm thấy beacon:', data)
-      if (data.beacons && data.beacons.length > 0) {
+    // eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
+    //   //console.log('Tìm thấy beacon:', data)
+    //   if (data.beacons && data.beacons.length > 0) {
 
-        if (data.beacons[0].uuid != current_uuid) {
-          current_uuid = data.beacons[0].uuid;
-          if (Actions.currentScene == 'News') {
-            Actions.pop();
-          }
-          Actions.News({ beaconUUID: current_uuid })
-          //get_AntifactByUUID({ beaconUUID: current_uuid });
-          //blockUUID = true;
-          // if (timeoutUUID) {
-          //   clearTimeout(timeoutUUID);
-          // }
-          // setTimeout(() => {
-          //   current_uuid = null;
-          // }, 30000);
-        }
-        console.log('Tìm thấy beacon:', data.beacons[0].uuid)
-      }
-    })
-    this.detectBeacons();
+    //     if (data.beacons[0].uuid != current_uuid) {
+    //       current_uuid = data.beacons[0].uuid;
+    //       if (Actions.currentScene == 'News') {
+    //         Actions.pop();
+    //       }
+    //       Actions.News({ beaconUUID: current_uuid })
+    //       //get_AntifactByUUID({ beaconUUID: current_uuid });
+    //       //blockUUID = true;
+    //       // if (timeoutUUID) {
+    //       //   clearTimeout(timeoutUUID);
+    //       // }
+    //       // setTimeout(() => {
+    //       //   current_uuid = null;
+    //       // }, 30000);
+    //     }
+    //     console.log('Tìm thấy beacon:', data.beacons[0].uuid)
+    //   }
+    // })
+    // this.detectBeacons();
+    // const { notifiTabActive } = this.props;
+    // this.setState({ currentTab: 1 })
   }
 
   componentWillUnmount() {
@@ -233,11 +239,11 @@ class Home extends Component {
               </View>
               <HeaderContent headerTitle={this.getTextHeader()} showButtonLeft={this.showButtonLeft()} />
               <View style={styles.listResult_container}>
-                <Tabs initialPage={0} locked={true} onChangeTab={(io) => {
-                  if (io.i == 0 && io.from == 0) {
-                    Actions.reset('home', { screenId: 'eventList' })
-                    return;
-                  }
+                <Tabs page={this.state.currentTab} onChangeTab={(io) => {
+                  // if (io.i == 0 && io.from == 0) {
+                  //   Actions.reset('home', { screenId: 'eventList' })
+                  //   return;
+                  // }
                 }} tabBarPosition="bottom" tabBarUnderlineStyle={styles.tabBarUnderlineStyle} style={{ backgroundColor: 'transparent' }}>
                   <Tab
                     heading={<TabHeading style={styles.tabHeading}>
@@ -251,9 +257,8 @@ class Home extends Component {
                       </Grid>
                     </TabHeading>}>
                     {this.renderEventTab()}
-
                   </Tab>
-                  <Tab heading={<TabHeading style={styles.tabHeading}>
+                  <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>
                         <IconVector name="user" size={20} />
@@ -383,7 +388,7 @@ class Home extends Component {
         break;
 
       default:
-        return (<Text>abchasu</Text>)
+        return (<Eventlist />)
         break;
     }
   }
@@ -393,7 +398,7 @@ class Home extends Component {
       case "eventList":
       case null:
       case undefined:
-        return I18n.t("sdb_day")
+        return I18n.t("saobacdau_event")
         break;
       case "schedule":
         return I18n.t("Schedule")
@@ -437,7 +442,7 @@ class Home extends Component {
         return I18n.t("notification")
         break;
       default:
-        return I18n.t("sdb_day")
+        return I18n.t("saobacdau_event")
         break;
     }
   }

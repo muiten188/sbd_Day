@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
 import App from './App';
 
-AppRegistry.registerComponent('sdb_day', () => App);
+AppRegistry.registerComponent('saobacdau_event', () => App);

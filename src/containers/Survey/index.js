@@ -71,17 +71,17 @@ class Survey extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // const { searchErorr } = this.props.surveyReducer;
-        // const { clearErrorSearch } = this.props.surveyAction;
-        // if (searchErorr) {
-        //     Alert.alert("Thông báo", "Tìm kiếm thất bại", [{
-        //         text: 'Ok',
-        //         onPress: (e) => {
-        //             clearErrorSearch();
-        //         }
-        //     }],
-        //         { cancelable: false });
-        // }
+        const { searchErorr } = this.props.surveyReducer;
+        const { clearErrorSearch } = this.props.surveyAction;
+        if (searchErorr) {
+            Alert.alert(I18n.t('report'), I18n.t('getSurveyFail'), [{
+                text: 'Ok',
+                onPress: (e) => {
+                    clearErrorSearch();
+                }
+            }],
+                { cancelable: false })
+        }
     }
 
 

@@ -12,7 +12,7 @@ export default {
   changePassword: 'Đổi mật khẩu',
   register: 'Đăng ký',
   result: "Kết quả",
-  sdb_day: 'SBD Day',
+  saobacdau_event: 'SBD Day',
   home: 'Trang chủ',
   profile: 'Cá nhân',
   qrcode: 'QR Code',

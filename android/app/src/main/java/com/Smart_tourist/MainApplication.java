@@ -1,4 +1,4 @@
-package com.sdb_day;
+package com.saobacdau_event;
 
 import android.app.Application;
 

@@ -1,27 +1,51 @@
 {
   "project_info": {
-    "project_number": "155195106173",
-    "firebase_url": "https://sbd-day.firebaseio.com",
-    "project_id": "sbd-day",
-    "storage_bucket": "sbd-day.appspot.com"
+    "project_number": "423620750614",
+    "firebase_url": "https://sbd-day-215006.firebaseio.com",
+    "project_id": "sbd-day-215006",
+    "storage_bucket": "sbd-day-215006.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:155195106173:android:be18cd6cb3016c36",
+        "mobilesdk_app_id": "1:423620750614:android:8c221a3bf197f8a6",
         "android_client_info": {
-          "package_name": "com.sdb_day"
+          "package_name": "com.saobacdau_event"
         }
       },
       "oauth_client": [
         {
-          "client_id": "155195106173-jr1cg0p9frr21c3lr1m52hpfv375jh1r.apps.googleusercontent.com",
+          "client_id": "423620750614-kkcsf6gi7f0hoi4g6d7ua3n5r4a6j8qe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saobacdau_event",
+            "certificate_hash": "4748b6adc001a8bb0c3ef284b20149a86ff650a8"
+          }
+        },
+        {
+          "client_id": "423620750614-vh5edkevd3dpftup4a1vd7hhhn89g1go.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saobacdau_event",
+            "certificate_hash": "46a77cb91f44e7e5e6190533e0dd947e3e2584bb"
+          }
+        },
+        {
+          "client_id": "423620750614-p14c5n4dunleff0i5kt7nohbdplul20k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saobacdau_event",
+            "certificate_hash": "a86cfdd669ec26c1d547015522e6ba0aa80683c0"
+          }
+        },
+        {
+          "client_id": "423620750614-1v9hs5303hjjlcssok8b953fqpk2jus4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDSjKv12i59u2eSo_FGq5bcKlnyEmAAxS8"
+          "current_key": "AIzaSyBibc5cbkm5DO2wWY4ZxuPToDYZI2ytVms"
         }
       ],
       "services": {
@@ -29,8 +53,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423620750614-1v9hs5303hjjlcssok8b953fqpk2jus4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

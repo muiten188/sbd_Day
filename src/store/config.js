@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { persistStore, autoRehydrate } from 'redux-persist'
 import reducers from './reducers/index';
 // import logger from 'redux-logger'
-
+export let store=null;
 const initialState = {};
 
 const middleware = [thunk]
@@ -21,7 +21,7 @@ export default function storeConfig(callback) {
     //         applyMiddleware(...middleware)
     //     )
     // )
-    const store = createStore(reducers,
+    store = createStore(reducers,
         initialState,
         compose(
             autoRehydrate(),

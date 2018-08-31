@@ -66,7 +66,7 @@ export default class extends Component {
                   <Image source={require("../../resources/assets/icon_title.png")} style={{ height: 35, resizeMode: 'contain' }}></Image>
                 </Col>
                 <Col style={styles.itemHeaderBody}>
-                  <Text style={styles.whileText}>{headerTitle ? headerTitle : I18n.t("sdb_day")}</Text>
+                  <Text style={styles.whileText}>{headerTitle ? headerTitle : I18n.t("saobacdau_event")}</Text>
                 </Col>
               </Row>
 

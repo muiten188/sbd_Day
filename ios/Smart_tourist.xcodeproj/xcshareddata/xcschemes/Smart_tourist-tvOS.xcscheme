@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "sdb_day-tvOS.app"
-               BlueprintName = "sdb_day-tvOS"
-               ReferencedContainer = "container:sdb_day.xcodeproj">
+               BuildableName = "saobacdau_event-tvOS.app"
+               BlueprintName = "saobacdau_event-tvOS"
+               ReferencedContainer = "container:saobacdau_event.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "sdb_day-tvOSTests.xctest"
-               BlueprintName = "sdb_day-tvOSTests"
-               ReferencedContainer = "container:sdb_day.xcodeproj">
+               BuildableName = "saobacdau_event-tvOSTests.xctest"
+               BlueprintName = "saobacdau_event-tvOSTests"
+               ReferencedContainer = "container:saobacdau_event.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "sdb_day-tvOSTests.xctest"
-               BlueprintName = "sdb_day-tvOSTests"
-               ReferencedContainer = "container:sdb_day.xcodeproj">
+               BuildableName = "saobacdau_event-tvOSTests.xctest"
+               BlueprintName = "saobacdau_event-tvOSTests"
+               ReferencedContainer = "container:saobacdau_event.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "sdb_day-tvOS.app"
-            BlueprintName = "sdb_day-tvOS"
-            ReferencedContainer = "container:sdb_day.xcodeproj">
+            BuildableName = "saobacdau_event-tvOS.app"
+            BlueprintName = "saobacdau_event-tvOS"
+            ReferencedContainer = "container:saobacdau_event.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "sdb_day-tvOS.app"
-            BlueprintName = "sdb_day-tvOS"
-            ReferencedContainer = "container:sdb_day.xcodeproj">
+            BuildableName = "saobacdau_event-tvOS.app"
+            BlueprintName = "saobacdau_event-tvOS"
+            ReferencedContainer = "container:saobacdau_event.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "sdb_day-tvOS.app"
-            BlueprintName = "sdb_day-tvOS"
-            ReferencedContainer = "container:sdb_day.xcodeproj">
+            BuildableName = "saobacdau_event-tvOS.app"
+            BlueprintName = "saobacdau_event-tvOS"
+            ReferencedContainer = "container:saobacdau_event.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

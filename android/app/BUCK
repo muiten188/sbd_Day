@@ -45,12 +45,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.sdb_day",
+    package = "com.saobacdau_event",
 )
 
 android_resource(
     name = "res",
-    package = "com.sdb_day",
+    package = "com.saobacdau_event",
     res = "src/main/res",
 )
 
