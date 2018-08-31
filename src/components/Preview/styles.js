@@ -5,8 +5,6 @@ export default {
     flex: 1
   },
   itemList: {
-    justifyContent: "center",
-    alignItems: "center",
     flex:1,
   },
   item: {

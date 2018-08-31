@@ -29,7 +29,7 @@ import styles from "./styles";
 import { connect } from "react-redux";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
-
+import YouTube from 'react-native-youtube';
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as eventListAction from "../../store/actions/containers/eventList_action";
 import Loading from "../../components/Loading";
@@ -67,8 +67,8 @@ class Eventlist extends Component {
 
 
     componentDidMount() {
-        const {search_HOT_NEWS } = this.props.eventListAction;
-        const {user}=this.props.loginReducer;
+        const { search_HOT_NEWS } = this.props.eventListAction;
+        const { user } = this.props.loginReducer;
         search_HOT_NEWS(null, user)
     }
     componentDidUpdate(prevProps, prevState) {
@@ -77,12 +77,12 @@ class Eventlist extends Component {
 
     render() {
         const locale = "vn";
-        const {  isLoading,listHotNews,searchErorr } = this.props.EventlistReducer;
+        const { isLoading, listHotNews, searchErorr } = this.props.EventlistReducer;
         return (
             <Container style={styles.container}>
                 <Grid>{/* marginBottom: 45 */}
 
-                    <Row style={{ height: 160, borderBottomWidth: 1, borderBottomColor: '#cecece' }}>
+                    <Row style={{ height: 190, borderBottomWidth: 1, borderBottomColor: '#cecece' }}>
                         <ProfileSlider data={listHotNews}></ProfileSlider>
                     </Row>
                     <Row>
@@ -113,8 +113,8 @@ class Eventlist extends Component {
                 width: '50%',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderWidth:  0.25,
-                borderColor:'#cecece',
+                borderWidth: 0.25,
+                borderColor: '#cecece',
             }}
                 onPress={() => { Actions.home({ screenId: item.routerName }) }}>
                 <Grid>

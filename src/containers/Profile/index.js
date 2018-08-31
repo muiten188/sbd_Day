@@ -42,6 +42,7 @@ import { Field, reduxForm, change } from "redux-form";
 import { InputAreaField, CheckBoxField, DropdownField, InputField } from "../../components/Element/Form";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as loginAction from "../../authen/actions/login_action";
+import FcmClient from '../../helper/fcmClient';
 // import { RNCamera, FaceDetector } from 'react-native-camera';
 import * as helper from '../../helper';
 const blockAction = false;
@@ -118,8 +119,10 @@ class Profile extends Component {
 
   onLogout() {
     const { loginAction } = this.props;
+    const {user}=this.props.loginReducer;
     //helper.clearAsyncStorage();
     loginAction.logout();
+    FcmClient.unRegisterFCM(user.userId);
     try {
       LoginManager.logOut();
     } catch (error) {

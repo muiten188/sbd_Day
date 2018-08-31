@@ -88,6 +88,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     // Print a log of the detected iBeacons (1 per second)
+    console.log('home construct')
     this.state = {
       languageSelect: 'vn',
       currentTab: this.props.screenId == "notification" ? 1 : 0,
@@ -108,7 +109,10 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    FcmClient.registerFCM();
+    const {user}=this.props.loginReducer;
+    if(FcmClient.registed==false){
+      FcmClient.registerFCM(user.userId);
+    }
     // FcmClient.newEvent.addListener('fcm-event-user-group', (obj) => {
     //   if (obj.isUser) {
     //     this.setState({ tabActivePosition: 0 })
@@ -162,7 +166,8 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
-    FcmClient.unRegisterFCM();
+    const {user}=this.props.loginReducer;
+    // FcmClient.unRegisterFCM(user.userId);
     if (eventBeacons) {
       eventBeacons.remove();
     }
@@ -239,7 +244,7 @@ class Home extends Component {
               </View>
               <HeaderContent headerTitle={this.getTextHeader()} showButtonLeft={this.showButtonLeft()} />
               <View style={styles.listResult_container}>
-                <Tabs page={this.state.currentTab} onChangeTab={(io) => {
+                <Tabs page={this.state.currentTab} locked={true} onChangeTab={(io) => {
                   // if (io.i == 0 && io.from == 0) {
                   //   Actions.reset('home', { screenId: 'eventList' })
                   //   return;

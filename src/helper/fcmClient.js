@@ -11,23 +11,23 @@ import { store } from '../store/config'
 import { Actions } from 'react-native-router-flux';
 import * as helper from '../helper';
 import moment from 'moment';
-export let homeRender = false;
-export let newMessage = false;
 class FcmClient {
+  registed = false;
   device_token = null;
   newEvent = new EventEmitter();
   userID = null;
   groupID = null;
-  registerFCM() {
-    this.showLocalMsg();
+  registerFCM(userID) {
     FCM.requestPermissions({
       badge: false,
       sound: true,
       alert: true
     }).then(() => console.log('fcm granted')).catch(() => console.log('notification permission rejected'));
     try {
+      this.registed=true;
       FCM.setBadgeNumber(0);
-      FCM.subscribeToTopic('topic1');
+      FCM.subscribeToTopic(""+userID+"");
+      FCM.subscribeToTopic('common');
       FCM.createNotificationChannel({
         id: 'default',
         name: 'Default',
@@ -111,6 +111,7 @@ class FcmClient {
             let body = notif.body || (notif.fcm && notif.fcm.body);
             let hapuType = notif.hapuType || (notif.fcm && notif.fcm.hapuType);
             let objectId = notif.objectId || (notif.fcm && notif.fcm.objectId);
+            debugger
             this.showLocalMsg('message', title, body, notif.image_link, message_id, objectId);
           }
 
@@ -151,6 +152,7 @@ class FcmClient {
           // } catch (e) {
           //   console.log(e);
           // }
+          console.log('notification push')
           Actions.home({ screenId: 'notification', notifiTabActive: true });
           
         }
@@ -193,7 +195,7 @@ class FcmClient {
       auto_cancel: true,                                  // Android only (default true)
       //large_icon: 'ic_launcher',                           // Android only
       //icon: 'ic_notify',                                // as FCM payload, you can relace this with custom icon you put in mipmap
-      big_text: 'body',     // Android only
+      big_text: body,     // Android only
       //sub_text: body,                      // Android only
       color: 'red',                                       // Android only
       vibrate: 500,
@@ -225,9 +227,12 @@ class FcmClient {
     // }, 500);
   }
 
-  unRegisterFCM() {
+  unRegisterFCM(userId) {
+    FCM.unsubscribeFromTopic(""+userId+"")
+    FCM.unsubscribeFromTopic("common")
     this.notificationListener.remove();
     this.refreshTokenListener.remove();
+    this.registed=false;
   }
 
   removeFcmTokenServer(user) {

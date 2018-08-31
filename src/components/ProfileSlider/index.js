@@ -20,6 +20,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import styles from "./styles";
 import User from "../User";
+import YouTube from 'react-native-youtube';
 import * as AppConfig from "../../config/app_config";
 let intervalSlider = null;
 String.prototype.replaceAll = function (search, replacement) {
@@ -44,17 +45,17 @@ export default class extends PureComponent {
   }
 
   componentDidMount() {
-    if (this.props.data) {
-      _intervalSlider = setInterval(() => {
-        this.setState({ indexSlider: this.state.indexSlider == this.props.data.length - 1 ? 0 : this.state.indexSlider + 1 })
-        try {
-          this.list.scrollToItem({ item: this.props.data[this.state.indexSlider], animated: true })
-        }
-        catch (e) {
-          //error 
-        }
-      }, 4000)
-    }
+    // if (this.props.data) {
+    //   _intervalSlider = setInterval(() => {
+    //     this.setState({ indexSlider: this.state.indexSlider == this.props.data.length - 1 ? 0 : this.state.indexSlider + 1 })
+    //     try {
+    //       this.list.scrollToItem({ item: this.props.data[this.state.indexSlider], animated: true })
+    //     }
+    //     catch (e) {
+    //       //error 
+    //     }
+    //   }, 4000)
+    // }
   }
 
   componentWillUnmount() {
@@ -76,7 +77,7 @@ export default class extends PureComponent {
           ref={ref => {
             this.list = ref;
           }}
-          style={{ width: '100%', height: 95 }}
+          style={{ width: '100%' }}
           data={data ? data : []}
           keyExtractor={this._keyExtractor}
           renderItem={this.buildMenuItem.bind(this)}
@@ -108,9 +109,10 @@ export default class extends PureComponent {
       _newsImage = `${AppConfig.API_HOST_BASE}${item.path}`;
     }
     return (
-      <TouchableOpacity 
-        style={{ padding: 1, borderRadius: 5, marginRight: 10, height: 160, width: width }}
+      <TouchableOpacity
+        style={{ padding: 1, borderRadius: 5, marginRight: 10, height: 180, width: width }}
         onPress={() => { Actions.preview({ data: item }) }}>
+        
         <Image style={{ flex: 1, borderRadius: 5 }} source={{ uri: _newsImage ? _newsImage : 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
       </TouchableOpacity>
     )

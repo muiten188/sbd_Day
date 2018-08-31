@@ -6,7 +6,6 @@ export function search_HOT_NEWS(values, user) {
     let data = [];
     let dataPost = values || {};
     var error = false;
-    debugger;
     return async (dispatch) => {
         dispatch(_searching_HOT_NEWS());
         var _header = await helper.buildHeader(user);

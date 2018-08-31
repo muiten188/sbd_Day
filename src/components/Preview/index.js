@@ -25,6 +25,7 @@ let intervalSlider = null;
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import VideoPlayer from "../../components/VideoPlayer";
 import YouTube from 'react-native-youtube'
+import HeaderContent from '../../components/Header_content';
 import AutoHeightWebView from 'react-native-autoheight-webview';
 import ImageZoom from 'react-native-image-pan-zoom';
 let currentListIndex = 0;
@@ -61,6 +62,7 @@ export default class Preview extends Component {
     }
     return (
       <Container style={styles.itemList}>
+        <HeaderContent headerTitle={"Preview"} showButtonLeft={true} hideRightButton={true} />
         {data.type == "IMAGE" ?
           <ImageZoom cropWidth={Dimensions.get('window').width}
             cropHeight={Dimensions.get('window').height}
@@ -71,31 +73,30 @@ export default class Preview extends Component {
           : null}
         {
           data.type == "VIDEO" && _video ?
-            <Content style={{ width: '100%', minHeight: 220 }}>
+            <View style={{ flex:1, justifyContent: 'center',alignItems:'center' }}>
               {/* <VideoPlayer video={{ uri: _video }}
                 volume={0.7}
                 onClosePressed={() => { }}
                 playInBackground={false}
               /> */}
-              <AutoHeightWebView source={{
+              {/* <AutoHeightWebView source={{
                 uri: data.path
               }}>
 
-              </AutoHeightWebView>
-              {/* <YouTube
-                videoId="vvvvcpwFw5o"   // The YouTube video ID
+              </AutoHeightWebView> */}
+              <YouTube
+                videoId={data.path}   // The YouTube video ID
                 play={true}             // control playback of video with true/false
-                fullscreen={false}       // control whether the video should play in fullscreen or inline
+                fullscreen={true}       // control whether the video should play in fullscreen or inline
                 loop={true}             // control whether the video should loop when ended
                 apiKey={"AIzaSyCpumcHqM6clMWURCg2hwW0MefeA11hpfA"}
                 //onReady={e => this.setState({ isReady: true })}
                 //onChangeState={e => this.setState({ status: e.state })}
                 //onChangeQuality={e => this.setState({ quality: e.quality })}
                 //onError={e => this.setState({ error: e.error })}
-                showFullscreenButton={false}
-                style={{ alignSelf: 'stretch', height: 250 }}
-              /> */}
-            </Content> : null
+                style={{ alignSelf: 'stretch', width: '100%', height: 250 }}
+              />
+            </View> : null
         }
       </Container>
     );

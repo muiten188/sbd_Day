@@ -59,7 +59,6 @@ class NewsDetail extends Component {
     componentDidMount() {
         const { get_NewsDetail } = this.props.NewsDetailAction;
         const { user } = this.props.loginReducer;
-        debugger;
         get_NewsDetail({ newsId: 1 }, user)
     }
 
