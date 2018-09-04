@@ -7,7 +7,9 @@ import {
     TouchableOpacity,
     Alert,
     ScrollView,
-    Image
+    Image,
+    WebView,
+    Dimensions
 } from "react-native";
 import {
     Container,
@@ -101,12 +103,10 @@ class Survey extends Component {
                     horizontal={false}
                     numColumns={1}
                 /> */}
-                <Content>
-                    <AutoHeightWebView source={{
-                        uri: surveyUrl
-                    }}>
+                    <AutoHeightWebView style={{width:'100%',height:Dimensions.get('window').height,paddingBottom:120}} source={{
+                        uri: 'http://113.171.23.144/event-manager/survey.html#!/survey?userId=2'
+                    }} >
                     </AutoHeightWebView>
-                </Content>
                 <Loading isShow={isLoading}></Loading>
             </Container>
         );

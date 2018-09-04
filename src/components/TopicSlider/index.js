@@ -100,9 +100,11 @@ export default class extends PureComponent {
     var item = dataItem.item;
     const { listTopicAll } = this.props;
     return (
-      <TouchableOpacity style={{ padding: 5, borderRadius: 5, marginRight: 10, height: 60, width: 60, backgroundColor: index == this.state.indexSlider ? '#007db7' : '#cecece' }}
+      <TouchableOpacity style={{ padding: 5, borderRadius: 5,justifyContent: "center",
+      alignItems: "center", marginRight: 10, height: 60, width: 60, backgroundColor: index == this.state.indexSlider ? '#007db7' : '#cecece' }}
         onPress={() => { Actions.pop(),Actions.home({ screenId: 'presentationDetail', scheduleItem: item, scheduleAllItem: listTopicAll }) }}>
-        <Image style={{ flex: 1 }} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
+        {/* <Image style={{ flex: 1 }} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image> */}
+        <Icon name="tasks" size={30}></Icon>
       </TouchableOpacity>
     )
   }

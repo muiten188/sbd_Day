@@ -6,7 +6,9 @@ import {
     FlatList,
     TouchableOpacity,
     Alert,
-    ScrollView
+    ScrollView,
+    Dimensions,
+    WebView
 } from "react-native";
 import {
     Container,
@@ -98,11 +100,11 @@ class NewsDetail extends Component {
                     </Row>
                     <Row>
                         <ScrollView>
-                            <AutoHeightWebView source={{
+                            <WebView style={{width:'100%',height:Dimensions.get('window').height}} source={{
                                 html: `${listNewsDetail.content}`
                             }}>
 
-                            </AutoHeightWebView>
+                            </WebView>
                         </ScrollView>
                     </Row>
                     {(listAllNewsClone && listAllNewsClone.length > 1) ? <Row style={{ height: 70, borderTopWidth: 1, borderTopColor: '#cecece' }}>

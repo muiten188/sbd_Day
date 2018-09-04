@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     Alert,
     ScrollView,
-    Linking,
+    Dimensions,
     WebView
 } from "react-native";
 import {
@@ -114,7 +114,7 @@ class ProductDetail extends Component {
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Introduce') + " : "}</Text>
                                 </Text>
-                                <AutoHeightWebView source={{
+                                <AutoHeightWebView style={{ width: '100%', height: Dimensions.get('window').height}} source={{
                                     html: `${productDetail.description}`
                                 }}>
 

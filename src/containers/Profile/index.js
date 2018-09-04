@@ -43,6 +43,7 @@ import { InputAreaField, CheckBoxField, DropdownField, InputField } from "../../
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as loginAction from "../../authen/actions/login_action";
 import FcmClient from '../../helper/fcmClient';
+
 // import { RNCamera, FaceDetector } from 'react-native-camera';
 import * as helper from '../../helper';
 const blockAction = false;
@@ -119,7 +120,7 @@ class Profile extends Component {
 
   onLogout() {
     const { loginAction } = this.props;
-    const {user}=this.props.loginReducer;
+    const { user } = this.props.loginReducer;
     //helper.clearAsyncStorage();
     loginAction.logout();
     FcmClient.unRegisterFCM(user.userId);
@@ -150,6 +151,7 @@ class Profile extends Component {
   render() {
     const locale = "vn";
     const { user } = this.props.loginReducer;
+    
     const { handleSubmit } = this.props;
     return (
       <Container style={styles.container}>
@@ -162,16 +164,15 @@ class Profile extends Component {
             <Text>Đăng nhập</Text>
           </Button>}
         <Grid style={styles.Grid}>
+            <Content>
           <Row style={styles.row}>
             <Col size={1}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
-                <Field
-                  name="mr"
-                  placeholder={I18n.t("normal")}
-                  label={I18n.t("normal")}
-                  selected={0}
-                  items={["bach1", "bach2", "bach3", "bach4", "bach5"]}
-                  component={DropdownField}
+              <Field
+                  name="firstName"
+                  placeholder={I18n.t("fullName")}
+                  label={I18n.t("fullName")}
+                  component={InputField}
                   disabled
                 />
               </View>
@@ -179,7 +180,7 @@ class Profile extends Component {
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="fullName"
+                  name="lastName"
                   placeholder={I18n.t("fullName")}
                   label={I18n.t("fullName")}
                   component={InputField}
@@ -197,7 +198,7 @@ class Profile extends Component {
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="phone"
+                  name="phoneNumber"
                   placeholder={I18n.t("phone")}
                   label={I18n.t("phone")}
                   component={InputField}
@@ -216,7 +217,7 @@ class Profile extends Component {
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="phone"
+                  name="email"
                   placeholder={I18n.t("email")}
                   label={I18n.t("email")}
                   component={InputField}
@@ -235,7 +236,7 @@ class Profile extends Component {
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="phone"
+                  name="companyName"
                   placeholder={I18n.t("Company")}
                   label={I18n.t("Company")}
                   component={InputField}
@@ -245,7 +246,7 @@ class Profile extends Component {
             </Col>
           </Row>
 
-          <Row style={styles.row}>
+          {/* <Row style={styles.row}>
             <Col size={1}>
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text>{I18n.t("position")}</Text>
@@ -254,7 +255,7 @@ class Profile extends Component {
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="phone"
+                  name="phoneNumber"
                   placeholder={I18n.t("position")}
                   label={I18n.t("position")}
                   component={InputField}
@@ -262,9 +263,9 @@ class Profile extends Component {
                 />
               </View>
             </Col>
-          </Row>
+          </Row> */}
 
-          <Row style={styles.row}>
+          {/* <Row style={styles.row}>
             <Col size={1}>
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text>{I18n.t("position")}</Text>
@@ -273,7 +274,7 @@ class Profile extends Component {
             <Col size={2}>
               <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
                 <Field
-                  name="phone"
+                  name="email"
                   placeholder={I18n.t("position")}
                   label={I18n.t("position")}
                   component={InputField}
@@ -281,11 +282,12 @@ class Profile extends Component {
                 />
               </View>
             </Col>
-          </Row>
-          <Button block style={{ marginTop: 10, marginRight: 10, marginLeft: 10 }}
+          </Row> */}
+          {/* <Button block style={{ marginTop: 10, marginRight: 10, marginLeft: 10 }}
             onPress={() => { Actions.changePassword() }}>
             <Text>{I18n.t("changePassword")}</Text>
-          </Button>
+          </Button> */}
+          </Content>
         </Grid>
       </Container >
     );
@@ -296,7 +298,8 @@ class Profile extends Component {
 function mapStateToProps(state, props) {
   return {
     profileReducer: state.profileReducer,
-    loginReducer: state.loginReducer
+    loginReducer: state.loginReducer,
+    initialValues: state.loginReducer.user
   };
 }
 function mapToDispatch(dispatch) {
