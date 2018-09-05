@@ -212,7 +212,7 @@ class login extends React.Component {
         <Loading isShow={loginReducer.Loging} />
         {/* background */}
         <Image
-          source={require("../../../resources/assets/splash1.png")}
+          source={require("../../../resources/assets/login_background.png")}
           style={[styles.backgroundImage]}
         />
 

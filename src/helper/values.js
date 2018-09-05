@@ -17,12 +17,12 @@ export const list_Menu = [
         mID:'parties',
         routerName:'parties'
     },
-    {
-        mName:'News',
-        IconName:'newspaper-o',
-        mID:'news',
-        routerName:'news'
-    },
+    // {
+    //     mName:'News',
+    //     IconName:'newspaper-o',
+    //     mID:'news',
+    //     routerName:'news'
+    // },
     // {
     //     mName:'Speech',
     //     IconName:'microphone',

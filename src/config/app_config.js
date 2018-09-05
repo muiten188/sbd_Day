@@ -16,6 +16,8 @@ export const GET_MAP_BY_ID = `${API_HOST}maps/getById`;
 export const GET_SURVEY=`${API_HOST}survey/getSurvey`;
 export const GET_NOTIFICATION=`${API_HOST}notification/`;
 export const GET_PROFILE=`${API_HOST}profile/getAll`;
+export const CHECKIN_BY_QRCODE=`${API_HOST}/authenticate/checkIn`;
+export const CHECK_CHECKIN=`${API_HOST}/authenticate/findExistsCheckIn`;
 
 export const LOGIN_SOCAIL = `${API_HOST}api/mobile/login/social`;
 export const REGISTER = `${API_HOST}api/mobile/users/register`;

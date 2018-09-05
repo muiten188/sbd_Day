@@ -87,7 +87,7 @@ export default class Preview extends Component {
               <YouTube
                 videoId={data.path}   // The YouTube video ID
                 play={true}             // control playback of video with true/false
-                fullscreen={true}       // control whether the video should play in fullscreen or inline
+                fullscreen={false}       // control whether the video should play in fullscreen or inline
                 loop={true}             // control whether the video should loop when ended
                 apiKey={"AIzaSyCpumcHqM6clMWURCg2hwW0MefeA11hpfA"}
                 //onReady={e => this.setState({ isReady: true })}

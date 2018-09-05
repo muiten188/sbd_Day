@@ -22,8 +22,10 @@ import HeaderContent from "../../components/Header_content";
 import * as qrCodeScannerAction from '../../store/actions/containers/qrCodeScanner_action';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import Loading from "../../components/Loading";
 import Header_content from "../../components/Header_content";
 const currentQrCode = null;
+import * as helper from '../../helper';
 class qrCodeScanner extends Component {
 
     static navigationOptions = {
@@ -32,24 +34,73 @@ class qrCodeScanner extends Component {
 
     constructor(props) {
         super(props);
-
+        this.state = {
+            languageSelect: 'vn'
+        };
+        this.loadSetting();
     }
 
     componentDidMount() {
-
+        // const { checkInByQrCode } = this.props.qrCodeScannerAction;
+        // const { user } = this.props.loginReducer;
+        // checkInByQrCode({ barcode: '1234567890' },user)
     }
+
+    async loadSetting() {
+        var lang = await helper.getLangSetting();
+        if (lang != null) {
+            I18n.locale = lang;
+            this.setState({
+                languageSelect: lang
+            })
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
-
+        const { clearCHECKIN_BY_QRCODEError } = this.props.qrCodeScannerAction;
+        const { searchErorr, checkInQrCode, checked } = this.props.qrCodeScannerReducer;
+        if (searchErorr) {
+            Alert.alert(I18n.t('report'), I18n.t('checkinFail'), [{
+                text: 'Ok',
+                onPress: (e) => {
+                    clearCHECKIN_BY_QRCODEError();
+                }
+            }],
+                { cancelable: false })
+        }
+        else if (checked) {
+            Alert.alert(I18n.t('report'), I18n.t('checked'), [{
+                text: 'Ok',
+                onPress: (e) => {
+                    clearCHECKIN_BY_QRCODEError();
+                    Actions.pop();
+                }
+            }],
+                { cancelable: false })
+        }
+        else if (checkInQrCode) {
+            Alert.alert(I18n.t('report'), I18n.t('checkinSuccess'), [{
+                text: 'Ok',
+                onPress: (e) => {
+                    clearCHECKIN_BY_QRCODEError();
+                    Actions.pop();
+                }
+            }],
+                { cancelable: false })
+        }
     }
+
     onSuccess(e) {
-        const { get_AntifactByQRCODE } = this.props.qrCodeScannerAction;
-        if (e.data != currentQrCode) {
-            currentQrCode=e.data;
-            Alert.alert("Thông báo", e.data);
-            get_AntifactByQRCODE({ qrCode: e.data })
-            setTimeout(()=>{
-                currentQrCode=null;
-            },1000)
+        const { checkInByQrCode } = this.props.qrCodeScannerAction;
+        const { isLoading } = this.props.qrCodeScannerReducer;
+        const { user } = this.props.loginReducer;
+        if (e.data != currentQrCode && !isLoading) {
+            currentQrCode = e.data;
+            Alert.alert(I18n.t('report'), e.data);
+            checkInByQrCode({ barcode: e.data },user)
+            setTimeout(() => {
+                currentQrCode = null;
+            }, 1000)
         }
         // Linking
         //     .openURL(e.data)
@@ -57,9 +108,10 @@ class qrCodeScanner extends Component {
     }
 
     render() {
+        const { isLoading } = this.props.qrCodeScannerReducer;
         return (
             <Container>
-                <HeaderContent headerTitle={"Qr Code"}
+                <HeaderContent headerTitle={I18n.t("checkin")}
                     showButtonLeft={true}
                     hideRightButton={true}></HeaderContent>
                 <QRCodeScanner
@@ -69,8 +121,8 @@ class qrCodeScanner extends Component {
                     reactivate={false}
                     topContent={
                         <Text style={styles.centerText}>
-                            Quét mã Qr code để biết thông tin Hiện vật
-          </Text>
+                            {I18n.t('checkinText')}
+                        </Text>
                     }
                     bottomContent={
                         <TouchableOpacity style={styles.buttonTouchable}>
@@ -78,6 +130,7 @@ class qrCodeScanner extends Component {
                         </TouchableOpacity>
                     }
                 />
+                <Loading isShow={isLoading}></Loading>
             </Container>
 
         );

@@ -113,9 +113,9 @@ export default class extends PureComponent {
         style={{ padding: 1, borderRadius: 5, marginRight: 10, height: 180, width: width }}
         onPress={() => { Actions.preview({ data: item }) }}>
         {item.type == "VIDEO" ?
-          <Image style={{ flex: 1, borderRadius: 5 }} source={{ uri: _newsImage ? _newsImage : 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg/1280px-YouTube_play_buttom_icon_%282013-2017%29.svg.png' }}></Image>
+          <Image style={{ width:width,height:'100%', borderRadius: 5,resizeMode:'stretch',backgroundColor:'red' }} source={_newsImage?{ uri:_newsImage  }:require("../../resources/assets/Image_VideoTrailerSBDDay.png")}></Image>
           :
-          <Image style={{ flex: 1, borderRadius: 5 }} source={{ uri: _newsImage }}></Image>
+          <Image style={{ width:width,height:'100%', borderRadius: 5 }} source={{ uri: _newsImage }}></Image>
         }
       </TouchableOpacity>
     )

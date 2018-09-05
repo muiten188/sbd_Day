@@ -67,9 +67,10 @@ class Eventlist extends Component {
 
 
     componentDidMount() {
-        const { search_HOT_NEWS } = this.props.eventListAction;
+        const { search_HOT_NEWS, search_CHECK_CHECKIN } = this.props.eventListAction;
         const { user } = this.props.loginReducer;
         search_HOT_NEWS(null, user)
+        search_CHECK_CHECKIN(null, user)
     }
     componentDidUpdate(prevProps, prevState) {
 
@@ -82,7 +83,7 @@ class Eventlist extends Component {
             <Container style={styles.container}>
                 <Grid>{/* marginBottom: 45 */}
 
-                    <Row style={{ height: 190, borderBottomWidth: 1, borderBottomColor: '#cecece' }}>
+                    <Row style={{ height: 190 }}>
                         <ProfileSlider data={listHotNews}></ProfileSlider>
                     </Row>
                     <Row>
@@ -90,7 +91,7 @@ class Eventlist extends Component {
                             ref={ref => {
                                 this.list = ref;
                             }}
-                            style={{ flex: 1, padding: 4, marginTop: 15 }}
+                            style={{ flex: 1, padding: 4, paddingTop: 0, marginTop: 0 }}
                             data={values.list_Menu ? values.list_Menu : []}
                             keyExtractor={this._keyExtractor}
                             renderItem={this.buildMenuItem.bind(this)}
@@ -107,22 +108,32 @@ class Eventlist extends Component {
         var index = dataItem.index;
         var item = dataItem.item;
         const { listNews } = this.props;
+        const { didCheckin } = this.props.EventlistReducer;
         return (
-            <TouchableOpacity style={{
+            <TouchableOpacity style={[{
                 height: 110,
                 width: '50%',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderWidth: 0.25,
+                borderWidth: 0,
                 borderColor: '#cecece',
-            }}
-                onPress={() => { Actions.home({ screenId: item.routerName }) }}>
+            }]}
+                onPress={() => {
+                    if (!(didCheckin && item.mName == "Checkin")) {
+                        Actions.qrScanner()
+                    }
+                }}>
+
                 <Grid>
                     <Row style={styles.center}>
                         <Icon style={{ color: '#007db7' }} size={35} name={item.IconName}></Icon>
                     </Row>
                     <Row style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
-                        <Text>{I18n.t(item.mName)}</Text>
+                        <Text>{didCheckin && item.mName == "Checkin" ? I18n.t('didCheckin')+"  " : I18n.t(item.mName)}  
+                            {didCheckin && item.mName == "Checkin" ? <Icon style={{
+                                color: 'green',
+                            }} size={25} name={"check-circle"}></Icon> : null}
+                        </Text>
                     </Row>
                 </Grid>
 

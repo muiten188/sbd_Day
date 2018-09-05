@@ -144,13 +144,13 @@ class Schedule extends Component {
                             <Text style={[{ paddingLeft: 4, paddingRight: 4 }, styles.smallText]}>{item.fromTime} - {item.toTime}</Text>
                         </Col>
                         <Col>
-                            <TouchableOpacity onPress={() => {
+                            <View onPress={() => {
                                 Actions.home({ screenId: 'presentationDetail', scheduleItem: item, scheduleAllItem: schedule })
                             }}><Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Presentation')}: </Text>
                                     <Text style={{ color: 'blue' }}>{item.title}</Text></Text>
                                 <Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Presenter')}: </Text>{item.author}</Text>
                                 <Text style={{ fontStyle: 'italic' }}><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Location')}: </Text>{item.location}</Text>
-                            </TouchableOpacity>
+                            </View>
                         </Col>
                     </Row>
                 </Grid>

@@ -63,7 +63,7 @@ export default class extends Component {
             !search ? <Col style={styles.itemHeaderBody}>
               <Row>
                 <Col style={styles.iconTitle}>
-                  <Image source={require("../../resources/assets/icon_title.png")} style={{ height: 35, resizeMode: 'contain' }}></Image>
+                  <Image source={require("../../resources/assets/icon_title.png")} style={{ marginLeft:10,height: 35,width:35, resizeMode: 'contain' }}></Image>
                 </Col>
                 <Col style={styles.itemHeaderBody}>
                   <Text style={styles.whileText}>{headerTitle ? headerTitle : I18n.t("saobacdau_event")}</Text>
@@ -81,7 +81,7 @@ export default class extends Component {
               </Col>
           }
 
-          {!hideRightButton ?
+          {!hideRightButton&&false ?
             <Col style={styles.itemHeaderEnd}>
               <Button transparent onPress={() => {
                 if (onSearch) {

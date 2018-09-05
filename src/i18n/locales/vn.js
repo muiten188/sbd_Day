@@ -72,4 +72,10 @@ export default {
   getMapDetailFail: "Không thể lấy chi tiết vị trí. Vui lòng kiếm tra lại kết nối!",
   getSurveyFail:"Không thể lấy thông tin survey. Vui lòng kiếm tra lại kết nối!",
   getNotificationFail:"Không thể lấy danh sách thông báo. Vui lòng kiếm tra lại kết nối!",
+  checkinFail:"Check in thất bại. Vui lòng kiếm tra lại kết nối!",
+  checkinText:'Quét mã Qr code để checkin.',
+  checkinSuccess:"Bạn đã check in thành công",
+  checked:'Bạn đã check in trước đó',
+  checkin:'Check in',
+  didCheckin:'Đã Check in'
 };

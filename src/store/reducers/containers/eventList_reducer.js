@@ -2,7 +2,11 @@ import * as types from "../../constants/action_types";
 const initState = {
   isLoading: false,
   listHotNews: [],
+  didCheckin: false,
   searchErorr: false,
+
+  isLoadingChecking: false,
+  searchCheckingErorr: false,
 };
 
 export default function (state = initState, action = {}) {
@@ -11,25 +15,55 @@ export default function (state = initState, action = {}) {
       return {
         ...state,
         listHotNews: action.data,
-        isLoadingHotNews: action.isLoadingHotNews,
-        searchHotNewsError: initState.searchHotNewsError,
+        isLoading: action.isLoading,
+        searchErorr: initState.searchErorr,
       };
     case types.SEARCHING_HOT_NEWS:
       return {
         ...state,
-        isLoadingHotNews: action.isLoadingHotNews,
+        isLoading: action.isLoading,
       };
     case types.SEARCH_HOT_NEWS_ERROR:
       return {
         ...state,
-        searchHotNewsError: action.searchHotNewsError,
+        searchErorr: action.searchErorr,
       };
     case types.SEARCH_HOT_NEWS_CLEAR_ERROR:
       return {
         ...state,
-        searchHotNewsError: initState.searchHotNewsError,
-        isLoadingHotNews: initState.isLoadingHotNews
+        searchErorr: initState.searchErorr,
+        isLoading: initState.isLoading
       };
+
+    case types.SEARCH_CHECK_CHECKIN:
+      var _didCheckin = false;
+      if (action.data.checkInCode != null && action.data.timeCheckIn != null) {
+        _didCheckin = true;
+      }
+      else {
+        _didCheckin = false;
+      }
+      return {
+        ...state,
+        didCheckin: _didCheckin
+      };
+    case types.SEARCHING_CHECK_CHECKIN:
+      return {
+        ...state,
+        isLoadingChecking: action.isLoadingChecking,
+      };
+    case types.SEARCH_CHECK_CHECKIN_ERROR:
+      return {
+        ...state,
+        searchCheckingErorr: action.searchCheckingErorr,
+      };
+    case types.SEARCH_CHECK_CHECKIN_CLEAR_ERROR:
+      return {
+        ...state,
+        searchCheckingErorr: initState.searchCheckingErorr,
+        isLoadingChecking: initState.isLoadingChecking
+      };
+
 
     default:
       return state;
