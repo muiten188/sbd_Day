@@ -20,8 +20,8 @@ export default {
     },
     Item: {
         borderBottomWidth: 0,
-        marginTop:5,
-        marginBottom:5,
+        marginTop:3,
+        marginBottom:3,
         paddingLeft:6,
         paddingRight:6,
     },

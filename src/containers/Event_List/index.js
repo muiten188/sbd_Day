@@ -119,8 +119,11 @@ class Eventlist extends Component {
                 borderColor: '#cecece',
             }]}
                 onPress={() => {
-                    if (!(didCheckin && item.mName == "Checkin")) {
+                    if ((!didCheckin && item.mName == "Checkin")) {
                         Actions.qrScanner()
+                    }
+                    else{
+                        Actions.home({ screenId: item.routerName })
                     }
                 }}>
 

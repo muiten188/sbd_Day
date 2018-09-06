@@ -151,7 +151,7 @@ class Profile extends Component {
   render() {
     const locale = "vn";
     const { user } = this.props.loginReducer;
-    
+
     const { handleSubmit } = this.props;
     return (
       <Container style={styles.container}>
@@ -164,89 +164,83 @@ class Profile extends Component {
             <Text>Đăng nhập</Text>
           </Button>}
         <Grid style={styles.Grid}>
-            <Content>
-          <Row style={styles.row}>
-            <Col size={1}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
-              <Field
-                  name="firstName"
-                  placeholder={I18n.t("fullName")}
-                  label={I18n.t("fullName")}
-                  component={InputField}
-                  disabled
-                />
-              </View>
-            </Col>
-            <Col size={2}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
-                <Field
-                  name="lastName"
-                  placeholder={I18n.t("fullName")}
-                  label={I18n.t("fullName")}
-                  component={InputField}
-                  disabled
-                />
-              </View>
-            </Col>
-          </Row>
-          <Row style={styles.row}>
-            <Col size={1}>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>{I18n.t("phone")}</Text>
-              </View>
-            </Col>
-            <Col size={2}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
-                <Field
-                  name="phoneNumber"
-                  placeholder={I18n.t("phone")}
-                  label={I18n.t("phone")}
-                  component={InputField}
-                  disabled
-                />
-              </View>
-            </Col>
-          </Row>
+          <Content>
+            <Row style={styles.row}>
+              <Col size={1}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text>{I18n.t("fullName")}</Text>
+                </View>
+              </Col>
+              <Col size={2}>
+                <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+                  <Field
+                    name="fullName"
+                    placeholder={I18n.t("fullName")}
+                    label={I18n.t("fullName")}
+                    component={InputField}
+                    disabled
+                  />
+                </View>
+              </Col>
+            </Row>
+            <Row style={styles.row}>
+              <Col size={1}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text>{I18n.t("phone")}</Text>
+                </View>
+              </Col>
+              <Col size={2}>
+                <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+                  <Field
+                    name="phoneNumber"
+                    placeholder={I18n.t("phone")}
+                    label={I18n.t("phone")}
+                    component={InputField}
+                    disabled
+                  />
+                </View>
+              </Col>
+            </Row>
 
-          <Row style={styles.row}>
-            <Col size={1}>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>{I18n.t("email")}</Text>
-              </View>
-            </Col>
-            <Col size={2}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
-                <Field
-                  name="email"
-                  placeholder={I18n.t("email")}
-                  label={I18n.t("email")}
-                  component={InputField}
-                  disabled
-                />
-              </View>
-            </Col>
-          </Row>
+            <Row style={styles.row}>
+              <Col size={1}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text>{I18n.t("email")}</Text>
+                </View>
+              </Col>
+              <Col size={2}>
+                <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+                  <Field
+                    name="email"
+                    placeholder={I18n.t("email")}
+                    label={I18n.t("email")}
+                    component={InputField}
+                    disabled
+                  />
+                </View>
+              </Col>
+            </Row>
 
-          <Row style={styles.row}>
-            <Col size={1}>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>{I18n.t("Company")}</Text>
-              </View>
-            </Col>
-            <Col size={2}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
-                <Field
-                  name="companyName"
-                  placeholder={I18n.t("Company")}
-                  label={I18n.t("Company")}
-                  component={InputField}
-                  disabled
-                />
-              </View>
-            </Col>
-          </Row>
+            <Row style={styles.row}>
+              <Col size={1}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text>{I18n.t("Company")}</Text>
+                </View>
+              </Col>
+              <Col size={2}>
+                <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+                  <Field
+                    name="companyName"
+                    placeholder={I18n.t("Company")}
+                    label={I18n.t("Company")}
+                    component={InputField}
+                    disabled
+                  />
+                </View>
+              </Col>
+            </Row>
 
-          {/* <Row style={styles.row}>
+            {/* <Row style={styles.row}>
             <Col size={1}>
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text>{I18n.t("position")}</Text>
@@ -265,7 +259,7 @@ class Profile extends Component {
             </Col>
           </Row> */}
 
-          {/* <Row style={styles.row}>
+            {/* <Row style={styles.row}>
             <Col size={1}>
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text>{I18n.t("position")}</Text>
@@ -283,7 +277,7 @@ class Profile extends Component {
               </View>
             </Col>
           </Row> */}
-          {/* <Button block style={{ marginTop: 10, marginRight: 10, marginLeft: 10 }}
+            {/* <Button block style={{ marginTop: 10, marginRight: 10, marginLeft: 10 }}
             onPress={() => { Actions.changePassword() }}>
             <Text>{I18n.t("changePassword")}</Text>
           </Button> */}
@@ -296,10 +290,12 @@ class Profile extends Component {
 
 }
 function mapStateToProps(state, props) {
+  var _user = Object.assign({}, state.loginReducer.user)
+  _user.fullName = _user.firstName + " " + _user.lastName;
   return {
     profileReducer: state.profileReducer,
     loginReducer: state.loginReducer,
-    initialValues: state.loginReducer.user
+    initialValues: _user
   };
 }
 function mapToDispatch(dispatch) {

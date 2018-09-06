@@ -148,8 +148,8 @@ class Schedule extends Component {
                                 Actions.home({ screenId: 'presentationDetail', scheduleItem: item, scheduleAllItem: schedule })
                             }}><Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Presentation')}: </Text>
                                     <Text style={{ color: 'blue' }}>{item.title}</Text></Text>
-                                <Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Presenter')}: </Text>{item.author}</Text>
-                                <Text style={{ fontStyle: 'italic' }}><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Location')}: </Text>{item.location}</Text>
+                                {/* <Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Presenter')}: </Text>{item.author}</Text>
+                                <Text style={{ fontStyle: 'italic' }}><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Location')}: </Text>{item.location}</Text> */}
                             </View>
                         </Col>
                     </Row>
