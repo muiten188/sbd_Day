@@ -76,8 +76,7 @@ class qrCodeScanner extends Component {
                 text: 'Ok',
                 onPress: (e) => {
                     clearCHECKIN_BY_QRCODEError();
-                    Actions.pop();
-                    search_CHECK_CHECKIN(null, user)
+                    Actions.pop();           
                 }
             }],
                 { cancelable: false })
@@ -87,6 +86,7 @@ class qrCodeScanner extends Component {
                 text: 'Ok',
                 onPress: (e) => {
                     clearCHECKIN_BY_QRCODEError();
+                    search_CHECK_CHECKIN(null, user)
                     Actions.pop();
                 }
             }],

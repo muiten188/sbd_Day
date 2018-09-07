@@ -45,7 +45,8 @@ export default function (state = initState, action = {}) {
         ...state,
         searchErorr: initState.searchErorr,
         isLoading: initState.isLoading,
-        checked:initState.checked
+        checked:initState.checked,
+        checkInQrCode:initState.checkInQrCode
       };
 
     default:
