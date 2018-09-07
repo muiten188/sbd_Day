@@ -20,6 +20,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 import HeaderContent from "../../components/Header_content";
 import * as qrCodeScannerAction from '../../store/actions/containers/qrCodeScanner_action';
+import * as eventListAction from '../../store/actions/containers/eventList_action';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Loading from "../../components/Loading";
@@ -57,6 +58,8 @@ class qrCodeScanner extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        const { search_CHECK_CHECKIN } = this.props.eventListAction;
+        const { user } = this.props.loginReducer;
         const { clearCHECKIN_BY_QRCODEError } = this.props.qrCodeScannerAction;
         const { searchErorr, checkInQrCode, checked } = this.props.qrCodeScannerReducer;
         if (searchErorr) {
@@ -74,6 +77,7 @@ class qrCodeScanner extends Component {
                 onPress: (e) => {
                     clearCHECKIN_BY_QRCODEError();
                     Actions.pop();
+                    search_CHECK_CHECKIN(null, user)
                 }
             }],
                 { cancelable: false })
@@ -97,7 +101,7 @@ class qrCodeScanner extends Component {
         if (e.data != currentQrCode && !isLoading) {
             currentQrCode = e.data;
             Alert.alert(I18n.t('report'), e.data);
-            checkInByQrCode({ barcode: e.data },user)
+            checkInByQrCode({ barcode: e.data }, user)
             setTimeout(() => {
                 currentQrCode = null;
             }, 1000)
@@ -150,7 +154,8 @@ function mapStateToProps(state, props) {
 }
 function mapToDispatch(dispatch) {
     return {
-        qrCodeScannerAction: bindActionCreators(qrCodeScannerAction, dispatch)
+        qrCodeScannerAction: bindActionCreators(qrCodeScannerAction, dispatch),
+        eventListAction: bindActionCreators(eventListAction, dispatch)
     };
 }
 

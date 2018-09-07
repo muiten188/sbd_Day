@@ -212,21 +212,6 @@ class Home extends Component {
     blockLoadMoreAction = loadEnd;
     const { homeAction } = this.props;
     const { user } = this.props.loginReducer;
-    if (searchErorr == true) {
-      Alert.alert(
-        "Thông báo",
-        "Tìm kiếm lỗi kiểm tra lại đường truyền.",
-        [
-          {
-            text: "Ok",
-            onPress: e => {
-              homeAction.clearError();
-            }
-          }
-        ],
-        { cancelable: false }
-      );
-    }
     return (
 
       <Container style={styles.container}>

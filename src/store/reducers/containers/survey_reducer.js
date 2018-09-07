@@ -11,7 +11,7 @@ export default function (state = initState, action = {}) {
       return {
         ...state,
         surveyUrl: action.data,
-        isLoading: action.isLoading,
+        isLoading: false,
         searchErorr: initState.searchErorr,
       };
     case types.SURVEY_SEARCHING_ALL:

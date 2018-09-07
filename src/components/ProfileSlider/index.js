@@ -36,32 +36,17 @@ export default class extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      indexSlider: 0
-    }
   }
 
   componentWillReceiveProps(nextProps) {
   }
 
   componentDidMount() {
-    // if (this.props.data) {
-    //   _intervalSlider = setInterval(() => {
-    //     this.setState({ indexSlider: this.state.indexSlider == this.props.data.length - 1 ? 0 : this.state.indexSlider + 1 })
-    //     try {
-    //       this.list.scrollToItem({ item: this.props.data[this.state.indexSlider], animated: true })
-    //     }
-    //     catch (e) {
-    //       //error 
-    //     }
-    //   }, 4000)
-    // }
+
   }
 
   componentWillUnmount() {
-    if (_intervalSlider) {
-      clearInterval(_intervalSlider);
-    }
+
   }
 
   static navigationOptions = {
@@ -78,24 +63,11 @@ export default class extends PureComponent {
             this.list = ref;
           }}
           style={{ width: '100%' }}
-          data={data ? data : []}
+          data={data}
           keyExtractor={this._keyExtractor}
           renderItem={this.buildMenuItem.bind(this)}
           horizontal={true}
-          scrollEnabled={true}
         />
-        {/* <Button transparent style={{ width: 40, position: 'absolute', right: 0, top: 25, justifyContent: 'center', alignItems: 'center' }}
-          onPress={() => {
-            this.list.scrollToEnd()
-          }}>
-          <Icon size={20} name="arrow-right"></Icon>
-        </Button>
-        <Button transparent style={{ width: 40, position: 'absolute', left: 0, top: 25, justifyContent: 'center', alignItems: 'center' }}
-          onPress={() => {
-            this.list.scrollToIndex({ index: 0 })
-          }}>
-          <Icon size={20} name="arrow-left"></Icon>
-        </Button> */}
       </View>
     );
   }
@@ -108,14 +80,19 @@ export default class extends PureComponent {
     if (item.type == "IMAGE" && item.path) {
       _newsImage = `${AppConfig.API_HOST_BASE}${item.path}`;
     }
+    console.log('item render')
     return (
       <TouchableOpacity
         style={{ padding: 1, borderRadius: 5, marginRight: 10, height: 180, width: width }}
-        onPress={() => { Actions.preview({ data: item }) }}>
+        onPress={() => {
+          if (item.type == "IMAGE") {
+            Actions.preview({ data: item })
+          }
+        }}>
         {item.type == "VIDEO" ?
           <Image style={{ width:width,height:'100%', borderRadius: 5,resizeMode:'stretch',backgroundColor:'red' }} source={_newsImage?{ uri:_newsImage  }:require("../../resources/assets/Image_VideoTrailerSBDDay.png")}></Image>
           :
-          <Image style={{ width:width,height:'100%', borderRadius: 5 }} source={{ uri: _newsImage }}></Image>
+          <Image style={{ width: width, height: '100%', borderRadius: 5 }} source={{ uri: _newsImage }}></Image>
         }
       </TouchableOpacity>
     )

@@ -84,7 +84,21 @@ class Eventlist extends Component {
                 <Grid>{/* marginBottom: 45 */}
 
                     <Row style={{ height: 190 }}>
-                        <ProfileSlider data={listHotNews}></ProfileSlider>
+                        {listHotNews.length == 1 ?
+                            <YouTube
+                                videoId={listHotNews[0].path}   // The YouTube video ID listHotNews[0].path
+                                play={false}             // control playback of video with true/false
+                                fullscreen={false}       // control whether the video should play in fullscreen or inline
+                                loop={true}             // control whether the video should loop when ended
+                                apiKey={"AIzaSyCpumcHqM6clMWURCg2hwW0MefeA11hpfA"}
+                                //onReady={e => this.setState({ isReady: true })}
+                                //onChangeState={e => this.setState({ status: e.state })}
+                                //onChangeQuality={e => this.setState({ quality: e.quality })}
+                                //onError={e => this.setState({ error: e.error })}
+                                controls={2}
+                                style={{ alignSelf: 'stretch', width: '100%', height: 190 }}
+                            /> :
+                            <ProfileSlider data={listHotNews}></ProfileSlider>}
                     </Row>
                     <Row>
                         <FlatList
@@ -122,7 +136,7 @@ class Eventlist extends Component {
                     if ((!didCheckin && item.mName == "Checkin")) {
                         Actions.qrScanner()
                     }
-                    else{
+                    else if (item.mName != "Checkin") {
                         Actions.home({ screenId: item.routerName })
                     }
                 }}>
@@ -132,7 +146,7 @@ class Eventlist extends Component {
                         <Icon style={{ color: '#007db7' }} size={35} name={item.IconName}></Icon>
                     </Row>
                     <Row style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
-                        <Text>{didCheckin && item.mName == "Checkin" ? I18n.t('didCheckin')+"  " : I18n.t(item.mName)}  
+                        <Text>{didCheckin && item.mName == "Checkin" ? I18n.t('didCheckin') + "  " : I18n.t(item.mName)}
                             {didCheckin && item.mName == "Checkin" ? <Icon style={{
                                 color: 'green',
                             }} size={25} name={"check-circle"}></Icon> : null}

@@ -13,6 +13,7 @@ export default {
   input: {    
     height:40, 
     width:'100%',    
+    paddingLeft:0
   },
   inputTextArea:{
     minHeight:40, 
