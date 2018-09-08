@@ -83,7 +83,7 @@ class Eventlist extends Component {
             <Container style={styles.container}>
                 <Grid>{/* marginBottom: 45 */}
 
-                    <Row style={{ height: 190 }}>
+                    <Row style={{ height: 190,marginBottom:6 }}>
                         {listHotNews.length == 1 ?
                             <YouTube
                                 videoId={listHotNews[0].path}   // The YouTube video ID listHotNews[0].path

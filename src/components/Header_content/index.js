@@ -51,6 +51,7 @@ export default class extends Component {
     return (
       <Header style={[styles.header, Platform.OS === 'ios' ? { height: 65 } : { height: 45 }]}>
         {/* <StatusBar backgroundColor="#007db7"></StatusBar> */}
+        <Image style={[{ position: 'absolute', top: 0, left: 0,width:'100%',height:'100%', resizeMode: 'stretch' },showButtonLeft == true?{left:25}:{}]} source={require('../../resources/assets/header.png')}></Image>
         <Grid>
           {showButtonLeft == true ? (
             <Col style={styles.itemButtonHeader}>
@@ -61,15 +62,6 @@ export default class extends Component {
           ) : null}
           {
             !search ? <Col style={styles.itemHeaderBody}>
-              <Row>
-                <Col style={styles.iconTitle}>
-                  <Image source={require("../../resources/assets/icon_title.png")} style={{ marginLeft:10,height: 35,width:35, resizeMode: 'contain' }}></Image>
-                </Col>
-                <Col style={styles.itemHeaderBody}>
-                  <Text style={styles.whileText}>{headerTitle ? headerTitle : I18n.t("saobacdau_event")}</Text>
-                </Col>
-              </Row>
-
             </Col> :
               <Col style={styles.itemHeaderBody}>
                 <Row>
@@ -81,7 +73,7 @@ export default class extends Component {
               </Col>
           }
 
-          {!hideRightButton&&false ?
+          {!hideRightButton && false ?
             <Col style={styles.itemHeaderEnd}>
               <Button transparent onPress={() => {
                 if (onSearch) {

@@ -1,7 +1,7 @@
 export default {
   header: {
     width: '100%',
-    backgroundColor: "#007db7",
+    backgroundColor: '#007db7',
     
     paddingLeft:0,
     paddingRight:0,
