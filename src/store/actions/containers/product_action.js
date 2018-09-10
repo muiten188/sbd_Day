@@ -3,10 +3,10 @@ import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
 export function getProducts(values, user) {
     let dataPost = values || {};
-    return async(dispatch) => {
+    return async (dispatch) => {
         dispatch(_QUICK_SEARCHing_ALL());
         var _header = await helper.buildHeader(user);
-        fetch(`${AppConfig.GET_PRODUCTS}`, {
+        fetch(`${AppConfig.GET_PRODUCTS}?${helper.getQueryString(dataPost)}`, {
             headers: _header,
             method: "GET"
         })
@@ -54,7 +54,7 @@ function _seach_ALLError() {
         isLoading: false
     };
 }
-export function clearErrorSearch(){
+export function clearErrorSearch() {
     return {
         type: types.PRODUCT_ALL_CLEAR_ERROR,
     };

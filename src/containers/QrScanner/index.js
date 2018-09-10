@@ -8,6 +8,7 @@ import {
     Alert,
     ScrollView,
     Linking,
+    DeviceEventEmitter
 } from "react-native";
 import {
     Container,
@@ -24,14 +25,32 @@ import * as eventListAction from '../../store/actions/containers/eventList_actio
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Loading from "../../components/Loading";
+import Beacons from 'react-native-beacons-manager'
 import Header_content from "../../components/Header_content";
 const currentQrCode = null;
 import * as helper from '../../helper';
+const current_uuid = null;
+const eventBeacons = null;
 class qrCodeScanner extends Component {
 
     static navigationOptions = {
         header: null
     };
+
+    async detectBeacons() {
+        // Tells the library to detect iBeacons
+        Beacons.detectIBeacons()
+        //Beacons.requestWhenInUseAuthorization();
+        // Start detecting all iBeacons in the nearby
+        try {
+            await Beacons.startRangingBeaconsInRegion('REGION1')
+            console.log(`Beacons ranging started succesfully!`)
+        } catch (err) {
+            console.log(`Beacons ranging not started, error: ${error}`)
+        }
+
+
+    }
 
     constructor(props) {
         super(props);
@@ -42,9 +61,45 @@ class qrCodeScanner extends Component {
     }
 
     componentDidMount() {
+        const { checkInByQrCode } = this.props.qrCodeScannerAction;
+        const { isLoading } = this.props.qrCodeScannerReducer;
+        const { user } = this.props.loginReducer;
         // const { checkInByQrCode } = this.props.qrCodeScannerAction;
         // const { user } = this.props.loginReducer;
         // checkInByQrCode({ barcode: '1234567890' },user)
+        eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
+            console.log('Tìm thấy beacon:', data.beacons)
+            if (data.beacons && data.beacons.length > 0) {
+                var listBeacons=data.beacons;
+                listBeacons.sort(function(a, b){return a.distance>b.distance});
+                if (listBeacons[0].uuid != current_uuid) {
+                    Alert.alert('Tìm thấy beacon:', listBeacons[0].uuid)
+                    current_uuid = listBeacons[0].uuid;
+                    checkInByQrCode({ barcode: current_uuid }, user)
+                    // if (Actions.currentScene == 'productList') {
+                    //   Actions.pop();
+                    // }
+                    // Actions.productList({ beaconUUID: current_uuid })
+                    //get_AntifactByUUID({ beaconUUID: current_uuid });
+                    //blockUUID = true;
+                    // if (timeoutUUID) {
+                    //   clearTimeout(timeoutUUID);
+                    // }
+                    // setTimeout(() => {
+                    //   current_uuid = null;
+                    // }, 30000);
+
+                }
+                console.log('Tìm thấy beacon:', listBeacons[0].uuid)
+            }
+        })
+        this.detectBeacons();
+    }
+
+    componentWillUnmount() {
+        if (eventBeacons) {
+            eventBeacons.remove();
+        }
     }
 
     async loadSetting() {
@@ -76,7 +131,7 @@ class qrCodeScanner extends Component {
                 text: 'Ok',
                 onPress: (e) => {
                     clearCHECKIN_BY_QRCODEError();
-                    Actions.pop();           
+                    Actions.pop();
                 }
             }],
                 { cancelable: false })

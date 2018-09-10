@@ -95,7 +95,7 @@ class Eventlist extends Component {
                                 //onChangeState={e => this.setState({ status: e.state })}
                                 //onChangeQuality={e => this.setState({ quality: e.quality })}
                                 //onError={e => this.setState({ error: e.error })}
-                                controls={2}
+                                controls={1}
                                 style={{ alignSelf: 'stretch', width: '100%', height: 190 }}
                             /> :
                             <ProfileSlider data={listHotNews}></ProfileSlider>}

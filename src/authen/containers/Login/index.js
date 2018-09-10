@@ -249,7 +249,7 @@ class login extends React.Component {
                       {I18n.t("login")}
                     </Text>
                   </Button>
-                  <Grid>
+                  {/* <Grid>
                     <Col>
                       <Button transparent dark style={[styles.buttonLogin]}
                         onPress={() => {
@@ -267,7 +267,7 @@ class login extends React.Component {
                         </Text>
                       </Button>
                     </Col>
-                  </Grid>
+                  </Grid> */}
 
 
                 </Form>
@@ -293,7 +293,7 @@ class login extends React.Component {
           /> */}
           </View>
         </View>
-        <View style={{
+        {/* <View style={{
           position: 'absolute', bottom: 0, left: 0,
           right: 0, height: 50, backgroundColor: 'transparent',
           justifyContent: 'center',
@@ -311,7 +311,7 @@ class login extends React.Component {
             <Picker.Item label="Việt Nam" value="vn" />
             <Picker.Item label="English" value="en" />
           </Picker>
-        </View>
+        </View> */}
       </Container>
     );
   }
