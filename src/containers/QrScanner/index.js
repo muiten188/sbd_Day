@@ -64,36 +64,10 @@ class qrCodeScanner extends Component {
         const { checkInByQrCode } = this.props.qrCodeScannerAction;
         const { isLoading } = this.props.qrCodeScannerReducer;
         const { user } = this.props.loginReducer;
-        // const { checkInByQrCode } = this.props.qrCodeScannerAction;
-        // const { user } = this.props.loginReducer;
-        // checkInByQrCode({ barcode: '1234567890' },user)
-        eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
-            console.log('Tìm thấy beacon:', data.beacons)
-            if (data.beacons && data.beacons.length > 0) {
-                var listBeacons=data.beacons;
-                listBeacons.sort(function(a, b){return a.distance>b.distance});
-                if (listBeacons[0].uuid != current_uuid) {
-                    Alert.alert('Tìm thấy beacon:', listBeacons[0].uuid)
-                    current_uuid = listBeacons[0].uuid;
-                    checkInByQrCode({ barcode: current_uuid }, user)
-                    // if (Actions.currentScene == 'productList') {
-                    //   Actions.pop();
-                    // }
-                    // Actions.productList({ beaconUUID: current_uuid })
-                    //get_AntifactByUUID({ beaconUUID: current_uuid });
-                    //blockUUID = true;
-                    // if (timeoutUUID) {
-                    //   clearTimeout(timeoutUUID);
-                    // }
-                    // setTimeout(() => {
-                    //   current_uuid = null;
-                    // }, 30000);
-
-                }
-                console.log('Tìm thấy beacon:', listBeacons[0].uuid)
-            }
-        })
-        this.detectBeacons();
+        const { beacon } = this.props;
+        if (beacon) {
+            checkInByQrCode({ barcode: beacon.uuid + beacon.major + beacon.minor }, user)
+        }
     }
 
     componentWillUnmount() {
@@ -131,6 +105,7 @@ class qrCodeScanner extends Component {
                 text: 'Ok',
                 onPress: (e) => {
                     clearCHECKIN_BY_QRCODEError();
+                    search_CHECK_CHECKIN(null, user)
                     Actions.pop();
                 }
             }],
@@ -168,27 +143,29 @@ class qrCodeScanner extends Component {
 
     render() {
         const { isLoading } = this.props.qrCodeScannerReducer;
+        const { beacon } = this.props;
         return (
             <Container>
                 <HeaderContent headerTitle={I18n.t("checkin")}
                     showButtonLeft={true}
                     hideRightButton={true}></HeaderContent>
-                <QRCodeScanner
-                    style={{ height: 200 }}
-                    onRead={this.onSuccess.bind(this)}
-                    showMarker={true}
-                    reactivate={false}
-                    topContent={
-                        <Text style={styles.centerText}>
-                            {I18n.t('checkinText')}
-                        </Text>
-                    }
-                    bottomContent={
-                        <TouchableOpacity style={styles.buttonTouchable}>
-                            <Text style={styles.buttonText}>OK</Text>
-                        </TouchableOpacity>
-                    }
-                />
+                {beacon ? <Text>Checkin bằng beacon...</Text> :
+                    <QRCodeScanner
+                        style={{ height: 200 }}
+                        onRead={this.onSuccess.bind(this)}
+                        showMarker={true}
+                        reactivate={false}
+                        topContent={
+                            <Text style={styles.centerText}>
+                                {I18n.t('checkinText')}
+                            </Text>
+                        }
+                        bottomContent={
+                            <TouchableOpacity style={styles.buttonTouchable}>
+                                <Text style={styles.buttonText}>OK</Text>
+                            </TouchableOpacity>
+                        }
+                    />}
                 <Loading isShow={isLoading}></Loading>
             </Container>
 

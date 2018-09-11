@@ -14,7 +14,7 @@ import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
 import org.reactnative.camera.RNCameraPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
-
+import com.solinor.bluetoothstatus.RNBluetoothManagerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -48,7 +48,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(), new AutoHeightWebViewPackage(), new RNCameraPackage(),
           new ReactVideoPackage(), new BeaconsAndroidPackage(), new ReactNativeYouTube(), new RNI18nPackage(),
-          new FIRMessagingPackage(), new VectorIconsPackage(), new FBSDKPackage(mCallbackManager));
+          new FIRMessagingPackage(), new VectorIconsPackage(), new FBSDKPackage(mCallbackManager),new RNBluetoothManagerPackage());
     }
 
     // @Override

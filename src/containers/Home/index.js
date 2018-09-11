@@ -109,8 +109,8 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    const {user}=this.props.loginReducer;
-    if(FcmClient.registed==false){
+    const { user } = this.props.loginReducer;
+    if (FcmClient.registed == false) {
       FcmClient.registerFCM(user.userId);
     }
     // FcmClient.newEvent.addListener('fcm-event-user-group', (obj) => {
@@ -166,7 +166,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
-    const {user}=this.props.loginReducer;
+    const { user } = this.props.loginReducer;
     // FcmClient.unRegisterFCM(user.userId);
     if (eventBeacons) {
       eventBeacons.remove();
@@ -251,7 +251,7 @@ class Home extends Component {
                   <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>
-                        <IconVector name="user" size={20} />
+                      <Image style={{ width: 18, height: 18 }} source={require('../../resources/assets/icon/ThongBao.png')} ></Image>
                       </Row>
                       <Row style={styles.textHeadingTab}>
                         <Text style={styles.textHeaderTab}>{I18n.t("notification")}</Text>
@@ -359,7 +359,7 @@ class Home extends Component {
         return (<PresentationDetail scheduleItem={this.props.scheduleItem} scheduleAllItem={this.props.scheduleAllItem}></PresentationDetail>)
         break;
       case "product":
-        return (<Product></Product>)
+        return (<Product beacon={this.props.beacon}></Product>)
         break;
       case "productDetail":
         return (<ProductDetail product={this.props.product} listProduct={this.props.listProduct}></ProductDetail>)

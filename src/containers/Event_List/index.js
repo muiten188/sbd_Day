@@ -7,7 +7,9 @@ import {
     TouchableOpacity,
     Alert,
     RefreshControl,
-    Image
+    Image,
+    DeviceEventEmitter,
+    AppState
 } from "react-native";
 import {
     Container,
@@ -36,10 +38,13 @@ import Loading from "../../components/Loading";
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import ProfileSlider from '../../components/ProfileSlider';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
+import Beacons from 'react-native-beacons-manager'
 import * as values from '../../helper/values';
 import * as helper from '../../helper';
+import { BluetoothStatus } from 'react-native-bluetooth-status';
 const blockAction = false;
-const blockLoadMoreAction = false;
+const listCurrentBeacon = [];
+const eventBeacons = null;
 
 class Eventlist extends Component {
 
@@ -47,10 +52,30 @@ class Eventlist extends Component {
         header: null
     };
 
+    async detectBeacons() {
+        // Tells the library to detect iBeacons
+        Beacons.detectIBeacons()
+        //Beacons.requestWhenInUseAuthorization();
+        // Start detecting all iBeacons in the nearby
+        try {
+            await Beacons.startRangingBeaconsInRegion('REGION1')
+            console.log(`Beacons ranging started succesfully!`)
+        } catch (err) {
+            console.log(`Beacons ranging not started, error: ${error}`)
+        }
+
+
+    }
+
     constructor(props) {
         super(props);
+        this.showMessage = false;
+        this.current_uuid = {};
+        this.listBeacons = [];
+        this.indexScanerBeacon = 0;
         this.state = {
-            languageSelect: 'vn'
+            languageSelect: 'vn',
+            height: 191
         };
         this.loadSetting();
     }
@@ -65,15 +90,110 @@ class Eventlist extends Component {
         }
     }
 
+    containsObject(obj, list) {
+        var i;
+        for (i = 0; i < list.length; i++) {
+            if (list[i].uuid == obj.uuid && list[i].major == obj.major && list[i].minor == obj.minor) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     componentDidMount() {
         const { search_HOT_NEWS, search_CHECK_CHECKIN } = this.props.eventListAction;
+        const { didCheckin } = this.props.EventlistReducer;
+        const { getProducts } = this.props;
         const { user } = this.props.loginReducer;
         search_HOT_NEWS(null, user)
         search_CHECK_CHECKIN(null, user)
+
+        eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', async (data) => {
+            //console.log('Tìm thấy beacon:', data.beacons)
+            if (AppState.currentState != "active") {
+                return;
+            }
+            if (data.beacons && data.beacons.length > 0 && blockAction == false) {
+                //blockAction = true;
+                const isEnabled = await BluetoothStatus.state();
+
+                if (!isEnabled) {
+                    setTimeout(() => {
+                        blockAction = false;
+                    }, 5000);
+
+                }
+                for (var i = 0; i < data.beacons.length; i++) {
+                    if (!this.containsObject(data.beacons[i], this.listBeacons)) {
+                        this.listBeacons.push(data.beacons[i]);
+                    }
+                }
+                this.indexScanerBeacon = this.indexScanerBeacon + 1;
+                if (this.indexScanerBeacon <= 5) {
+                    return;
+                }
+                this.listBeacons.sort(function (a, b) { return a.distance > b.distance });
+                var objectBeacon = { uuid: this.listBeacons[0].uuid, major: this.listBeacons[0].major, minor: this.listBeacons[0].minor }
+                console.log('array merge', this.listBeacons)
+                if (JSON.stringify(this.current_uuid) != JSON.stringify(objectBeacon)) {
+                    this.current_uuid = objectBeacon;
+                    if (this.showMessage) {
+                        return;
+                    }
+
+                    this.showMessage = true;
+                    if (!this.props.EventlistReducer.didCheckin) {
+                        Alert.alert(I18n.t('report'), 'Tìm thấy beacon bạn checkin bạn có muốn thực hiện checkin bằng beacon?', [{
+                            text: 'Ok',
+                            onPress: (e) => {
+                                Actions.qrScanner({ beacon: this.current_uuid })
+                                setTimeout(() => {
+                                    this.current_uuid = {};
+                                }, 100000);
+                                this.showMessage = false;
+                            }
+                        },
+                        {
+                            text: 'Cancel',
+                            onPress: () => { this.showMessage = false; console.log('Cancel Pressed') }, style: 'cancel'
+                        }],
+                            { cancelable: false });
+                    }
+                    else {
+                        Alert.alert(I18n.t('report'), 'Tìm thấy beacon bạn có muốn lấy thông tin sản phẩm theo beacon?', [{
+                            text: 'Ok',
+                            onPress: (e) => {
+                                this.showMessage = false;
+                                Actions.home({ screenId: 'product', beacon: this.current_uuid })
+                            }
+                        },
+                        {
+                            text: 'Cancel',
+                            onPress: () => { this.showMessage = false; console.log('Cancel Pressed') }, style: 'cancel'
+                        }],
+                            { cancelable: false });
+                    }
+                    console.log('Tìm thấy beacon:', this.listBeacons[0].uuid)
+                }
+                setTimeout(() => {
+                    blockAction = false;
+                }, 5000);
+                this.listBeacons = [];
+                this.indexScanerBeacon = 0;
+
+            }
+        })
+        this.detectBeacons();
     }
     componentDidUpdate(prevProps, prevState) {
 
+    }
+
+    componentWillUnmount() {
+        if (eventBeacons) {
+            eventBeacons.remove();
+        }
     }
 
     render() {
@@ -83,7 +203,7 @@ class Eventlist extends Component {
             <Container style={styles.container}>
                 <Grid>{/* marginBottom: 45 */}
 
-                    <Row style={{ height: 190,marginBottom:6 }}>
+                    <Row style={{ height: 190, marginBottom: 6 }}>
                         {listHotNews.length == 1 ?
                             <YouTube
                                 videoId={listHotNews[0].path}   // The YouTube video ID listHotNews[0].path
@@ -91,12 +211,12 @@ class Eventlist extends Component {
                                 fullscreen={false}       // control whether the video should play in fullscreen or inline
                                 loop={true}             // control whether the video should loop when ended
                                 apiKey={"AIzaSyCpumcHqM6clMWURCg2hwW0MefeA11hpfA"}
-                                //onReady={e => this.setState({ isReady: true })}
+                                onReady={() => { setTimeout(() => this.setState({ height: 190 }), 200) }}
                                 //onChangeState={e => this.setState({ status: e.state })}
                                 //onChangeQuality={e => this.setState({ quality: e.quality })}
                                 //onError={e => this.setState({ error: e.error })}
                                 controls={1}
-                                style={{ alignSelf: 'stretch', width: '100%', height: 190 }}
+                                style={{ alignSelf: 'stretch', width: '100%', height: this.state.height }}
                             /> :
                             <ProfileSlider data={listHotNews}></ProfileSlider>}
                     </Row>
@@ -143,7 +263,8 @@ class Eventlist extends Component {
 
                 <Grid>
                     <Row style={styles.center}>
-                        <Icon style={{ color: '#007db7' }} size={35} name={item.IconName}></Icon>
+                        {item.isIcon ? <Icon style={{ color: '#007db7' }} size={32} name={item.IconName}></Icon> :
+                            <Image style={{ width: 32, height: 32 }} source={item.IconName} ></Image>}
                     </Row>
                     <Row style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
                         <Text>{didCheckin && item.mName == "Checkin" ? I18n.t('didCheckin') + "  " : I18n.t(item.mName)}

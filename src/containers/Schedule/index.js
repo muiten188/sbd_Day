@@ -136,7 +136,6 @@ class Schedule extends Component {
     renderFlatListItemDetail(dataItem) {
         const item = dataItem.item;
         const { schedule } = this.props.ScheduleReducer;
-        debugger;
         return (
             <View style={{ marginBottom: 10 }}>
                 <Grid>

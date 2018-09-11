@@ -57,7 +57,7 @@ export default {
     padding: 20,
     borderRadius: 5,
     width:'100%',
-    height:250,
+    height:215,
     borderWidth: 0.5,
     borderColor:'#ccc',
     backgroundColor: "#fff"

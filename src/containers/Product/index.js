@@ -41,7 +41,7 @@ import * as helper from '../../helper';
 import * as AppConfig from "../../config/app_config";
 import Beacons from 'react-native-beacons-manager'
 const listCurrentBeacon = [];
-const current_uuid=null;
+const current_uuid = {};
 const eventBeacons = null;
 const blockAction = false;
 const blockLoadMoreAction = false;
@@ -77,43 +77,13 @@ class Product extends Component {
     componentDidMount() {
         const { getProducts } = this.props.productAction;
         const { user } = this.props.loginReducer;
-        getProducts({}, user);
-
-        eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', (data) => {
-            console.log('Tìm thấy beacon:', data.beacons)
-            if (data.beacons && data.beacons.length > 0) {
-                var listBeacons = data.beacons;
-                listBeacons.sort(function (a, b) { return a.distance > b.distance });
-                if (current_uuid != listBeacons[0].uuid) {
-                    current_uuid = listBeacons[0].uuid;
-                    Alert.alert(I18n.t('report'), 'Tìm thấy beacon bạn có muốn lấy thông tin sản phẩm theo beacon?', [{
-                        text: 'Ok',
-                        onPress: (e) => {
-                            getProducts({ beacon: current_uuid }, user);
-                        }
-                    },
-                    {
-                        text: 'Cancel',
-                        onPress: () => console.log('Cancel Pressed'), style: 'cancel'
-                    }],
-                        { cancelable: false });
-                    // if (Actions.currentScene == 'productList') {
-                    //   Actions.pop();
-                    // }
-                    // Actions.productList({ beaconUUID: current_uuid })
-                    //get_AntifactByUUID({ beaconUUID: current_uuid });
-                    //blockUUID = true;
-                    // if (timeoutUUID) {
-                    //   clearTimeout(timeoutUUID);
-                    // }
-                    // setTimeout(() => {
-                    //   current_uuid = null;
-                    // }, 30000);
-                    console.log('Tìm thấy beacon:', listBeacons[0].uuid)
-                }
-            }
-        })
-        this.detectBeacons();
+        const { beacon } = this.props;
+        if (beacon) {
+            getProducts({ beacon: beacon.uuid + beacon.major + beacon.minor }, user);
+        }
+        else {
+            getProducts({}, user);
+        }
     }
 
     componentWillUnmount() {

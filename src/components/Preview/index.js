@@ -33,7 +33,8 @@ export default class Preview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      indexSlider: 0
+      indexSlider: 0,
+      height: 229
     }
   }
 
@@ -89,12 +90,13 @@ export default class Preview extends Component {
                 play={true}             // control playback of video with true/false
                 fullscreen={false}       // control whether the video should play in fullscreen or inline
                 loop={true}             // control whether the video should loop when ended
-                apiKey={"AIzaSyCpumcHqM6clMWURCg2hwW0MefeA11hpfA"}
-                //onReady={e => this.setState({ isReady: true })}
+                apiKey={"AIzaSyCdh2Bp8lF6n_4_RFRxFeQqNEVz8zOQweE"}
+                onReady={() => { setTimeout(() => this.setState({ height: 230 }), 200) }}
                 //onChangeState={e => this.setState({ status: e.state })}
                 //onChangeQuality={e => this.setState({ quality: e.quality })}
-                //onError={e => this.setState({ error: e.error })}
-                style={{ alignSelf: 'stretch', width: '100%', height: 250 }}
+                // onError={e => {debugger;}}
+                controls={1}
+                style={{ alignSelf: 'stretch', width: '100%', height: this.state.height }}
               />
             </View> : null
         }

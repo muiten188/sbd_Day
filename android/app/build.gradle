@@ -154,6 +154,7 @@ dependencies {
     // compile (project(':react-native-google-signin')){
     //     exclude group: "com.google.android.gms" // very important
     // }
+    compile project(':react-native-bluetooth-status')
     compile project(':react-native-autoheight-webview')
     compile project(':react-native-youtube')
     compile project(':react-native-fbsdk')

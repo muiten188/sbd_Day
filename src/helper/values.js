@@ -1,19 +1,22 @@
+import Icon from "react-native-vector-icons/FontAwesome";
 export const list_Menu = [
     {
         mName:'Checkin',
         IconName:'check',
+        isIcon:true,
         mID:'checkIn',
         routerName:'profile'
     },
     {
         mName:'Schedule',
-        IconName:'edit',
+        IconName:require('../resources/assets/icon/LichSuKien.png'),
         mID:'schedule',
         routerName:'schedule'
     },
     {
         mName:'Parties',
         IconName:'group',
+        isIcon:true,
         mID:'parties',
         routerName:'parties'
     },
@@ -31,19 +34,19 @@ export const list_Menu = [
     // },
     {
         mName:'Product',
-        IconName:'windows',
+        IconName:require('../resources/assets/icon/SanPhamTrungBay.png'),
         mID:'product',
         routerName:'product'
     },
     {
-        mName:'Location',
-        IconName:'location-arrow',
+        mName:'Map',
+        IconName:require('../resources/assets/icon/BanDo.png'),
         mID:'location',
         routerName:'location'
     },
     {
         mName:'Survey',
-        IconName:'hand-paper-o',
+        IconName:require('../resources/assets/icon/KhaoSat.png'),
         mID:'survey',
         routerName:'survey'
     }
