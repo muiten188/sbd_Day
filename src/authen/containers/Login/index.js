@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-const FBSDK = require('react-native-fbsdk');
+
 import {
   TouchableOpacity,
   Image,
@@ -37,7 +37,7 @@ import { Field, reduxForm } from "redux-form";
 import { InputField } from "../../../components/Element/Form";
 import Loading from "../../../components/Loading";
 import { Actions } from "react-native-router-flux";
-const { LoginButton, LoginManager, ShareDialog, AccessToken, GraphRequestManager, GraphRequest } = FBSDK;
+
 import * as helper from "../../../helper";
 import PropTypes from 'prop-types';
 const username = "";

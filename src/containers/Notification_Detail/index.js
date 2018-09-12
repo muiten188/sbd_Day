@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
-  Dimensions
+  Dimensions,
+  WebView
 } from "react-native";
 import {
   Container,
@@ -76,7 +77,7 @@ class NotificationDetail extends Component {
         <Content style={{ padding: 10 }}>
           <Text style={{ fontWeight: '500' }}>{notification.title}</Text>
 
-          <AutoHeightWebView style={{ width: '100%', height: Dimensions.get('window').height, paddingTop: 10 }} source={{
+          <AutoHeightWebView style={{ width: Dimensions.get('window').width-20, height: Dimensions.get('window').height, paddingTop: 10 }} source={{
             html: `${notification.content}`
           }}>
 

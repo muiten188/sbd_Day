@@ -1,5 +1,5 @@
 import React from "react";
-const FBSDK = require('react-native-fbsdk');
+
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {
@@ -19,7 +19,7 @@ import * as AppConfig from "../../config/app_config";
 import styles from "./styles";
 import { Actions } from "react-native-router-flux";
 import { Grid, Col, Row } from "react-native-easy-grid";
-const { LoginButton, LoginManager, ShareDialog, AccessToken, GraphRequestManager, GraphRequest } = FBSDK;
+
 // const resolveAssetSource = require("resolveAssetSource");
 // const userAvar = require("../../resources/assets/Comment.jpg");
 // const ICON_SIZE = 24;

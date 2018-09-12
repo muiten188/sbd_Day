@@ -151,13 +151,13 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-camera')
     // compile (project(':react-native-google-signin')){
     //     exclude group: "com.google.android.gms" // very important
     // }
     compile project(':react-native-bluetooth-status')
     compile project(':react-native-autoheight-webview')
     compile project(':react-native-youtube')
-    compile project(':react-native-fbsdk')
     compile project(':react-native-i18n')
     compile project(':react-native-vector-icons')
     compile project(':react-native-beacons-manager')

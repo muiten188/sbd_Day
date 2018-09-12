@@ -49,9 +49,9 @@ export default class extends Component {
       _onBack = onBack;
     }
     return (
-      <Header style={[styles.header, Platform.OS === 'ios' ? { height: 65 } : { height: 45 }]}>
+      <Header style={[styles.header, Platform.OS === 'ios' ? { height: 45 } : { height: 45 }]}>
         {/* <StatusBar backgroundColor="#007db7"></StatusBar> */}
-        <Image style={[{ position: 'absolute', top: 0, left: 0,width:'100%',height:'100%', resizeMode: 'stretch' },showButtonLeft == true?{left:25}:{}]} source={require('../../resources/assets/header.png')}></Image>
+        <Image style={[{ position: 'absolute', top: 0, left: 0,width:'100%',height:45, resizeMode: 'stretch' },showButtonLeft == true?{left:25}:{}]} source={require('../../resources/assets/header.png')}></Image>
         <Grid>
           {showButtonLeft == true ? (
             <Col style={styles.itemButtonHeader}>

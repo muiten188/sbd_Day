@@ -7,8 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-const FBSDK = require('react-native-fbsdk');
-const { LoginManager } = FBSDK;
+
 import {
   Container,
   Text,

@@ -33,7 +33,7 @@ export default {
   itemHeaderEnd:{
     width:45,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   whileText:{
     color:'#fff'

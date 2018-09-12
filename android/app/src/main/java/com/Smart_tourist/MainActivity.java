@@ -2,7 +2,6 @@ package com.saobacdau_event;
 import android.content.Intent;
 
 import com.facebook.react.ReactActivity;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 public class MainActivity extends ReactActivity {
 
