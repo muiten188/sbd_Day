@@ -290,7 +290,7 @@ class Profile extends Component {
 }
 function mapStateToProps(state, props) {
   var _user = Object.assign({}, state.loginReducer.user)
-  _user.fullName = _user.firstName + " " + _user.lastName;
+  _user.fullName = _user.lastName + " " + _user.firstName;
   return {
     profileReducer: state.profileReducer,
     loginReducer: state.loginReducer,

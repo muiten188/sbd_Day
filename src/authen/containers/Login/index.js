@@ -344,9 +344,7 @@ login.propTypes = {
 function mapStateToProps(state, props) {
   return {
     loginReducer: state.loginReducer,
-    initialValues: state.loginReducer.userForm
-      ? state.loginReducer.userForm
-      : {
+    initialValues:  {
         username: "",//admin
         password: ""//"123456a@"
       }

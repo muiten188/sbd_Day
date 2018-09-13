@@ -1,6 +1,7 @@
 import { AsyncStorage } from "react-native";
 import { Alert } from "react-native";
 import * as types from '../store/constants/action_types';
+export let currentScreen = null;
 export function setAsyncStorage(key, value) {
   try {
     Jsovalue = JSON.stringify(value);

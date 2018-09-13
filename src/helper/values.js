@@ -8,23 +8,30 @@ export const list_Menu = [
     //     routerName:'profile'
     // },
     {
-        mName:'Schedule',
-        IconName:require('../resources/assets/icon/LichSuKien.png'),
-        mID:'schedule',
-        routerName:'schedule'
+        mName: 'Schedule',
+        IconName: require('../resources/assets/icon/LichSuKien.png'),
+        mID: 'schedule',
+        routerName: 'schedule'
     },
     {
-        mName:'Product',
-        IconName:require('../resources/assets/icon/SanPhamTrungBay.png'),
-        mID:'product',
-        routerName:'product'
+        mName: '_presentation',
+        IconName: 'user',
+        isIcon: true,
+        mID: 'presentation',
+        routerName: 'presentation'
     },
     {
-        mName:'Parties',
-        IconName:'group',
-        isIcon:true,
-        mID:'parties',
-        routerName:'parties'
+        mName: 'Product',
+        IconName: require('../resources/assets/icon/SanPhamTrungBay.png'),
+        mID: 'product',
+        routerName: 'product'
+    },
+    {
+        mName: 'Parties',
+        IconName: 'group',
+        isIcon: true,
+        mID: 'parties',
+        routerName: 'parties'
     },
     // {
     //     mName:'News',
@@ -38,17 +45,17 @@ export const list_Menu = [
     //     mID:'speech',
     //     routerName:'presentation'
     // },
-    
+
+
     {
-        mName:'Map',
-        IconName:require('../resources/assets/icon/BanDo.png'),
-        mID:'location',
-        routerName:'location'
+        mName: 'Survey',
+        IconName: require('../resources/assets/icon/KhaoSat.png'),
+        mID: 'survey',
+        routerName: 'survey'
+    }, {
+        mName: 'Map',
+        IconName: require('../resources/assets/icon/BanDo.png'),
+        mID: 'location',
+        routerName: 'location'
     },
-    {
-        mName:'Survey',
-        IconName:require('../resources/assets/icon/KhaoSat.png'),
-        mID:'survey',
-        routerName:'survey'
-    }
 ]

@@ -58,6 +58,7 @@ import Survey from "../Survey";
 import SurveyDetail from "../SurveyDetail";
 import ChangePassword from "../ChangePassword";
 import FcmClient from '../../helper/fcmClient';
+import * as Appconfig from '../../helper/index';
 const blockAction = false;
 const blockLoadMoreAction = false;
 const blockUUID = false;
@@ -332,6 +333,7 @@ class Home extends Component {
   }
 
   renderEventTab() {
+    Appconfig.currentScreen=this.props.screenId;
     switch (this.props.screenId) {
       case "eventList":
       case null:

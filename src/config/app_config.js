@@ -1,4 +1,4 @@
-export const API_HOST_BASE = 'http://113.171.23.144/event-manager-api/';
+export const API_HOST_BASE = 'http://event.easylink.vn/event-manager-api/';//'http://event.easylink.vn/event-manager-api/'
 export const API_HOST = `${API_HOST_BASE}mobile/`;
 
 export const GET_Eventlist = `${API_HOST}api/mobile/museum/`;
@@ -18,6 +18,7 @@ export const GET_NOTIFICATION=`${API_HOST}notification/`;
 export const GET_PROFILE=`${API_HOST}profile/getAll`;
 export const CHECKIN_BY_QRCODE=`${API_HOST}/authenticate/checkIn`;
 export const CHECK_CHECKIN=`${API_HOST}/authenticate/findExistsCheckIn`;
+export const GET_PRESENTATION=`${API_HOST}/presenter/getAll`;
 
 export const LOGIN_SOCAIL = `${API_HOST}api/mobile/login/social`;
 export const REGISTER = `${API_HOST}api/mobile/users/register`;

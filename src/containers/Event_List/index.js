@@ -42,6 +42,7 @@ import Beacons from 'react-native-beacons-manager'
 import * as values from '../../helper/values';
 import * as helper from '../../helper';
 import { BluetoothStatus } from 'react-native-bluetooth-status';
+import * as Appconfig from '../../helper/index';
 const blockAction = false;
 const listCurrentBeacon = [];
 const eventBeacons = null;
@@ -65,7 +66,7 @@ class Eventlist extends Component {
         }
     }
 
-    async stopDetectBeacon(){
+    async stopDetectBeacon() {
         try {
             await Beacons.stopRangingBeaconsInRegion('REGION1')
             console.log(`Beacons ranging started succesfully!`)
@@ -112,6 +113,9 @@ class Eventlist extends Component {
         eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', async (data) => {
             console.log('Tìm thấy beacon:', data.beacons)
             if (AppState.currentState != "active") {
+                return;
+            }
+            if (Appconfig.currentScreen == 'product' || Appconfig.currentScreen == 'productDetail') {
                 return;
             }
             if (data.beacons && data.beacons.length > 0 && blockAction == false) {
@@ -189,6 +193,7 @@ class Eventlist extends Component {
     _handleAppStateChange(nextAppState) {
         if (nextAppState == "active") {
             this.onEventBeacon();
+            this.detectBeacons();
         }
         else {
             if (eventBeacons) {

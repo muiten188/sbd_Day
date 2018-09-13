@@ -90,6 +90,7 @@ class Product extends Component {
         if (eventBeacons) {
             eventBeacons.remove();
         }
+        helper.currentScreen=null;
     }
     //true new list != current list 
     //false current list == new list
