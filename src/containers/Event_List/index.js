@@ -63,8 +63,15 @@ class Eventlist extends Component {
         } catch (err) {
             console.log(`Beacons ranging not started, error: ${error}`)
         }
+    }
 
-
+    async stopDetectBeacon(){
+        try {
+            await Beacons.stopRangingBeaconsInRegion('REGION1')
+            console.log(`Beacons ranging started succesfully!`)
+        } catch (err) {
+            console.log(`Beacons ranging not started, error: ${error}`)
+        }
     }
 
     constructor(props) {
@@ -101,16 +108,9 @@ class Eventlist extends Component {
         return false;
     }
 
-    componentDidMount() {
-        const { search_HOT_NEWS, search_CHECK_CHECKIN } = this.props.eventListAction;
-        const { didCheckin } = this.props.EventlistReducer;
-        const { getProducts } = this.props;
-        const { user } = this.props.loginReducer;
-        search_HOT_NEWS(null, user)
-        search_CHECK_CHECKIN(null, user)
-
+    onEventBeacon() {
         eventBeacons = DeviceEventEmitter.addListener('beaconsDidRange', async (data) => {
-            //console.log('Tìm thấy beacon:', data.beacons)
+            console.log('Tìm thấy beacon:', data.beacons)
             if (AppState.currentState != "active") {
                 return;
             }
@@ -184,6 +184,30 @@ class Eventlist extends Component {
 
             }
         })
+    }
+
+    _handleAppStateChange(nextAppState) {
+        if (nextAppState == "active") {
+            this.onEventBeacon();
+        }
+        else {
+            if (eventBeacons) {
+                eventBeacons.remove();
+                this.stopDetectBeacon();
+            }
+        }
+
+    }
+
+    componentDidMount() {
+        const { search_HOT_NEWS, search_CHECK_CHECKIN } = this.props.eventListAction;
+        const { didCheckin } = this.props.EventlistReducer;
+        const { getProducts } = this.props;
+        const { user } = this.props.loginReducer;
+        search_HOT_NEWS(null, user)
+        search_CHECK_CHECKIN(null, user)
+        AppState.addEventListener('change', this._handleAppStateChange.bind(this));
+        this.onEventBeacon();
         this.detectBeacons();
     }
     componentDidUpdate(prevProps, prevState) {
@@ -193,6 +217,7 @@ class Eventlist extends Component {
     componentWillUnmount() {
         if (eventBeacons) {
             eventBeacons.remove();
+            this.stopDetectBeacon();
         }
     }
 

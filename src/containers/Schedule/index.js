@@ -137,7 +137,7 @@ class Schedule extends Component {
         const item = dataItem.item;
         const { schedule } = this.props.ScheduleReducer;
         return (
-            <View style={{ marginBottom: 10 }}>
+            <View style={{ marginBottom: 15 }}>
                 <Grid>
                     <Row>
                         <Col style={{ marginTop: 2, width: 115, justifyContent: 'flex-start', alignItems: 'center' }}>
@@ -146,10 +146,10 @@ class Schedule extends Component {
                         <Col>
                             <View onPress={() => {
                                 Actions.home({ screenId: 'presentationDetail', scheduleItem: item, scheduleAllItem: schedule })
-                            }}><Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{item.scheduleType != "OTHER" ? I18n.t('Presentation') + ": " : ''}</Text>
+                            }}><Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{item.scheduleType != "OTHER" ? "" : ''}</Text>
                                     <Text style={{ color: 'blue' }}>{item.title}</Text></Text>
-                                {item.scheduleType != "OTHER" ? <Text><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Presenter')}: </Text>{item.author}</Text> : null}
-                                <Text style={{ fontStyle: 'italic' }}><Text style={[{ fontWeight: '500' }, styles.smallText]}>{I18n.t('Location')}: </Text>{item.location}</Text>
+                                {item.scheduleType != "OTHER" ? <Text><Text style={[{ fontWeight: '500' }, styles.smallText]}></Text>{item.author}</Text> : null}
+                                <Text style={{ fontStyle: 'italic',color:'#666666' }}><Text style={[{ fontWeight: '500' }, styles.smallText]}></Text>{item.location}</Text>
                             </View>
                         </Col>
                     </Row>

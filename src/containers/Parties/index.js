@@ -112,7 +112,7 @@ class Parties extends Component {
                 <Text>
                     {item.name}
                 </Text>
-                {dataItem.index == 0 ? <Text>
+                {item.description != null||item.description == '' ? <Text>
                     Nhà tài trợ vàng
                 </Text> : null}
             </Col>
