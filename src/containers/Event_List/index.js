@@ -211,9 +211,9 @@ class Eventlist extends Component {
         const { user } = this.props.loginReducer;
         search_HOT_NEWS(null, user)
         search_CHECK_CHECKIN(null, user)
-        AppState.addEventListener('change', this._handleAppStateChange.bind(this));
-        this.onEventBeacon();
-        this.detectBeacons();
+        // AppState.addEventListener('change', this._handleAppStateChange.bind(this));
+        // this.onEventBeacon();
+        // this.detectBeacons();
     }
     componentDidUpdate(prevProps, prevState) {
 
