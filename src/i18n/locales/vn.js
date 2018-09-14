@@ -77,7 +77,7 @@ export default {
   checkinFail:"Check in thất bại. Vui lòng kiếm tra lại kết nối!",
   checkinText:'Quét mã Qr code để checkin.',
   checkinSuccess:"Bạn đã check in thành công",
-  checked:'Bạn đã check in trước đó',
+  checked:'Bạn đã check in trước đó hoặc mã checkin không tồn tại.',
   checkin:'Check in',
   didCheckin:'Đã Check in'
 };
