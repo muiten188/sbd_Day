@@ -1,8 +1,11 @@
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
 export default {
   container: {
     height: "100%",
     backgroundColor: "#fff",
     flex: 1,
+    paddingTop: getStatusBarHeight(true)
   },
   colorHeader: {
     color: '#007db7'

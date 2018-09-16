@@ -15,6 +15,7 @@ import {
     Text,
     Button
 } from "native-base";
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import styles from "./styles";
 import { connect } from "react-redux";
 import { Grid, Col, Row } from "react-native-easy-grid";
@@ -145,7 +146,7 @@ class qrCodeScanner extends Component {
         const { isLoading } = this.props.qrCodeScannerReducer;
         const { beacon } = this.props;
         return (
-            <Container>
+            <Container style={{ paddingTop: getStatusBarHeight(true) }}>
                 <HeaderContent headerTitle={I18n.t("checkin")}
                     showButtonLeft={true}
                     hideRightButton={true}></HeaderContent>
