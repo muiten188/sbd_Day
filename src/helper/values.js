@@ -13,12 +13,19 @@ export const list_Menu = [
         mID: 'schedule',
         routerName: 'schedule'
     },
+    // {
+    //     mName: '_presentation',
+    //     IconName: 'user',
+    //     isIcon: true,
+    //     mID: 'presentation',
+    //     routerName: 'presentation'
+    // },
     {
-        mName: '_presentation',
+        mName: 'Introduction',
         IconName: 'user',
         isIcon: true,
-        mID: 'presentation',
-        routerName: 'presentation'
+        mID: 'introduction',
+        routerName: 'introduction'
     },
     {
         mName: 'Product',
@@ -52,10 +59,17 @@ export const list_Menu = [
         IconName: require('../resources/assets/icon/KhaoSat.png'),
         mID: 'survey',
         routerName: 'survey'
-    }, {
-        mName: 'Map',
-        IconName: require('../resources/assets/icon/BanDo.png'),
-        mID: 'location',
-        routerName: 'location'
+    },
+    //  {
+    //     mName: 'Map',
+    //     IconName: require('../resources/assets/icon/BanDo.png'),
+    //     mID: 'location',
+    //     routerName: 'location'
+    // },
+    {
+        mName: 'SubmitQuestion',
+        IconName: require('../resources/assets/icon/DatCauHoi.png'),
+        mID: 'submit_question',
+        routerName: 'submit_question'
     },
 ]
