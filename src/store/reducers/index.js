@@ -27,6 +27,7 @@ import mapReducer from './containers/map_reducer';
 import mapDetailReducer from './containers/mapDetail_reducer';
 import museumMapReducer from './containers/MuseumMap_reducer';
 import router_Reducer from "./router/router_reducer";
+import questionReducer from "./containers/question_reducer";
 import * as types from "../constants/action_types";
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
@@ -60,6 +61,7 @@ const appReducer = combineReducers({
   museumMapReducer,
   app_Reducer,
   router_Reducer,
+  questionReducer,
   form: formReducer
 });
 

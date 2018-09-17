@@ -10,6 +10,7 @@ import {
   Image,
   WebView,
   Dimensions,TextInput
+
 } from "react-native";
 import {
   Container,
@@ -40,6 +41,7 @@ import IconEntypo from "react-native-vector-icons/Entypo";
 import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from "react-native-router-flux";
 import * as helper from "../../helper";
+import * as questionAction from "../../store/actions/containers/question_action";
 // import AutoHeightWebView from 'react-native-autoheight-webview';
 const blockAction = false;
 const blockLoadMoreAction = false;
@@ -53,26 +55,26 @@ class ListQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      languageSelect: "vi",
+      languageSelect: "vn",
     };
     this.loadSetting();
   }
 
-  componentDidMount() {
-    // const { getSurvey } = this.props.surveyAction;
-    // const { user } = this.props.loginReducer;
-    // getSurvey({ userId: user.userId }, user);
-  }
+  // componentDidMount() {
+  //   const { getQuestion } = this.props.questionAction;
+  //       const { user } = this.props.loginReducer;
+  //       getQuestion({}, user);
+  // }
 
-  async loadSetting() {
-    var lang = await helper.getLangSetting();
-    if (lang != null) {
-      I18n.locale = lang;
-      this.setState({
-        languageSelect: lang,
-      });
-    }
-  }
+  // async loadSetting() {
+  //   var lang = await helper.getLangSetting();
+  //   if (lang != null) {
+  //     I18n.locale = lang;
+  //     this.setState({
+  //       languageSelect: lang,
+  //     });
+  //   }
+  // }
 
   componentDidUpdate(prevProps, prevState) {
     // const { searchErorr } = this.props.surveyReducer;
@@ -210,7 +212,6 @@ class ListQuestion extends Component {
   _keyExtractor(item, index) {
     return index;
   }
-
   textEclipse(text, length) {
     var _length = length ? length : 55;
     return text.length > _length ? text.substring(0, _length) + "..." : text;
@@ -218,13 +219,13 @@ class ListQuestion extends Component {
 }
 function mapStateToProps(state, props) {
   return {
-    // surveyReducer: state.surveyReducer,
-    // loginReducer: state.loginReducer
+    // questionReducer: state.questionReducer,
+    loginReducer: state.loginReducer
   };
 }
 function mapToDispatch(dispatch) {
   return {
-    // surveyAction: bindActionCreators(surveyAction, dispatch)
+    questionAction: bindActionCreators(questionAction, dispatch)
   };
 }
 
