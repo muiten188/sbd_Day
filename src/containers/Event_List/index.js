@@ -171,13 +171,18 @@ class Eventlist extends Component {
                                 Actions.qrScanner({ beacon: this.current_uuid })
                                 setTimeout(() => {
                                     this.current_uuid = {};
-                                }, 100000);
+                                }, 50000);
                                 this.showMessage = false;
                             }
                         },
                         {
                             text: 'Cancel',
-                            onPress: () => { this.showMessage = false; console.log('Cancel Pressed') }, style: 'cancel'
+                            onPress: () => {
+                                this.showMessage = false; console.log('Cancel Pressed');
+                                setTimeout(() => {
+                                    this.current_uuid = {};
+                                }, 50000);
+                            }, style: 'cancel'
                         }],
                             { cancelable: false });
                     }
@@ -191,7 +196,13 @@ class Eventlist extends Component {
                         },
                         {
                             text: 'Cancel',
-                            onPress: () => { this.showMessage = false; console.log('Cancel Pressed') }, style: 'cancel'
+                            onPress: () => {
+                                this.showMessage = false;
+                                console.log('Cancel Pressed');
+                                setTimeout(() => {
+                                    this.current_uuid = {};
+                                }, 50000);
+                            }, style: 'cancel'
                         }],
                             { cancelable: false });
                     }

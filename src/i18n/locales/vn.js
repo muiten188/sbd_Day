@@ -59,7 +59,7 @@ export default {
   helpful: 'Helpful',
   fullName: 'Tên',
   phone: 'Điện thoại',
-  email: 'email',
+  email: 'Email',
   position: 'vị trí',
   changePassword: 'Thay đổi mật khẩu',
   userName: 'Tên đăng nhập',

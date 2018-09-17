@@ -109,13 +109,13 @@ class Notification extends Component {
       paddingTop: 10, paddingBottom: 10, borderBottomWidth: 0.5,
       borderBottomColor: '#cecece'
     }}>
-      <Col style={{ width: 80, marginTop: 10, justifyContent: 'center', alignItems: 'center' }}>
-        <Image style={{ width: 60, height: 60 }} source={ require('../../resources/assets/icon/LogoThongBao-SBD-100px-x-100px.png')}></Image>
+      <Col style={{ width: 80, marginTop: 10, justifyContent: 'flex-start', alignItems: 'center' }}>
+        <Image style={{ width: 60, height: 60 }} source={require('../../resources/assets/icon/LogoThongBao-SBD-100px-x-100px.png')}></Image>
       </Col>
-      <Col style={{ justifyContent: 'center', alignItems: 'flex-start', padding: 6,marginBottom:15 }}>
+      <Col style={{ justifyContent: 'center', alignItems: 'flex-start', padding: 6, marginBottom: 15 }}>
         <TouchableOpacity onPress={() => { Actions.notificationDetail({ notification: item }) }}>
-          <Text style={{ fontWeight: '500', fontSize: 13 }}>{item.title}</Text>
-          <AutoHeightWebView style={{ width:200,paddingTop: 10 }} source={{
+          <Text style={{ fontWeight: '500', fontSize: 14 }}>{item.title}</Text>
+          <AutoHeightWebView style={{ width: Dimensions.get('window').width-110, paddingTop: 10 }} source={{
             html: `${item.content}`
           }}></AutoHeightWebView>
 

@@ -166,15 +166,15 @@ class Profile extends Component {
           <Content>
             <Row style={styles.row}>
               <Col size={1}>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
                   <Text>{I18n.t("fullName")}</Text>
                 </View>
               </Col>
               <Col size={2}>
-                <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+                <View style={{ flex: 1,  marginTop: 5,  borderColor: '#cecece' }}>
                   <Field
                     name="fullName"
-                    placeholder={I18n.t("fullName")}
+                    placeholder={''}
                     label={I18n.t("fullName")}
                     component={InputField}
                     disabled
@@ -184,15 +184,15 @@ class Profile extends Component {
             </Row>
             <Row style={styles.row}>
               <Col size={1}>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
                   <Text>{I18n.t("phone")}</Text>
                 </View>
               </Col>
               <Col size={2}>
-                <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+                <View style={{ flex: 1,  marginTop: 5,  borderColor: '#cecece' }}>
                   <Field
                     name="phoneNumber"
-                    placeholder={I18n.t("phone")}
+                    placeholder={''}
                     label={I18n.t("phone")}
                     component={InputField}
                     disabled
@@ -203,15 +203,15 @@ class Profile extends Component {
 
             <Row style={styles.row}>
               <Col size={1}>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
                   <Text>{I18n.t("email")}</Text>
                 </View>
               </Col>
               <Col size={2}>
-                <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+                <View style={{ flex: 1,  marginTop: 5, borderWidth: 0, borderColor: '#cecece' }}>
                   <Field
                     name="email"
-                    placeholder={I18n.t("email")}
+                    placeholder={''}
                     label={I18n.t("email")}
                     component={InputField}
                     disabled
@@ -222,15 +222,15 @@ class Profile extends Component {
 
             <Row style={styles.row}>
               <Col size={1}>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
                   <Text>{I18n.t("Company")}</Text>
                 </View>
               </Col>
               <Col size={2}>
-                <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+                <View style={{ flex: 1,  marginTop: 5,  borderColor: '#cecece' }}>
                   <Field
                     name="companyName"
-                    placeholder={I18n.t("Company")}
+                    placeholder={''}
                     label={I18n.t("Company")}
                     component={InputField}
                     disabled
@@ -246,7 +246,7 @@ class Profile extends Component {
               </View>
             </Col>
             <Col size={2}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+              <View style={{ flex: 1,  marginTop: 5,  borderColor: '#cecece' }}>
                 <Field
                   name="phoneNumber"
                   placeholder={I18n.t("position")}
@@ -265,7 +265,7 @@ class Profile extends Component {
               </View>
             </Col>
             <Col size={2}>
-              <View style={{ flex: 1, margin: 3, borderWidth: 1, borderColor: '#cecece' }}>
+              <View style={{ flex: 1,  marginTop: 5,  borderColor: '#cecece' }}>
                 <Field
                   name="email"
                   placeholder={I18n.t("position")}
@@ -282,6 +282,9 @@ class Profile extends Component {
           </Button> */}
           </Content>
         </Grid>
+        <Row style={{ position: 'absolute', bottom: 20 }}>
+          <Button block style={{ width: '98%', marginLeft: 5,backgroundColor:'#007db7' }} onPress={this.onLogout.bind(this)}><Text>Đăng xuất</Text></Button>
+        </Row>
       </Container >
     );
   }
