@@ -26,7 +26,7 @@ import {
     H3,
     H6,
     Picker,
-    Badge
+    Badge,Textarea
 } from "native-base";
 import styles from "./styles";
 import { connect } from "react-redux";
@@ -42,6 +42,8 @@ import * as helper from '../../helper';
 // import AutoHeightWebView from 'react-native-autoheight-webview';
 const blockAction = false;
 const blockLoadMoreAction = false;
+let screenWidth = Dimensions.get("window").width;
+let screenHeight = Dimensions.get("window").height;
 class SubmitQuestion extends Component {
 
     static navigationOptions = {
@@ -88,50 +90,123 @@ class SubmitQuestion extends Component {
 
 
     render() {
+        var listEx = [
+          {
+            questionTopicId: 1,
+            title: "Hỏi thời tiết",
+            content: "Ngày mai có mưa không ông?",
+            questionFor: "Ông Trời",
+            status: "SENDED",
+            timeSubmit: 1536918287000,
+          },
+          {
+            questionTopicId: 2,
+            title: "Title testing",
+            content: "Content testing",
+            questionFor: "User testing",
+            status: "SENDED",
+            timeSubmit: 1536927381000,
+          },
+          {
+            questionTopicId: 2,
+            title: "Title testing",
+            content: "Content testing",
+            questionFor: "User testing",
+            status: "SENDED",
+            timeSubmit: 1536927381000,
+          },
+          {
+            questionTopicId: 2,
+            title: "Title testing",
+            content: "Content testing",
+            questionFor: "User testing",
+            status: "SENDED",
+            timeSubmit: 1536927381000,
+          },
+          {
+            questionTopicId: 2,
+            title: "Title testing",
+            content: "Content testing",
+            questionFor: "User testing",
+            status: "SENDED",
+            timeSubmit: 1536927381000,
+          },
+          {
+            questionTopicId: 2,
+            title: "Title testing",
+            content: "Content testing",
+            questionFor: "User testing",
+            status: "SENDED",
+            timeSubmit: 1536927381000,
+          },
+        ];
+    
         const locale = "vn";
         // const { surveyUrl, isLoading, searchErorr } = this.props.surveyReducer;
         return (
-            <Container style={{backgroundColor: 'red'}}>
-                {/* <FlatList
-                    ref={ref => {
-                        this.list = ref;
-                    }}
-                    style={{ flex: 1, padding: 4 }}
-                    data={[{}, {}, {}, {}, {}]}
-                    keyExtractor={this._keyExtractor}
-                    renderItem={this.renderFlatListItem.bind(this)}
-                    horizontal={false}
-                    numColumns={1}
-                /> */}
-                    {/* <AutoHeightWebView style={{width:'100%',height:Dimensions.get('window').height,paddingBottom:120}} source={{
-                        uri: 'http://113.171.23.144/event-manager/survey.html#!/survey?userId=2'
-                    }} >
-                    </AutoHeightWebView>
-                <Loading isShow={isLoading}></Loading> */}
-            </Container>
+          <Container style={{ backgroundColor: "green" }}>
+            <FlatList
+              ref={ref => {
+                this.list = ref;
+              }}
+              // style={{ flex: 1, padding: 4 }}
+              data={listEx}
+              keyExtractor={this._keyExtractor}
+              renderItem={this.renderFlatListItem.bind(this)}
+              horizontal={true}
+              pagingEnabled={true}
+              showsHorizontalScrollIndicator={true}
+              scrollIndicatorInsets={{ top: 10, left: 10, bottom: 10, right: 10 }} //ios
+              onMomentumScrollBegin={() => {
+                // alert('Begin scrolling')
+              }}
+              onMomentumScrollEnd={() => {
+                //alert('End scrolling')
+              }}
+              onScroll={event => {
+                let logData = `Scrolled to x = ${
+                  event.nativeEvent.contentOffset.x
+                }, y =${event.nativeEvent.contentOffset.y}`;
+                console.log(logData);
+              }}
+              scrollEventThrottle={10}
+              // horizontal={false}
+              // numColumns={1}
+            />
+            {/* <AutoHeightWebView style={{width:'100%',height:Dimensions.get('window').height,paddingBottom:120}} source={{
+                            uri: 'http://113.171.23.144/event-manager/survey.html#!/survey?userId=2'
+                        }} >
+                        </AutoHeightWebView>
+                    <Loading isShow={isLoading}></Loading> */}
+          </Container>
         );
-    }
-
-    renderFlatListItem(dataItem) {
+      }
+    
+      renderFlatListItem(dataItem) {
         const item = dataItem.item;
-        return (<Grid style={{ width: '100%', height: 80, marginBottom: 6, paddingTop: 10 }}>
-            <Col style={{ width: 80, justifyContent: 'center', alignItems: 'center' }}>
-                <IconEntypo size={35} name="help"></IconEntypo>
-
-            </Col>
-            <Col style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
-                <TouchableOpacity onPress={() => { Actions.home({ screenId: 'surveyDetail' }) }}>
-                    <Text>
-                        {I18n.t("Survey")}{" 1 "}
-                        <Text style={{ textDecorationLine: 'underline' }}>{this.textEclipse("Product 1")}</Text>
-                    </Text>
-                </TouchableOpacity>
-                {/* <Text style={{fontWeight:'500'}}>{this.textEclipse("Presenter: Mr ABC",30)}</Text> */}
-            </Col>
-
-        </Grid>)
-    }
-
+        return (
+          <View
+            style={{
+              backgroundColor: "#5f9ea0",
+              flex: 1,
+              width: screenWidth,
+              // justifyContent: "center",
+              // alignItems: "center",
+            }}
+          >
+            <View style={{ flex: 4 }}>
+              <Text>{item.title}</Text>
+              <Text>{item.content}</Text>
+            </View>
+            <View style={{ flex: 5}}>
+            <Form>
+            <Textarea rowSpan={5} bordered placeholder="Textarea" />
+          </Form>
+            </View>
+            <Button></Button>
+          </View>
+        );
+      }
     _keyExtractor(item, index) {
         return index;
     }
