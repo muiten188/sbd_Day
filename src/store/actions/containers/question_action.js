@@ -2,8 +2,7 @@ import * as AppConfig from "../../../config/app_config";
 import * as helper from "../../../helper";
 import * as types from "../../constants/action_types";
 
-export function getQuestion(values, user) {
-  let dataPost = values || {};
+export function getQuestion(user) {
   return async dispatch => {
     dispatch(_searching_Question());
     var _header = await helper.buildHeader(user);
@@ -22,9 +21,9 @@ export function getQuestion(values, user) {
         }
       })
       .then(responseJson => {
-        if (responseJson.data) {
-          data = responseJson.data;
-          dispatch(_search_Question(data, dataPost));
+        if (responseJson.listData) {
+          data = responseJson.listData;
+          dispatch(_search_Question(data));
         } else {
           if (!error) {
             dispatch(_seach_QuestionError());
@@ -37,7 +36,7 @@ export function getQuestion(values, user) {
   };
 }
 
-function _search_Question(data, valuesForm) {
+function _search_Question(data) {
   return {
     type: types.SEARCH_QUESTION,
     data: data,

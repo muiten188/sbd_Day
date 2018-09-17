@@ -2,49 +2,20 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import {
   View,
-  KeyboardAvoidingView,
   FlatList,
-  TouchableOpacity,
-  Alert,
-  ScrollView,
-  Image,
-  WebView,
-  Dimensions,TextInput
+  Dimensions
 } from "react-native";
 import {
   Container,
   Text,
-  Button,
-  Content,
-  Body,
-  Thumbnail,
-  Form,
-  Item,
-  Input,
-  H1,
-  H2,
-  H3,
-  H6,
-  Picker,
-  Badge,
-  Textarea,
+  Grid,
+  Col, 
 } from "native-base";
-import styles from "./styles";
 import { connect } from "react-redux";
-import { Grid, Col, Row } from "react-native-easy-grid";
+import * as question_action from '../../store/actions/containers/question_action';
 import I18n from "../../i18n/i18n";
-// import * as surveyAction from "../../store/actions/containers/survey_action";
-import Loading from "../../components/Loading";
-import IconVector from "react-native-vector-icons/FontAwesome";
-import IconEntypo from "react-native-vector-icons/Entypo";
-import HeaderContent from "../../components/Header_content";
-import { Actions, Router, Scene, Stack } from "react-native-router-flux";
 import * as helper from "../../helper";
-// import AutoHeightWebView from 'react-native-autoheight-webview';
-const blockAction = false;
-const blockLoadMoreAction = false;
 let screenWidth = Dimensions.get("window").width;
-let screenHeight = Dimensions.get("window").height;
 class ListQuestion extends Component {
   static navigationOptions = {
     header: null,
@@ -58,12 +29,6 @@ class ListQuestion extends Component {
     this.loadSetting();
   }
 
-  componentDidMount() {
-    // const { getSurvey } = this.props.surveyAction;
-    // const { user } = this.props.loginReducer;
-    // getSurvey({ userId: user.userId }, user);
-  }
-
   async loadSetting() {
     var lang = await helper.getLangSetting();
     if (lang != null) {
@@ -74,137 +39,95 @@ class ListQuestion extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // const { searchErorr } = this.props.surveyReducer;
-    // const { clearErrorSearch } = this.props.surveyAction;
-    // if (searchErorr) {
-    //     Alert.alert(I18n.t('report'), I18n.t('getSurveyFail'), [{
-    //         text: 'Ok',
-    //         onPress: (e) => {
-    //             clearErrorSearch();
-    //         }
-    //     }],
-    //         { cancelable: false })
-    // }
+  componentDidMount() {
+    const { getQuestion } = this.props.question_action;
+    const { user } = this.props.loginReducer;
+    getQuestion(user);
   }
-
   render() {
-    var listEx = [
-      {
-        questionTopicId: 1,
-        title: "Hỏi thời tiết",
-        content: "Ngày mai có mưa không ông?",
-        questionFor: "Ông Trời",
-        status: "SENDED",
-        timeSubmit: 1536918287000,
-      },
-      {
-        questionTopicId: 2,
-        title: "Title testing",
-        content: "Content testing",
-        questionFor: "User testing",
-        status: "SENDED",
-        timeSubmit: 1536927381000,
-      },
-      {
-        questionTopicId: 2,
-        title: "Title testing",
-        content: "Content testing",
-        questionFor: "User testing",
-        status: "SENDED",
-        timeSubmit: 1536927381000,
-      },
-      {
-        questionTopicId: 2,
-        title: "Title testing",
-        content: "Content testing",
-        questionFor: "User testing",
-        status: "SENDED",
-        timeSubmit: 1536927381000,
-      },
-      {
-        questionTopicId: 2,
-        title: "Title testing",
-        content: "Content testing",
-        questionFor: "User testing",
-        status: "SENDED",
-        timeSubmit: 1536927381000,
-      },
-      {
-        questionTopicId: 2,
-        title: "Title testing",
-        content: "Content testing",
-        questionFor: "User testing",
-        status: "SENDED",
-        timeSubmit: 1536927381000,
-      },
-    ];
+    const listQuestions = this.props.questionReducer.listQuestion;
 
-    const locale = "vn";
-    // const { surveyUrl, isLoading, searchErorr } = this.props.surveyReducer;
+    let { schedule } = this.props.ScheduleReducer;
+    let listScheduler = [];
+    schedule =  Array.isArray(schedule) ? schedule : [];
+    schedule.forEach(schedule => {
+      schedule.listSchedule.forEach(e => {
+        e.targetDate = schedule.targetDate;
+        listScheduler.push(e);
+      });
+    });
+    listScheduler = listScheduler.filter(e => e.scheduleType === 'PRESENTATION');
+    listScheduler.forEach(e => {
+      e.listQuestions = listQuestions.filter(question => question.questionTopicId === e.scheduleId);
+    });
+
     return (
-      <Container style={{ backgroundColor: "green" }}>
+      <Container>
         <FlatList
-          ref={ref => {
-            this.list = ref;
-          }}
-          // style={{ flex: 1, padding: 4 }}
-          data={listEx}
+          data={listScheduler}
           keyExtractor={this._keyExtractor}
           renderItem={this.renderFlatListItem.bind(this)}
           horizontal={true}
           pagingEnabled={true}
           showsHorizontalScrollIndicator={true}
           scrollIndicatorInsets={{ top: 10, left: 10, bottom: 10, right: 10 }} //ios
-          onMomentumScrollBegin={() => {
-            // alert('Begin scrolling')
-          }}
-          onMomentumScrollEnd={() => {
-            //alert('End scrolling')
-          }}
-          onScroll={event => {
-            let logData = `Scrolled to x = ${
-              event.nativeEvent.contentOffset.x
-            }, y =${event.nativeEvent.contentOffset.y}`;
-            console.log(logData);
-          }}
           scrollEventThrottle={10}
-          // horizontal={false}
-          // numColumns={1}
         />
-        {/* <AutoHeightWebView style={{width:'100%',height:Dimensions.get('window').height,paddingBottom:120}} source={{
-                        uri: 'http://113.171.23.144/event-manager/survey.html#!/survey?userId=2'
-                    }} >
-                    </AutoHeightWebView>
-                <Loading isShow={isLoading}></Loading> */}
       </Container>
     );
   }
 
-  renderFlatListItem(dataItem) {
-    const item = dataItem.item;
+  renderFlatListItem({ item }) {
     return (
       <View
         style={{
-          backgroundColor: "#5f9ea0",
+          backgroundColor: "#fff",
           flex: 1,
           width: screenWidth,
-          // justifyContent: "center",
-          // alignItems: "center",
         }}
       >
-        <View style={{ flex: 4 }}>
-          <Text>{item.title}</Text>
-          <Text>{item.content}</Text>
+        <View style={{ backgroundColor: '#357db2', margin: 5, marginBottom: 10, padding: 20 }}>
+          <Text style={{ color: 'white', fontWeight: 'bold', marginBottom: 20, fontSize: 20 }}>{item.title.toUpperCase()}</Text>
+          <Text style={{ color: 'white', fontStyle: 'italic', marginBottom: 10 }}>{item.author}</Text>
+          <Text style={{ color: '#aaa', marginBottom: 5 }}>{`Địa điểm: ${item.location}`}</Text>
+          <Text style={{ color: '#aaa', marginBottom: 5 }}>{`Thời gian: ${new Date(item.targetDate).toLocaleTimeString()}   ${new Date(item.targetDate).toLocaleDateString()}`}</Text>
         </View>
-        <View style={{ flex: 5}}>
-        <Form>
-        <Textarea rowSpan={5} bordered placeholder="Textarea" />
-      </Form>
+        <Text style={{ fontStyle: 'italic', margin: 5}}>{`--- Danh sách câu hỏi`}</Text>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: screenWidth }}>
+          { (item.listQuestions && item.listQuestions.length > 0) && <FlatList
+            ref={ref => {
+              this.list = ref;
+            }}
+            style={{ flex: 1, padding: 4, width: screenWidth }}
+            data={item.listQuestions || []}
+            keyExtractor={this._keyExtractor}
+            renderItem={this.renderQuestionFlatListItem.bind(this)}
+            horizontal={false}
+            numColumns={1}
+          /> ||    <Text style={{ marginBottom: 10, color: '#aaa' }}>Chưa có câu hỏi</Text>
+          }
         </View>
-        <Button></Button>
       </View>
     );
+  }
+
+  renderQuestionFlatListItem({item}) {
+    return (<Grid style={{
+      width: '100%', marginBottom: 6,
+      paddingTop: 5, paddingBottom: 5, borderBottomWidth: 0.5,
+      borderBottomColor: '#cecece'
+    }}>
+      <Col style={{ justifyContent: 'center', alignItems: 'flex-start', padding: 6, marginBottom: 15 }}>
+        <View>
+          <Text style={{ fontWeight: 'bold' }}>{`Tiêu đề: ${item.title}`}</Text>
+          <Text style={{ marginTop: 6 }}>{`Câu hỏi cho: ${item.questionFor}`}</Text>
+          <Text style={{ marginBottom: 20, marginTop: 6 }}>{`Nội dung: ${item.content}`}</Text>
+        </View>
+        <View style={{ position: 'absolute', bottom: -5, right: 0 }}>
+          <Text style={{ fontWeight: '100', fontSize: 12 }}>{item.timeSubmit ? `${new Date(item.timeSubmit).toLocaleTimeString()}   ${new Date(item.timeSubmit).toLocaleDateString()}` : ''} </Text>
+        </View>
+      </Col>
+    </Grid >)
   }
 
   _keyExtractor(item, index) {
@@ -218,13 +141,14 @@ class ListQuestion extends Component {
 }
 function mapStateToProps(state, props) {
   return {
-    // surveyReducer: state.surveyReducer,
-    // loginReducer: state.loginReducer
+    loginReducer: state.loginReducer,
+    ScheduleReducer: state.ScheduleReducer,
+    questionReducer: state.questionReducer
   };
 }
 function mapToDispatch(dispatch) {
   return {
-    // surveyAction: bindActionCreators(surveyAction, dispatch)
+    question_action: bindActionCreators(question_action, dispatch)
   };
 }
 
