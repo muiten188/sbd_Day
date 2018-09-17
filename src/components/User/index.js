@@ -64,7 +64,6 @@ class user extends React.Component {
             <Thumbnail style={{ width: 130, height: 130, borderRadius: 100,borderWidth:1 }} source={{ uri: avartarUrl?avartarUrl:'https://cdn.washingtoncitypaper.com/files/base/scomm/wcp/image/2009/04/640w/__contexts.org_socimages_files_2009_04_d_silhouette.jpg' }} />
           </Row>
         </Grid>
-        <Button style={styles.logoutButton} onPress={onLogout} small={true}><Text>Đăng xuất</Text></Button>
       </View>
     );
   }

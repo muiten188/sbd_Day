@@ -15,7 +15,7 @@ export default {
   },
   row:{
     height:50,
-    marginTop:6,
+    marginTop:2,
   },
   Grid: {
     
