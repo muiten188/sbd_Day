@@ -1,4 +1,4 @@
-export const API_HOST_BASE = 'http://113.171.23.144/event-manager-api/';//'http://event.easylink.vn/event-manager-api/'
+export const API_HOST_BASE = 'http://event.easylink.vn/event-manager-api/';//'http://event.easylink.vn/event-manager-api/'
 export const API_HOST = `${API_HOST_BASE}mobile/`;
 
 export const GET_Eventlist = `${API_HOST}api/mobile/museum/`;
