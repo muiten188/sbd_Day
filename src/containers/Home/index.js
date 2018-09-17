@@ -59,6 +59,10 @@ import SurveyDetail from "../SurveyDetail";
 import ChangePassword from "../ChangePassword";
 import FcmClient from '../../helper/fcmClient';
 import * as Appconfig from '../../helper/index';
+import SubmitQuestion from "../SubmitQuestion";
+import ListQuestion from "../ListQuestion";
+import Introduction from "../Introduction";
+import Guests from "../Guests";
 const blockAction = false;
 const blockLoadMoreAction = false;
 const blockUUID = false;
@@ -213,6 +217,9 @@ class Home extends Component {
     blockLoadMoreAction = loadEnd;
     const { homeAction } = this.props;
     const { user } = this.props.loginReducer;
+    //FIXME for testing
+    user.accountType = 'ADMINISTRATOR';
+
     return (
 
       <Container style={styles.container}>
@@ -236,6 +243,8 @@ class Home extends Component {
                   //   return;
                   // }
                 }} tabBarPosition="bottom" tabBarUnderlineStyle={styles.tabBarUnderlineStyle} style={{ backgroundColor: 'transparent' }}>
+                  
+                  
                   <Tab
                     heading={<TabHeading style={styles.tabHeading}>
                       <Grid>
@@ -249,6 +258,9 @@ class Home extends Component {
                     </TabHeading>}>
                     {this.renderEventTab()}
                   </Tab>
+
+
+
                   <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>
@@ -262,6 +274,23 @@ class Home extends Component {
                     {this.renderNotifiTab()}
                     {/* <Notification /> */}
                   </Tab>
+
+                  {user.accountType !== 'GUESTS' && 
+                    <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
+                    <Grid>
+                      <Row style={styles.iconTab}>
+                      <Image style={{ width: 18, height: 18 }} source={require('../../resources/assets/icon/DanhSachCauHoi.png')} ></Image>
+                      </Row>
+                      <Row style={styles.textHeadingTab}>
+                        <Text style={styles.textHeaderTab}>{I18n.t("questions")}</Text>
+                      </Row>
+                    </Grid>
+                  </TabHeading>}>
+                    {this.renderListQuestionsTab()}
+                  </Tab>
+                  }
+
+
                   <Tab heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>
@@ -309,7 +338,9 @@ class Home extends Component {
         break;
     }
   }
-
+  renderListQuestionsTab() {
+    return <ListQuestion />;
+  }
   renderNotifiTab() {
     switch (this.props.screenId) {
       case "notification":
@@ -345,6 +376,12 @@ class Home extends Component {
       case "schedule":
         return (<Schedule></Schedule>)
         break;
+      case "introduction":
+        return (<Introduction></Introduction>)
+        break;
+        case "guests":
+          return (<Guests></Guests>)
+          break;
       case "parties":
         return (<Parties></Parties>)
         break;
@@ -375,6 +412,9 @@ class Home extends Component {
       case "survey":
         return (<Survey></Survey>)
         break;
+        case "submit_question":
+          return (<SubmitQuestion/>)
+          break;
       case "surveyDetail":
         return (<SurveyDetail></SurveyDetail>)
         break;

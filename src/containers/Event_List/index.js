@@ -9,7 +9,8 @@ import {
     RefreshControl,
     Image,
     DeviceEventEmitter,
-    AppState
+    AppState,
+    Platform
 } from "react-native";
 import {
     Container,
@@ -55,15 +56,31 @@ class Eventlist extends Component {
 
     async detectBeacons() {
         // Tells the library to detect iBeacons
-        Beacons.detectIBeacons()
-        //Beacons.requestWhenInUseAuthorization();
-        // Start detecting all iBeacons in the nearby
-        try {
-            await Beacons.startRangingBeaconsInRegion('REGION1')
-            console.log(`Beacons ranging started succesfully!`)
-        } catch (err) {
-            console.log(`Beacons ranging not started, error: ${error}`)
+        if(Platform.OS === 'ios'){
+            const region = {
+                identifier: 'Estimotes',
+                uuid: 'b9407f30-f5f8-466e-aff9-25556b57fe6d'
+            };
+            
+            // Request for authorization while the app is open
+            Beacons.requestWhenInUseAuthorization();
+            
+            Beacons.startMonitoringForRegion(region);
+            Beacons.startRangingBeaconsInRegion(region);
+            
+            Beacons.startUpdatingLocation();
         }
+        else{
+            Beacons.detectIBeacons()
+            //Beacons.requestWhenInUseAuthorization();
+            // Start detecting all iBeacons in the nearby
+            try {
+                await Beacons.startRangingBeaconsInRegion('REGION1')
+                console.log(`Beacons ranging started succesfully!`)
+            } catch (err) {
+                console.log(`Beacons ranging not started, error: ${error}`)
+            }
+        }  
     }
 
     async stopDetectBeacon() {

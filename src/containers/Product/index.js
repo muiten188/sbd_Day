@@ -191,10 +191,11 @@ class Product extends Component {
     }
 
     textEclipse(text, length) {
+        var _text=text?text:'';
         var _length = length ? length : 55;
-        return (((text).length > _length) ?
-            (((text).substring(0, _length)) + '...') :
-            text)
+        return (((_text).length > _length) ?
+            (((_text).substring(0, _length)) + '...') :
+            _text)
     }
 }
 function mapStateToProps(state, props) {

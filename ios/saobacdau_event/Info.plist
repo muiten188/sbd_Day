@@ -33,6 +33,29 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Play using while you are hiking</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>$(PRODUCT_NAME) bluetooth use for find beacon near around.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>$(PRODUCT_NAME) user your calendar.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera use for scan QR Code to find product.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Use dectect location beacon.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>$(PRODUCT_NAME) motion use.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) photos and video use.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>$(PRODUCT_NAME) speech recognition use.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -54,12 +77,13 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
-  <key>UIViewControllerBasedStatusBarAppearance</key>
-  <false/>
-  <key>NSAppTransportSecurity</key>
-  <dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-  </dict>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
