@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import Index from './src';
 import { PermissionsAndroid } from 'react-native';
+console.disableYellowBox = true;
 const height = Dimensions.get('window').height;
 export default class App extends Component{
 

@@ -1,0 +1,7 @@
+diff a/src/config/app_config.js b/src/config/app_config.js	(rejected hunks)
+@@ -19,6 +19,7 @@
+  export const CHECKIN_BY_QRCODE=`${API_HOST}/authenticate/checkIn`;
+  export const CHECK_CHECKIN=`${API_HOST}/authenticate/findExistsCheckIn`;
+  export const GET_PRESENTATION=`${API_HOST}/presenter/getAll`;
+ +export const GET_GUESTS=`${API_HOST}/invitee/getAll`;
+ +export const GET_QUESTION=`${API_HOST}/questionTopic/getAllQuestionTopic`;

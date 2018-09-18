@@ -21,6 +21,7 @@ export default {
   to: ' đến ',
   language: 'Ngôn ngữ',
   description: 'Mô tả: ',
+  submit_question_successfully: 'Submit question successfully',
   find: "Tìm kiếm",
   confirmPassword: "Nhập lại mật khẩu",
   fullName: 'Họ Tên',
