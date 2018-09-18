@@ -115,7 +115,7 @@ class Notification extends Component {
       <Col style={{ justifyContent: 'center', alignItems: 'flex-start', padding: 6, marginBottom: 15 }}>
         <TouchableOpacity onPress={() => { Actions.notificationDetail({ notification: item }) }}>
           <Text style={{ fontWeight: '500', fontSize: 14 }}>{item.title}</Text>
-          <AutoHeightWebView style={{ width: Dimensions.get('window').width-110, paddingTop: 10 }} source={{
+          <AutoHeightWebView defaultHeight={500} style={{ width: Dimensions.get('window').width-110, paddingTop: 10 }} source={{
             html: `${item.content}`
           }}></AutoHeightWebView>
 

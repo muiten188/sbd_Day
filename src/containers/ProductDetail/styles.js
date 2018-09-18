@@ -24,6 +24,7 @@ export default {
         marginBottom:3,
         paddingLeft:6,
         paddingRight:6,
+        width:'100%',
     },
     rowBar: {
         height: 35,

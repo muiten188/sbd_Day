@@ -38,7 +38,7 @@ class ProductDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            languageSelect: 'vi'
+            languageSelect: 'vi',
         };
         this.loadSetting();
     }
@@ -76,64 +76,77 @@ class ProductDetail extends Component {
 
     render() {
         const { searchErorr, isLoading, productDetail } = this.props.productDetailReducer;
-        const {listProduct,product}=this.props;
+        const { listProduct, product } = this.props;
         return (
             <Container>
+
                 <Grid>{/* marginBottom: 45 */}
-                    <Row style={{ height: 160 }}>
-                        <ProductDetailSlider data={productDetail.profiles}></ProductDetailSlider>
-                    </Row>
-                    <Row>
-                        <ScrollView>
+                    <Content>
+                        {productDetail.profiles && productDetail.profiles.length > 0 ?
+                            <Row style={{ height: 160 }}>
+                                <ProductDetailSlider data={productDetail.profiles}></ProductDetailSlider>
+                            </Row> : null}
+                        <Row>
                             <View style={[styles.Item, { marginTop: 10 }]}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Product') + " : "}</Text> {productDetail.name}
                                 </Text>
                             </View>
+                        </Row>
+                        <Row>
                             <View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Company') + " : "}</Text> {productDetail.company}
                                 </Text>
                             </View>
-                            <View style={styles.Item}>
-                                <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Date') + " : "}</Text> {productDetail.targetDate ? new Date(productDetail.targetDate).toLocaleDateString() : ''}
-                                </Text>
-                            </View>
+                        </Row>
+                        <View style={styles.Item}>
+                            <Text>
+                                <Text style={{ fontWeight: '500' }}>{I18n.t('Date') + " : "}</Text> {productDetail.targetDate ? new Date(productDetail.targetDate).toLocaleDateString() : ''}
+                            </Text>
+                        </View>
+                        <Row>
                             <View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Time') + " : "}</Text> {productDetail.fromTime} - {productDetail.toTime}
                                 </Text>
                             </View>
+                        </Row>
+                        <Row>
                             <View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Location') + " : "}</Text> {productDetail.location}
                                 </Text>
                             </View>
+                        </Row>
+                        <Row>
                             <View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Introduce') + " : "}</Text>
                                 </Text>
-                                <AutoHeightWebView style={{ width: '100%', height: Dimensions.get('window').height}} source={{
-                                    html: `${productDetail.description}`
-                                }}>
+                                <AutoHeightWebView
+                                    defaultHeight={2000}
+                                    style={{ paddingRight: 10 }} source={{
+                                        html: `${productDetail.description}`
+                                    }}>
 
                                 </AutoHeightWebView>
                             </View>
-                        </ScrollView>
-                    </Row>
-                    <Row style={{ height: 70, borderTopWidth: 1, borderTopColor: '#cecece' }}>
-                        <ProductSlider listProduct={this.remove(listProduct,product)} listAllProduct={listProduct}></ProductSlider>
-                    </Row>
+                        </Row>
+                    </Content>
+                    {/* {listProduct.length > 1 ? <Row style={{ height: 70, borderTopWidth: 1, borderTopColor: '#cecece' }}>
+                        <ProductSlider listProduct={this.remove(listProduct, product)} listAllProduct={listProduct}></ProductSlider>
+                    </Row> : null} */}
                 </Grid>
-            </Container>
+
+            </Container >
         );
     }
 
     remove(array, element) {
-        var _arr=[];
-        for(var i=0;i<array.length;i++){
-            if(array[i]!=element){
+        var _arr = [];
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] != element) {
                 _arr.push(array[i])
             }
         }

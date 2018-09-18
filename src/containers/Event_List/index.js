@@ -165,7 +165,7 @@ class Eventlist extends Component {
 
                     this.showMessage = true;
                     if (!this.props.EventlistReducer.didCheckin) {
-                        Alert.alert(I18n.t('report'), 'Tìm thấy beacon bạn checkin bạn có muốn thực hiện checkin bằng beacon?', [{
+                        Alert.alert(I18n.t('report'), 'Bạn có muốn Checkin sự kiện SBD Day 2018 không?\nNếu có chọn [OK] và không chọn [Cancel]', [{
                             text: 'Ok',
                             onPress: (e) => {
                                 Actions.qrScanner({ beacon: this.current_uuid })
