@@ -1,9 +1,11 @@
 import * as AppConfig from "../../../config/app_config";
 import * as helper from "../../../helper";
 import * as types from "../../constants/action_types";
-import I18n from "../../../i18n/i18n";
+import I18n from "../../../i18n/i18n";import {
+  Alert
+} from "react-native";
 
-export function postSubmitQuestion(values, user) {
+export function postSubmitQuestion(values, user, onDonefunc = () => {}) {
   return async dispatch => {
     dispatch(_saveing_Submit_Question());
     let error = false;
@@ -18,26 +20,39 @@ console.log('xac nhan');
       },
       body: JSON.stringify({
         "content": values.content,
-        "questionFor": values.guestName,
-        // "scheduleId": values.scheduleId,
+        "questionFor": values.questionFor,
+        "scheduleId": values.scheduleId,
         "title": values.title
       }),
     })
       .then(function(response) {
         console.log('log nua ne',response);
         
-        if (response.status != 200) {
-          dispatch(_save_Submit_Question(false));
-          error = true;
-        } else {
+        // if (response.status != 200) {
+        //   dispatch(_save_Submit_Question(false));
+        //   error = true;
+        // } else {
           return response.json();
-        }
+        // }
       })
       .then(function(responseJson) {
         if (responseJson) {
           console.log('submit',responseJson);
-          alert(I18n.t('submit_question_successfully'))
-          dispatch(_save_Submit_Question(true, responseJson));
+          // dispatch(_save_Submit_Question(true, responseJson));
+
+          Alert.alert(
+            I18n.t("report"),
+            I18n.t("submit_question_successfully"),
+            [
+              {
+                text: "Ok",
+                onPress: e => {
+                  onDonefunc();
+                },
+              },
+            ],
+            { cancelable: false }
+          );
         } else {
           if (!error) {
             dispatch(_save_Submit_Question(false));

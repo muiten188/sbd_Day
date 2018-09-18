@@ -181,7 +181,7 @@ class SubmitQuestion extends Component {
               marginBottom: 10,
               padding: 20,
             }}
-            disabled={this.state.text == ""}
+            disabled={this.state.text === ''}
             onPress={() => {
               if (listScheduler[this.selectedIndex] ) {
                 postSubmitQuestion(
@@ -191,13 +191,16 @@ class SubmitQuestion extends Component {
                     questionFor: listScheduler[this.selectedIndex].author,
                     scheduleId: listScheduler[this.selectedIndex].scheduleId,
                   },
-                  this.props.loginReducer.user
+                  this.props.loginReducer.user,
+                  () => {
+                    this.setState({
+                      text: "",
+                      textTitle: "",
+                    });
+                    this.props.question_action.getQuestion(this.props.loginReducer.user);;
+                  }
                 );
               }
-              this.setState({
-                text: "",
-                textTitle: "",
-              });
             }}
           >
             <Text>SEND</Text>

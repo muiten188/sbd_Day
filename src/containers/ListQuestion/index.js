@@ -3,7 +3,8 @@ import { bindActionCreators } from "redux";
 import {
   View,
   FlatList,
-  Dimensions
+  Dimensions,
+  Alert
 } from "react-native";
 import {
   Container,
