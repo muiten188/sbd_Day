@@ -104,7 +104,7 @@ class Survey extends Component {
                     numColumns={1}
                 /> */}
                     <AutoHeightWebView style={{width:'100%',height:Dimensions.get('window').height,paddingBottom:120}} source={{
-                        uri: 'http://113.171.23.144/event-manager/survey.html#!/survey?userId=2'
+                        uri: surveyUrl
                     }} >
                     </AutoHeightWebView>
                 <Loading isShow={isLoading}></Loading>
