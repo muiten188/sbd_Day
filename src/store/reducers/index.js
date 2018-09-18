@@ -18,6 +18,7 @@ import guiderRatingReducer from "./containers/guider_rating_reducer";
 import app_Reducer from "./app_reducer";
 import qrCodeScannerReducer from './containers/qrCodeScanner_reducer';
 import presentationReducer from './containers/presentation_reducer';
+import guestsReducer from './containers/guests_reducer';
 import presentationDetailReducer from './containers/presentationDetail_reducer';
 import surveyReducer from './containers/survey_reducer';
 import surveyDetailReducer from './containers/surveyDetail_reducer';
@@ -36,6 +37,7 @@ import * as helper from '../../helper/index';
 const appReducer = combineReducers({
   loginReducer,
   registerReducer,
+  guestsReducer,
   homeReducer,
   EventlistReducer,
   ScheduleReducer,

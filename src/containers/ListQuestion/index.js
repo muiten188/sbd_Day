@@ -13,6 +13,8 @@ import {
 } from "native-base";
 import { connect } from "react-redux";
 import * as question_action from '../../store/actions/containers/question_action';
+import * as scheduleAction from "../../store/actions/containers/schedule_action";
+import Loading from "../../components/Loading";
 import I18n from "../../i18n/i18n";
 import * as helper from "../../helper";
 let screenWidth = Dimensions.get("window").width;
@@ -42,12 +44,30 @@ class ListQuestion extends Component {
   componentDidMount() {
     const { getQuestion } = this.props.question_action;
     const { user } = this.props.loginReducer;
+    const { get_Schedule } = this.props.scheduleAction;
+
     getQuestion(user);
+    get_Schedule({}, user)
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { scheduleError } = this.props.ScheduleReducer;
+    const { clearScheduleError } = this.props.scheduleAction;
+    if (scheduleError) {
+        Alert.alert(I18n.t('report'), I18n.t('getScheduleFail'), [{
+            text: 'Ok',
+            onPress: (e) => {
+                clearScheduleError();
+            }
+        }],
+            { cancelable: false })
+    }
+  }
+
   render() {
     const listQuestions = this.props.questionReducer.listQuestion;
 
-    let { schedule } = this.props.ScheduleReducer;
+    let { schedule, isLoading } = this.props.ScheduleReducer;
     let listScheduler = [];
     schedule =  Array.isArray(schedule) ? schedule : [];
     schedule.forEach(schedule => {
@@ -73,6 +93,7 @@ class ListQuestion extends Component {
           scrollIndicatorInsets={{ top: 10, left: 10, bottom: 10, right: 10 }} //ios
           scrollEventThrottle={10}
         />
+        <Loading isShow={isLoading}></Loading>
       </Container>
     );
   }
@@ -148,7 +169,8 @@ function mapStateToProps(state, props) {
 }
 function mapToDispatch(dispatch) {
   return {
-    question_action: bindActionCreators(question_action, dispatch)
+    question_action: bindActionCreators(question_action, dispatch),
+    scheduleAction: bindActionCreators(scheduleAction, dispatch)
   };
 }
 

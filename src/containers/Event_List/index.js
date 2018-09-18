@@ -57,18 +57,18 @@ class Eventlist extends Component {
     async detectBeacons() {
         // Tells the library to detect iBeacons
         if(Platform.OS === 'ios'){
-            const region = {
-                identifier: 'Estimotes',
-                uuid: 'b9407f30-f5f8-466e-aff9-25556b57fe6d'
-            };
+            // const region = {
+            //     identifier: 'Estimotes',
+            //     uuid: 'b9407f30-f5f8-466e-aff9-25556b57fe6d'
+            // };
             
-            // Request for authorization while the app is open
-            Beacons.requestWhenInUseAuthorization();
+            // // Request for authorization while the app is open
+            // Beacons.requestWhenInUseAuthorization();
             
-            Beacons.startMonitoringForRegion(region);
-            Beacons.startRangingBeaconsInRegion(region);
+            // Beacons.startMonitoringForRegion(region);
+            // Beacons.startRangingBeaconsInRegion(region);
             
-            Beacons.startUpdatingLocation();
+            // Beacons.startUpdatingLocation();
         }
         else{
             Beacons.detectIBeacons()
