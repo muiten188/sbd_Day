@@ -110,10 +110,10 @@ class ListQuestion extends Component {
         <View style={{ backgroundColor: '#357db2', margin: 5, marginBottom: 10, padding: 20 }}>
           <Text style={{ color: 'white', fontWeight: 'bold', marginBottom: 20, fontSize: 20 }}>{item.title.toUpperCase()}</Text>
           <Text style={{ color: 'white', fontStyle: 'italic', marginBottom: 10 }}>{item.author}</Text>
-          <Text style={{ color: '#aaa', marginBottom: 5 }}>{`Địa điểm: ${item.location}`}</Text>
-          <Text style={{ color: '#aaa', marginBottom: 5 }}>{`Thời gian: ${new Date(item.targetDate).toLocaleTimeString()}   ${new Date(item.targetDate).toLocaleDateString()}`}</Text>
+          <Text style={{ color: '#aaa', marginBottom: 5 }}>{`${I18n.t('LocationQ')}: ${item.location}`}</Text>
+          <Text style={{ color: '#aaa', marginBottom: 5 }}>{`${I18n.t('Time')}: ${new Date(item.targetDate).toLocaleTimeString()}   ${new Date(item.targetDate).toLocaleDateString()}`}</Text>
         </View>
-        <Text style={{ fontStyle: 'italic', margin: 5}}>{`--- Danh sách câu hỏi`}</Text>
+        <Text style={{ fontStyle: 'italic', margin: 5}}>{`--- ${I18n.t('ListQuestion')}`}</Text>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: screenWidth }}>
           { (item.listQuestions && item.listQuestions.length > 0) && <FlatList
             ref={ref => {
@@ -125,7 +125,7 @@ class ListQuestion extends Component {
             renderItem={this.renderQuestionFlatListItem.bind(this)}
             horizontal={false}
             numColumns={1}
-          /> ||    <Text style={{ marginBottom: 10, color: '#aaa' }}>Chưa có câu hỏi</Text>
+          /> ||    <Text style={{ marginBottom: 10, color: '#aaa' }}>{I18n.t('NoQuestion')}</Text>
           }
         </View>
       </View>
@@ -140,9 +140,9 @@ class ListQuestion extends Component {
     }}>
       <Col style={{ justifyContent: 'center', alignItems: 'flex-start', padding: 6, marginBottom: 15 }}>
         <View>
-          <Text style={{ fontWeight: 'bold' }}>{`Tiêu đề: ${item.title}`}</Text>
-          <Text style={{ marginTop: 6 }}>{`Câu hỏi cho: ${item.questionFor}`}</Text>
-          <Text style={{ marginBottom: 20, marginTop: 6 }}>{`Nội dung: ${item.content}`}</Text>
+          <Text style={{ fontWeight: 'bold' }}>{`${I18n.t('Title')}: ${item.title}`}</Text>
+          <Text style={{ marginTop: 6 }}>{`${I18n.t('QuestionFor')}: ${item.questionFor}`}</Text>
+          <Text style={{ marginBottom: 20, marginTop: 6 }}>{`${I18n.t('Content')}: ${item.content}`}</Text>
         </View>
         <View style={{ position: 'absolute', bottom: -5, right: 0 }}>
           <Text style={{ fontWeight: '100', fontSize: 12 }}>{item.timeSubmit ? `${new Date(item.timeSubmit).toLocaleTimeString()}   ${new Date(item.timeSubmit).toLocaleDateString()}` : ''} </Text>

@@ -12,13 +12,13 @@ export function getQuestion(user) {
       method: "GET",
     })
       .then(function(response) {
-        if (response.status == 401) {
-          dispatch(helper.logout());
-        } else if (response.status != 200) {
-          dispatch(_seach_QuestionError());
-        } else {
+        // if (response.status == 401) {
+        //   dispatch(helper.logout());
+        // } else if (response.status != 200) {
+        //   dispatch(_seach_QuestionError());
+        // } else {
           return response.json();
-        }
+        // }
       })
       .then(responseJson => {
         if (responseJson.listData) {

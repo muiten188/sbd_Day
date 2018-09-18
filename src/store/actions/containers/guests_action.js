@@ -3,8 +3,6 @@ import * as AppConfig from "../../../config/app_config";
 import * as helper from '../../../helper';
 export function get_Guests(values, user) {
     let data = [];
-    //let dataPost = values || {};
-    //dataPost = { ...dataPost, currentPage: 1, pageSize: pageSize };
     return async(dispatch) => {
         
         dispatch(_searching_Guests());
@@ -14,18 +12,19 @@ export function get_Guests(values, user) {
             method: "GET"
         })
             .then(function (response) {
-                if (response.status == 401) {
-                    dispatch(helper.logout());
-                } else if (response.status != 200) {
-                    dispatch(_seach_Guestsrror());
-                } else {
+                // if (response.status == 401) {
+                //     dispatch(helper.logout());
+                // } else if (response.status != 200) {
+                //     dispatch(_seach_Guestsrror());
+                // } else {
                     return response.json();
-                }
+                // }
             })
             .then((responseJson) => {
                 if (responseJson) {
-                    data = responseJson.listData
-                    dispatch(_search_Guests(data));
+                    const listGuests = responseJson.listData;
+                    listGuests.sort((a,b) => (a.companyName > b.companyName) ? 1 : ((b.companyName > a.companyName) ? -1 : 0) );
+                    dispatch(_search_Guests(listGuests));
                 }
                 else {
                     dispatch(_seach_GuestsError());
