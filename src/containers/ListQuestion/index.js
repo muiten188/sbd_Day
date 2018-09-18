@@ -78,7 +78,7 @@ class ListQuestion extends Component {
     });
     listScheduler = listScheduler.filter(e => e.scheduleType === 'PRESENTATION');
     listScheduler.forEach(e => {
-      e.listQuestions = listQuestions.filter(question => question.questionTopicId === e.scheduleId);
+      e.listQuestions = listQuestions.filter(question => question.scheduleId === e.scheduleId);
     });
 
     return (

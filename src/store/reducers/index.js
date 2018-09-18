@@ -34,6 +34,7 @@ import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import { Actions } from "react-native-router-flux";
 import * as helper from '../../helper/index';
+import submitReducer from './containers/submit_question_reducer';
 const appReducer = combineReducers({
   loginReducer,
   registerReducer,
@@ -64,6 +65,7 @@ const appReducer = combineReducers({
   app_Reducer,
   router_Reducer,
   questionReducer,
+  submitReducer,
   form: formReducer
 });
 

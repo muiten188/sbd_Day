@@ -21,6 +21,7 @@ export const CHECK_CHECKIN=`${API_HOST}/authenticate/findExistsCheckIn`;
 export const GET_PRESENTATION=`${API_HOST}/presenter/getAll`;
 export const GET_GUESTS=`${API_HOST}/invitee/getAll`;
 export const GET_QUESTION=`${API_HOST}/questionTopic/getAllQuestionTopic`;
+export const GET_SUBMIT_QUESTION=`${API_HOST}/questionTopic/pushQuestionTopic`;
 
 export const LOGIN_SOCAIL = `${API_HOST}api/mobile/login/social`;
 export const REGISTER = `${API_HOST}api/mobile/users/register`;

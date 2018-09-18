@@ -217,8 +217,6 @@ class Home extends Component {
     blockLoadMoreAction = loadEnd;
     const { homeAction } = this.props;
     const { user } = this.props.loginReducer;
-    //FIXME for testing
-    user.accountType = 'ADMINISTRATOR';
 
     return (
 
@@ -275,7 +273,7 @@ class Home extends Component {
                     {/* <Notification /> */}
                   </Tab>
 
-                  {user.accountType !== 'GUESTS' && 
+                  {user && user.accountType !== 'GUESTS' && 
                     <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>

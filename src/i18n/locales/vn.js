@@ -20,6 +20,7 @@ export default {
   from: ' từ ',
   to: ' đến ',
   language: 'Ngôn ngữ',
+  submit_question_successfully: 'Gửi câu hỏi thành công',
   description: 'Mô tả: ',
   find: "Tìm kiếm",
   confirmPassword: "Nhập lại mật khẩu",
