@@ -247,7 +247,7 @@ class Home extends Component {
                     heading={<TabHeading style={styles.tabHeading}>
                       <Grid>
                         <Row style={styles.iconTab}>
-                          <IconVector name="home" size={20} />
+                          <IconVector name="home" style={{color:'#000'}} size={20} />
                         </Row>
                         <Row style={styles.textHeadingTab}>
                           <Text style={styles.textHeaderTab}>{I18n.t("home")}</Text>
@@ -292,7 +292,7 @@ class Home extends Component {
                   <Tab heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>
-                        <IconVector name="user" size={20} />
+                        <IconVector name="user" style={{color:'#000'}} size={20} />
                       </Row>
                       <Row style={styles.textHeadingTab}>
                         <Text style={styles.textHeaderTab}>{I18n.t("profile")}</Text>
