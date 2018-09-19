@@ -45,15 +45,15 @@ export default class extends PureComponent {
 
   componentDidMount() {
     if (this.props.data) {
-      // _intervalSlider = setInterval(() => {
-      //   this.setState({ indexSlider: this.state.indexSlider == this.props.data.length - 1 ? 0 : this.state.indexSlider + 1 })
-      //   try {
-      //     this.list.scrollToItem({ item: this.props.data[this.state.indexSlider], animated: true })
-      //   }
-      //   catch (e) {
-      //     //error 
-      //   }
-      // }, 4000)
+      _intervalSlider = setInterval(() => {
+        this.setState({ indexSlider: this.state.indexSlider == this.props.data.length - 1 ? 0 : this.state.indexSlider + 1 })
+        try {
+          this.list.scrollToItem({ item: this.props.data[this.state.indexSlider], animated: true })
+        }
+        catch (e) {
+          //error 
+        }
+      }, 4000)
     }
   }
 
@@ -111,7 +111,8 @@ export default class extends PureComponent {
       <TouchableOpacity
         style={{ padding: 1, borderRadius: 5, marginRight: 10, height: '100%', width: width }}
         onPress={() => { Actions.preview({ data: item }) }}>
-        <Image style={{ width: width, height: '100%', borderRadius: 5,resizeMode:'stretch' }} source={_newsImage ? { uri: _newsImage } : require("../../resources/assets/Image_VideoTrailerSBDDay.png")}></Image>
+        <Image style={[{ width: width, height: '100%', borderRadius: 5, resizeMode: 'stretch' }, _newsImage ? {} : { opacity: 0.8 }]} source={_newsImage ? { uri: _newsImage } : require("../../resources/assets/Image_VideoTrailerSBDDay.png")}></Image>
+        {_newsImage ? null : <Icon name={"play-circle-o"} style={{ position: 'absolute', top: 45, left: '43%', color: '#000' }} size={60}></Icon>}
       </TouchableOpacity>
     )
   }
