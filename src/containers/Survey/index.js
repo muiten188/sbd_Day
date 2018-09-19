@@ -103,10 +103,10 @@ class Survey extends Component {
                     horizontal={false}
                     numColumns={1}
                 /> */}
-                    <AutoHeightWebView style={{width:'100%',height:Dimensions.get('window').height,paddingBottom:120}} source={{
-                        uri: surveyUrl
-                    }} >
-                    </AutoHeightWebView>
+                <AutoHeightWebView style={{ width: '100%', height: Dimensions.get('window').height, paddingBottom: 120 }} source={{
+                    uri: surveyUrl
+                }} >
+                </AutoHeightWebView>
                 <Loading isShow={isLoading}></Loading>
             </Container>
         );

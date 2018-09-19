@@ -78,7 +78,7 @@ class PresentationDetail extends Component {
         let listAllScheduleClone = scheduleAllItem ? scheduleAllItem.slice(0) : null;
         const { isLoading, presentationDetail } = this.props.presentationDetailReducer;
         let listTopicDif = this.getListTopic(listAllScheduleClone, scheduleItem);
-        
+
         return (
             <Container>
                 <Grid>{/* marginBottom: 45 */}
@@ -113,13 +113,14 @@ class PresentationDetail extends Component {
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Summary') + " : "}</Text>
                                 </Text>
-                                
+
                             </View>
-                            <AutoHeightWebView  style={{ width: '100%', height: Dimensions.get('window').height}} source={{
+                            {presentationDetail.description ?
+                                <AutoHeightWebView style={{ width: '100%', height: Dimensions.get('window').height }} source={{
                                     html: `${presentationDetail.description}`
                                 }}>
 
-                                </AutoHeightWebView>
+                                </AutoHeightWebView> : null}
                             {/*<View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Presenter') + " : "}</Text> Mr ABC
@@ -156,9 +157,9 @@ class PresentationDetail extends Component {
     }
 
     remove(array, element) {
-        var _arr=[];
-        for(var i=0;i<array.length;i++){
-            if(array[i]!=element){
+        var _arr = [];
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] != element) {
                 _arr.push(array[i])
             }
         }

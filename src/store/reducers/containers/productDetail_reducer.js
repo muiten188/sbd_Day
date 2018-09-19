@@ -28,6 +28,7 @@ export default function (state = initState, action = {}) {
       return {
         ...state,
         searchErorr: initState.searchErorr,
+        productDetail:initState.productDetail,
         isLoading: initState.isLoading
       };
 

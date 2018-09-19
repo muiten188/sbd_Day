@@ -8,7 +8,8 @@ import {
     Alert,
     ScrollView,
     Dimensions,
-    WebView
+    WebView,
+    Platform
 } from "react-native";
 import {
     Container,
@@ -48,6 +49,11 @@ class ProductDetail extends Component {
         const { user } = this.props.loginReducer;
         const { product } = this.props;
         getProductsById({ productId: product.productId }, user)
+    }
+
+    componentWillUnmount() {
+        const { clearErrorSearch } = this.props.productDetailAction;
+        clearErrorSearch();
     }
 
     async loadSetting() {
@@ -100,7 +106,7 @@ class ProductDetail extends Component {
                                 </Text>
                             </View>
                         </Row>
-                        <View style={styles.Item}>
+                        {/* <View style={styles.Item}>
                             <Text>
                                 <Text style={{ fontWeight: '500' }}>{I18n.t('Date') + " : "}</Text> {productDetail.targetDate ? new Date(productDetail.targetDate).toLocaleDateString() : ''}
                             </Text>
@@ -111,26 +117,29 @@ class ProductDetail extends Component {
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Time') + " : "}</Text> {productDetail.fromTime} - {productDetail.toTime}
                                 </Text>
                             </View>
-                        </Row>
-                        <Row>
+                        </Row> */}
+                        {/* <Row>
                             <View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Location') + " : "}</Text> {productDetail.location}
                                 </Text>
                             </View>
-                        </Row>
+                        </Row> */}
                         <Row>
                             <View style={styles.Item}>
                                 <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Introduce') + " : "}</Text>
                                 </Text>
-                                <AutoHeightWebView
-                                    defaultHeight={2000}
-                                    style={{ paddingRight: 10 }} source={{
-                                        html: `${productDetail.description}`
-                                    }}>
+                                {productDetail.description ?
+                                    <AutoHeightWebView
+                                        defaultHeight={2000}
+                                        // scalesPageToFit={Platform.OS === 'Android' ? true : false}
+                                        enableAnimation={true}
+                                        style={{ paddingRight: 10 }} source={{
+                                            html: `${productDetail.description}`
+                                        }}>
 
-                                </AutoHeightWebView>
+                                    </AutoHeightWebView> : null}
                             </View>
                         </Row>
                     </Content>

@@ -76,12 +76,12 @@ class NotificationDetail extends Component {
         <HeaderContent headerTitle={this.textEclipse(notification.title, 30)} showButtonLeft={true} hideRightButton={true} />
         <Content style={{ padding: 10 }}>
           <Text style={{ fontWeight: '500' }}>{notification.title}</Text>
-
-          <AutoHeightWebView style={{ width: Dimensions.get('window').width-20, height: Dimensions.get('window').height, paddingTop: 10 }} source={{
-            html: `${notification.content}`
-          }}>
-
-          </AutoHeightWebView>
+          {notification.content ?
+            <AutoHeightWebView style={{ width: Dimensions.get('window').width - 20, height: Dimensions.get('window').height, paddingTop: 10 }} source={{
+              html: `${notification.content}`
+            }}>
+            </AutoHeightWebView> : null
+          }
         </Content>
         <Text style={{ fontWeight: '100', position: 'absolute', bottom: 0, right: 0, fontSize: 12 }}>{notification.createdDate ? new Date(notification.createdDate).toLocaleDateString() : ''} </Text>
       </Container>
