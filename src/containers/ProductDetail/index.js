@@ -127,9 +127,9 @@ class ProductDetail extends Component {
                         </Row> */}
                         <Row>
                             <View style={styles.Item}>
-                                <Text>
+                                {/* <Text>
                                     <Text style={{ fontWeight: '500' }}>{I18n.t('Introduce') + " : "}</Text>
-                                </Text>
+                                </Text> */}
                                 {productDetail.description ?
                                     <AutoHeightWebView
                                         defaultHeight={2000}
