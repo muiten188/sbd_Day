@@ -110,12 +110,12 @@ class Guests extends Component {
             <Col style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
                 <View onPress={() => { Actions.home({ screenId: 'guestsDetail' }) }}>
                     <Text>
-                        {item.lastName + ' ' + item.firstName}
+                        {item.fullname}
                     </Text>
                 </View>
                 <Text style={{ fontStyle: 'italic',color:'#666666' }}>{I18n.t('Company')}: {item.companyName}</Text>
-                {item.phoneNumber && <Text style={{ fontStyle: 'italic',color:'#666666' }}>{I18n.t('Phone')}: {item.phoneNumber}</Text>}
-                {item.email && <Text style={{ fontStyle: 'italic',color:'#666666' }}>{I18n.t('Email')}: {item.email}</Text>}
+                {/* {item.phoneNumber && <Text style={{ fontStyle: 'italic',color:'#666666' }}>{I18n.t('Phone')}: {item.phoneNumber}</Text>}
+                {item.email && <Text style={{ fontStyle: 'italic',color:'#666666' }}>{I18n.t('Email')}: {item.email}</Text>} */}
             </Col>
 
         </Grid>)

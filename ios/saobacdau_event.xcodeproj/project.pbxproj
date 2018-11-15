@@ -23,7 +23,6 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		18EECE39A0C149B8B7D7720B /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7D0EAD9DA164BECA0030519 /* Roboto.ttf */; };
-		2CE203143CA9412B8B9AD70D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 731969A2C4B340988BCC8B05 /* MaterialCommunityIcons.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -64,7 +63,6 @@
 		CF07FBCA214BAEF0003FA016 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF07FBC9214BAEF0003FA016 /* GoogleService-Info.plist */; };
 		CF0EB5D3214B911C005E39A7 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0EB5D0214B90FC005E39A7 /* libRCTPushNotification.a */; };
 		CF294BD221498A2B001FFBEA /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = CF294BA321498A29001FFBEA /* YTPlayerView-iframe-player.html */; };
-		F16FBA6C7A75423BBE97C02A /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 038F03643C5D41F3962C6AE5 /* Feather.ttf */; };
 		F8983082578A43D8ABEC3C53 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97377856E08B4373972EECE9 /* SimpleLineIcons.ttf */; };
 /* End PBXBuildFile section */
 
@@ -1493,8 +1491,6 @@
 				5442983633BE459F988FE4F0 /* rubicon-icon-font.ttf in Resources */,
 				F8983082578A43D8ABEC3C53 /* SimpleLineIcons.ttf in Resources */,
 				31D228006D814B6AB33724B2 /* Zocial.ttf in Resources */,
-				F16FBA6C7A75423BBE97C02A /* Feather.ttf in Resources */,
-				2CE203143CA9412B8B9AD70D /* MaterialCommunityIcons.ttf in Resources */,
 				BAE358FA1BE14EF6AC9F911D /* Feather.ttf in Resources */,
 				7BCFAA42EF754DF2A4C47EFB /* MaterialCommunityIcons.ttf in Resources */,
 			);
