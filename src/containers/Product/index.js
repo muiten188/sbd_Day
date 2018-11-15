@@ -172,7 +172,7 @@ class Product extends Component {
             <Col style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
                 <TouchableOpacity onPress={() => { Actions.home({ screenId: 'productDetail', product: item, listProduct: listProduct }) }}>
                     <Text>
-                        <Text style={{ fontWeight: '500' }}></Text>
+                        <Text style={{ fontWeight: '500' }}>{I18n.t('Product')}: </Text>
                         <Text style={{ color: 'blue' }}>{this.textEclipse(item.name)}</Text>
                     </Text>
 
