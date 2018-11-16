@@ -14,9 +14,7 @@ export function get_Prensentation(values, user) {
             method: "GET"
         })
             .then(function (response) {
-                if (response.status == 401) {
-                    dispatch(helper.logout());
-                } else if (response.status != 200) {
+                if (response.status != 200) {
                     dispatch(_seach_Prensentationrror());
                 } else {
                     return response.json();

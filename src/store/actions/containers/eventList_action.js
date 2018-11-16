@@ -8,20 +8,20 @@ export function search_HOT_NEWS(values, user) {
     var error = false;
     return async (dispatch) => {
         dispatch(_searching_HOT_NEWS());
-        var _header = await helper.buildHeader(user);
+        //var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_PROFILE}`, {
-            headers: _header,
+            // headers: _header,
             method: "GET"
         })
             .then(function (response) {
-                if (response.status == 401) {
-                    dispatch(helper.logout());
-                } else if (response.status != 200) {
-                    error = true;
-                    dispatch(_seach_HOT_NEWSError());
-                } else {
+                // if (response.status == 401) {
+                //     dispatch(helper.logout());
+                // } else if (response.status != 200) {
+                //     error = true;
+                //     dispatch(_seach_HOT_NEWSError());
+                // } else {
                     return response.json();
-                }
+                // }
             })
             .then((responseJson) => {
                 if (responseJson) {

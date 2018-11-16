@@ -111,7 +111,6 @@ class FcmClient {
             let body = notif.body || (notif.fcm && notif.fcm.body);
             let hapuType = notif.hapuType || (notif.fcm && notif.fcm.hapuType);
             let objectId = notif.objectId || (notif.fcm && notif.fcm.objectId);
-            debugger
             this.showLocalMsg('message', title, body, notif.image_link, message_id, objectId);
           }
 

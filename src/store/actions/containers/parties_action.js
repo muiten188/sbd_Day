@@ -15,9 +15,7 @@ export function get_Parties(values, user) {
             method: "GET"
         })
             .then(function (response) {
-                if (response.status == 401) {
-                    dispatch(helper.logout());
-                } else if (response.status != 200) {
+                if (response.status != 200) {
                     dispatch(_seach_Partiesrror());
                 } else {
                     return response.json();

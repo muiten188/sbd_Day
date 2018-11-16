@@ -14,9 +14,7 @@ export function get_NewsDetail(values, user) {
             method: "GET"
         })
             .then(function (response) {
-                if (response.status == 401) {
-                    dispatch(helper.logout());
-                } else if (response.status != 200) {
+                if (response.status != 200) {
                     error = true;
                     dispatch(_seach_NewsDetailError());
                 } else {

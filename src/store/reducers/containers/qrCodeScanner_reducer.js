@@ -10,19 +10,13 @@ export default function (state = initState, action = {}) {
   switch (action.type) {
     case types.SEARCH_CHECKIN_BY_QRCODE:
       var _checkInQrCode = null;
-      var _searchErorr=initState.searchErorr;
-      if (action.data.checkInCode == null && action.data.timeCheckIn == null) {
-        _checkInQrCode = null;
-        _searchErorr=true;
-      }
-      else {
-        _checkInQrCode = action.data
-      }
+      // var _searchErorr=initState.searchErorr;
+      _checkInQrCode = action.data
       return {
         ...state,
         checkInQrCode: _checkInQrCode,
         isLoading: action.isLoading,
-        searchErorr: _searchErorr,
+        searchErorr: false,
       };
     case types.CHECKED_BY_QRCODE:
       return {

@@ -15,9 +15,7 @@ export function get_AntifactByQRCODE(values, user) {
             method: "GET"
         })
             .then(function (response) {
-                if (response.status == 401) {
-                    //dispatch(_logout());
-                } else if (response.status != 200) {
+                if (response.status != 200) {
                     dispatch(_seach_ANTIFACT_BY_QRCODEError());
                 } else {
                     return response.json();

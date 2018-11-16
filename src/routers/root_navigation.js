@@ -16,6 +16,7 @@ import NewsDetail from '../containers/NewsDetail';
 import Guider from '../containers/Guider';
 import GuiderRating from '../containers/Guider_rating';
 import QrCodeScanner from '../containers/QrScanner';
+import QrCodeProductScanner from '../containers/QrCode_Product';
 import PresentationDetail from '../containers/PresentationDetail';
 import Presentation from '../containers/Presentation';
 import MuseumMap from '../containers/Museum_map';
@@ -55,7 +56,7 @@ class RootNavigation extends React.Component {
                     <Scene key="login"
                         component={Login}
                         title="Login"
-                        initial={true}
+                        initial={false}
                     />
                     <Scene
                         key="register"
@@ -65,7 +66,7 @@ class RootNavigation extends React.Component {
                     <Scene key="home"
                         component={Home}
                         title="Home"
-                        initial={false}
+                        initial={true}
                     />
                     <Scene key="Schedule"
                         component={Schedule}
@@ -107,6 +108,11 @@ class RootNavigation extends React.Component {
                         title="qrScanner"
                         initial={false}>
                     </Scene>
+                    <Scene key="qrScannerProduct"
+                        component={QrCodeProductScanner}
+                        title="qrScannerProduct"
+                        initial={false}>
+                    </Scene>
                     <Scene key="Presentation"
                         component={Presentation}
                         title="Search Museum"
@@ -122,7 +128,7 @@ class RootNavigation extends React.Component {
                         title="preview"
                         initial={false}>
                     </Scene>
-                    
+
                 </Stack>
             </Router>
         );

@@ -91,5 +91,6 @@ export default {
   checkinSuccess:"Bạn đã check in thành công",
   checked:'Bạn đã check in trước đó',
   checkin:'Check in',
-  didCheckin:'Đã Check in'
+  didCheckin:'Đã Check in',
+  getGuestsFail:"Lấy thông tin khách mời thất bại"
 };

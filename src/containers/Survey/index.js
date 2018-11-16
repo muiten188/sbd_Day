@@ -40,6 +40,7 @@ import HeaderContent from "../../components/Header_content";
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as helper from '../../helper';
 import AutoHeightWebView from 'react-native-autoheight-webview';
+import * as AppConfig from '../../config/app_config';
 const blockAction = false;
 const blockLoadMoreAction = false;
 class Survey extends Component {
@@ -59,7 +60,7 @@ class Survey extends Component {
     componentDidMount() {
         const { getSurvey } = this.props.surveyAction;
         const { user } = this.props.loginReducer;
-        getSurvey({ userId: user.userId }, user);
+        //getSurvey({ userId: user.userId }, user);
     }
 
     async loadSetting() {
@@ -104,7 +105,7 @@ class Survey extends Component {
                     numColumns={1}
                 /> */}
                 <AutoHeightWebView style={{ width: '100%', height: Dimensions.get('window').height, paddingBottom: 120 }} source={{
-                    uri: surveyUrl
+                    uri: AppConfig.API_SURVEY
                 }} >
                 </AutoHeightWebView>
                 <Loading isShow={isLoading}></Loading>

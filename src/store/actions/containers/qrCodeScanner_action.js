@@ -5,13 +5,19 @@ import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 
 export function checkInByQrCode(values, user) {
     let data = [];
-    Actions.pop();
-    let dataPost = values || {};
+    let dataPost={};
+    try{
+        dataPost = {barcode:JSON.parse(values.barcode).code};
+    }
+    catch(e){
+        dispatch(_seach_CHECKIN_BY_QRCODEError());
+    }
     var error = false;
     //dataPost = { ...dataPost };
     return async (dispatch) => {
         dispatch(_searching_CHECKIN_BY_QRCODE());
         var _header = await helper.buildHeader(user);
+        debugger;
         fetch(`${AppConfig.CHECKIN_BY_QRCODE}?${helper.getQueryString(dataPost)}`, {
             headers: _header,
             method: "POST"

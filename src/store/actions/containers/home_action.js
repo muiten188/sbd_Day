@@ -14,9 +14,7 @@ export function get_AntifactByUUID(values, user) {
       method: "GET"
     })
       .then(function (response) {
-        if (response.status == 401) {
-          //dispatch(_logout());
-        } else if (response.status != 200) {
+         if (response.status != 200) {
           dispatch(_seach_ANTIFACT_BY_UUIDError());
         } else {
           return response.json();

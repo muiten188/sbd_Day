@@ -154,15 +154,7 @@ class Profile extends Component {
     const { handleSubmit } = this.props;
     return (
       <Container style={styles.container}>
-        {true ? <User user={user} onLogout={this.onLogout.bind(this)}></User> :
-          <Button full
-            onPress={() => {
-              Actions.login();
-            }}
-            style={{ margin: 15 }}>
-            <Text>Đăng nhập</Text>
-          </Button>}
-        <Grid style={styles.Grid}>
+        {user ? <View style={{flex:1}}><User user={user} onLogout={this.onLogout.bind(this)}></User><Grid style={styles.Grid}>
           <Content>
             <Row style={styles.row}>
               <Col size={1}>
@@ -171,7 +163,7 @@ class Profile extends Component {
                 </View>
               </Col>
               <Col size={2}>
-                <View style={{ flex: 1,  marginTop: 5,  borderColor: '#cecece' }}>
+                <View style={{ flex: 1, marginTop: 5, borderColor: '#cecece' }}>
                   <Field
                     name="fullName"
                     placeholder={''}
@@ -189,7 +181,7 @@ class Profile extends Component {
                 </View>
               </Col>
               <Col size={2}>
-                <View style={{ flex: 1,  marginTop: 5,  borderColor: '#cecece' }}>
+                <View style={{ flex: 1, marginTop: 5, borderColor: '#cecece' }}>
                   <Field
                     name="phoneNumber"
                     placeholder={''}
@@ -208,7 +200,7 @@ class Profile extends Component {
                 </View>
               </Col>
               <Col size={2}>
-                <View style={{ flex: 1,  marginTop: 5, borderWidth: 0, borderColor: '#cecece' }}>
+                <View style={{ flex: 1, marginTop: 5, borderWidth: 0, borderColor: '#cecece' }}>
                   <Field
                     name="email"
                     placeholder={''}
@@ -227,7 +219,7 @@ class Profile extends Component {
                 </View>
               </Col>
               <Col size={2}>
-                <View style={{ flex: 1,  marginTop: 5,  borderColor: '#cecece' }}>
+                <View style={{ flex: 1, marginTop: 5, borderColor: '#cecece' }}>
                   <Field
                     name="companyName"
                     placeholder={''}
@@ -282,9 +274,17 @@ class Profile extends Component {
           </Button> */}
           </Content>
         </Grid>
-        <Row style={{ position: 'absolute', bottom: 20 }}>
-          <Button block style={{ width: '98%', marginLeft: 5,backgroundColor:'#007db7' }} onPress={this.onLogout.bind(this)}><Text>Đăng xuất</Text></Button>
-        </Row>
+          <Row style={{ position: 'absolute', bottom: 20 }}>
+            <Button block style={{ width: '98%', marginLeft: 5, backgroundColor: '#007db7' }} onPress={this.onLogout.bind(this)}><Text>Đăng xuất</Text></Button>
+          </Row></View> :
+          <Button full
+            onPress={() => {
+              Actions.login();
+            }}
+            style={{ margin: 15 }}>
+            <Text>Đăng nhập</Text>
+          </Button>}
+
       </Container >
     );
   }

@@ -13,9 +13,7 @@ export function QUICK_SEARCH_ALL(values, user) {
             method: "GET"
         })
             .then(function (response) {
-                if (response.status == 401) {
-                    //dispatch(_logout());
-                } else if (response.status != 200) {
+                if (response.status != 200) {
                     dispatch(_seach_ALLError());
                 } else {
                     return response.json();

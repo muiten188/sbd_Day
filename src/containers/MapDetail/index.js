@@ -79,7 +79,6 @@ class MapDetail extends Component {
     render() {
         const { news } = this.props;
         const { mapDetail, searchErorr, isLoading } = this.props.mapDetailReducer;
-        debugger
         var mapImageUrl = null;
         if (mapDetail.path && mapDetail.path != "") {
             mapImageUrl = `${appConfig.API_HOST_BASE}${mapDetail.path}`;

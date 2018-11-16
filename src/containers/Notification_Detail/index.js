@@ -77,7 +77,7 @@ class NotificationDetail extends Component {
         <Content style={{ padding: 10 }}>
           <Text style={{ fontWeight: '500' }}>{notification.title}</Text>
           {notification.content ?
-            <AutoHeightWebView style={{ width: Dimensions.get('window').width - 20, height: Dimensions.get('window').height, paddingTop: 10 }} source={{
+            <AutoHeightWebView style={{ paddingTop: 10 }} source={{
               html: `${notification.content}`
             }}>
             </AutoHeightWebView> : null

@@ -45,6 +45,7 @@ import Beacons from 'react-native-beacons-manager'
 import IconVector from 'react-native-vector-icons/FontAwesome';
 import Eventlist from '../Event_List';
 import Profile from '../Profile';
+import QrCodeProductScanner from '../QrCode_Product';
 import Notification from '../Notification';
 import NotificationDetail from '../Notification_Detail';
 import NewsDetail from "../NewsDetail";
@@ -115,7 +116,7 @@ class Home extends Component {
 
   componentWillMount() {
     const { user } = this.props.loginReducer;
-    if (FcmClient.registed == false) {
+    if (FcmClient.registed == false && user) {
       FcmClient.registerFCM(user.userId);
     }
     // FcmClient.newEvent.addListener('fcm-event-user-group', (obj) => {
@@ -241,13 +242,13 @@ class Home extends Component {
                   //   return;
                   // }
                 }} tabBarPosition="bottom" tabBarUnderlineStyle={styles.tabBarUnderlineStyle} style={{ backgroundColor: 'transparent' }}>
-                  
-                  
+
+
                   <Tab
                     heading={<TabHeading style={styles.tabHeading}>
                       <Grid>
                         <Row style={styles.iconTab}>
-                          <IconVector name="home" style={{color:'#000'}} size={20} />
+                          <IconVector name="home" style={{ color: '#000' }} size={20} />
                         </Row>
                         <Row style={styles.textHeadingTab}>
                           <Text style={styles.textHeaderTab}>{I18n.t("home")}</Text>
@@ -262,10 +263,10 @@ class Home extends Component {
                   <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>
-                      <Image style={{ width: 18, height: 18 }} source={require('../../resources/assets/icon/ThongBao.png')} ></Image>
+                        <Image style={{ width: 18, height: 18 }} source={require('../../resources/assets/icon/qr-code.png')} ></Image>
                       </Row>
                       <Row style={styles.textHeadingTab}>
-                        <Text style={styles.textHeaderTab}>{I18n.t("notification")}</Text>
+                        <Text style={styles.textHeaderTab}>{I18n.t("qrcode")}</Text>
                       </Row>
                     </Grid>
                   </TabHeading>}>
@@ -273,26 +274,26 @@ class Home extends Component {
                     {/* <Notification /> */}
                   </Tab>
 
-                  {user && user.accountType !== 'GUESTS' && 
+                  {user && user.accountType !== 'GUESTS' &&
                     <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
-                    <Grid>
-                      <Row style={styles.iconTab}>
-                      <Image style={{ width: 18, height: 18 }} source={require('../../resources/assets/icon/DanhSachCauHoi.png')} ></Image>
-                      </Row>
-                      <Row style={styles.textHeadingTab}>
-                        <Text style={styles.textHeaderTab}>{I18n.t("questions")}</Text>
-                      </Row>
-                    </Grid>
-                  </TabHeading>}>
-                    {this.renderListQuestionsTab()}
-                  </Tab>
+                      <Grid>
+                        <Row style={styles.iconTab}>
+                          <Image style={{ width: 18, height: 18 }} source={require('../../resources/assets/icon/DanhSachCauHoi.png')} ></Image>
+                        </Row>
+                        <Row style={styles.textHeadingTab}>
+                          <Text style={styles.textHeaderTab}>{I18n.t("questions")}</Text>
+                        </Row>
+                      </Grid>
+                    </TabHeading>}>
+                      {this.renderListQuestionsTab()}
+                    </Tab>
                   }
 
 
                   <Tab heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>
-                        <IconVector name="user" style={{color:'#000'}} size={20} />
+                        <IconVector name="user" style={{ color: '#000' }} size={20} />
                       </Row>
                       <Row style={styles.textHeadingTab}>
                         <Text style={styles.textHeaderTab}>{I18n.t("profile")}</Text>
@@ -341,9 +342,11 @@ class Home extends Component {
   }
   renderNotifiTab() {
     switch (this.props.screenId) {
-      case "notification":
       case null:
       case undefined:
+      case "qrScanerProduct":
+        return (<QrCodeProductScanner></QrCodeProductScanner>)
+      case "notification":
         return (
           <Notification />
         )
@@ -362,7 +365,7 @@ class Home extends Component {
   }
 
   renderEventTab() {
-    Appconfig.currentScreen=this.props.screenId;
+    Appconfig.currentScreen = this.props.screenId;
     switch (this.props.screenId) {
       case "eventList":
       case null:
@@ -377,9 +380,9 @@ class Home extends Component {
       case "introduction":
         return (<Introduction></Introduction>)
         break;
-        case "guests":
-          return (<Guests></Guests>)
-          break;
+      case "guests":
+        return (<Guests></Guests>)
+        break;
       case "parties":
         return (<Parties></Parties>)
         break;
@@ -410,9 +413,9 @@ class Home extends Component {
       case "survey":
         return (<Survey></Survey>)
         break;
-        case "submit_question":
-          return (<SubmitQuestion/>)
-          break;
+      case "submit_question":
+        return (<SubmitQuestion />)
+        break;
       case "surveyDetail":
         return (<SurveyDetail></SurveyDetail>)
         break;

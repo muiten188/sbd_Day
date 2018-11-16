@@ -17,6 +17,7 @@ import guiderReducer from "./containers/guider_reducer";
 import guiderRatingReducer from "./containers/guider_rating_reducer";
 import app_Reducer from "./app_reducer";
 import qrCodeScannerReducer from './containers/qrCodeScanner_reducer';
+import qrCodeProductScannerReducer from './containers/qrcode_product_reducer';
 import presentationReducer from './containers/presentation_reducer';
 import guestsReducer from './containers/guests_reducer';
 import presentationDetailReducer from './containers/presentationDetail_reducer';
@@ -53,6 +54,7 @@ const appReducer = combineReducers({
   changePasswordReducer,
   commentReducer,
   qrCodeScannerReducer,
+  qrCodeProductScannerReducer,
   presentationReducer,
   presentationDetailReducer,
   surveyReducer,
@@ -73,7 +75,7 @@ const rootReducer = (state, action) => {
   if (action.type === types.LOGGED_OUT) {
     state.loginReducer = undefined;
     helper.clearAsyncStorage();
-    Actions.reset('login');
+    //Actions.reset('login');
   }
   return appReducer(state, action);
 };

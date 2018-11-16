@@ -39,9 +39,6 @@ export function getPayInfo(startDate, endDate, paymentMethod, user) {
       }
     )
       .then(function (response) {
-        if (response.status == 401) {
-          dispatch(_logout());
-        }
         if (response.status != 200) {
           dispatch(_listPayError());
         } else {
@@ -81,9 +78,7 @@ export function searchPayInfo(values, currentPage, pageSize, user) {
       qs: dataPost
     })
       .then(function (response) {
-        if (response.status == 401) {
-          dispatch(_logout());
-        } else if (response.status != 200) {
+        if (response.status != 200) {
           dispatch(_seachPayInfoError());
         } else {
           return response.json();
@@ -151,9 +146,7 @@ export function loadPayInfoMore(values, currentPage, pageSize, user) {
       qs: dataPost
     })
       .then(function (response) {
-        if (response.status == 401) {
-          dispatch(_logout());
-        } else if (response.status != 200) {
+         if (response.status != 200) {
           dispatch(_seachPayInfoError());
         } else {
           return response.json();

@@ -22,7 +22,7 @@ export function get_Guests(values, user) {
             })
             .then((responseJson) => {
                 if (responseJson) {
-                    const listGuests = responseJson.listData;
+                    const listGuests = responseJson;
                     listGuests.sort((a,b) => (a.companyName > b.companyName) ? 1 : ((b.companyName > a.companyName) ? -1 : 0) );
                     dispatch(_search_Guests(listGuests));
                 }

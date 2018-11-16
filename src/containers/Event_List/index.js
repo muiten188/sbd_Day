@@ -219,16 +219,16 @@ class Eventlist extends Component {
     }
 
     _handleAppStateChange(nextAppState) {
-        if (nextAppState == "active") {
-            this.onEventBeacon();
-            this.detectBeacons();
-        }
-        else {
-            if (eventBeacons) {
-                eventBeacons.remove();
-                this.stopDetectBeacon();
-            }
-        }
+        // if (nextAppState == "active") {
+        //     this.onEventBeacon();
+        //     this.detectBeacons();
+        // }
+        // else {
+        //     if (eventBeacons) {
+        //         eventBeacons.remove();
+        //         this.stopDetectBeacon();
+        //     }
+        // }
 
     }
 
@@ -238,20 +238,24 @@ class Eventlist extends Component {
         const { getProducts } = this.props;
         const { user } = this.props.loginReducer;
         search_HOT_NEWS(null, user)
-        search_CHECK_CHECKIN(null, user)
-        AppState.addEventListener('change', this._handleAppStateChange.bind(this));
-        this.onEventBeacon();
-        this.detectBeacons();
+        if(user){
+            
+            search_CHECK_CHECKIN(null, user)
+            AppState.addEventListener('change', this._handleAppStateChange.bind(this));
+            // this.onEventBeacon();
+            // this.detectBeacons();
+        }
+        
     }
     componentDidUpdate(prevProps, prevState) {
 
     }
 
     componentWillUnmount() {
-        if (eventBeacons) {
-            eventBeacons.remove();
-            this.stopDetectBeacon();
-        }
+        // if (eventBeacons) {
+        //     eventBeacons.remove();
+        //     this.stopDetectBeacon();
+        // }
     }
 
     render() {

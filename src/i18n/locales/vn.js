@@ -90,8 +90,10 @@ export default {
   getPresentationFail:'Không thể lấy danh sách diễn giả. Vui lòng kiếm tra lại kết nối!',
   checkinFail:"Check in thất bại. Vui lòng kiếm tra lại kết nối!",
   checkinText:'Quét mã Qr code để checkin.',
-  checkinSuccess:"Bạn vừa Checkin sự kiện SBD Day 2018 thành công.",
+  checkinSuccess:"Bạn vừa Checkin sự kiện thành công.",
   checked:'Bạn đã check in trước đó hoặc mã checkin không tồn tại.',
   checkin:'Check in',
-  didCheckin:'Đã Check in'
+  didCheckin:'Đã Check in',
+  getGuestsFail:"Lấy thông tin khách mời thất bại",
+  getProductByQrcodeFail:'Lấy thông tin sản phẩm thất bại do sai QRcode'
 };

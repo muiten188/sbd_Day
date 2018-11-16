@@ -7,7 +7,7 @@ export default class extends Component {
         const { message = 'Application Loading...' } = this.props
         return (
             <Container style={styles.container}>
-                <Text>{message}</Text>
+                {/* <Text>{message}</Text> */}
                 <Spinner color={'#007aff'} />
             </Container>
         )

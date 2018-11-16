@@ -15,9 +15,7 @@ export function search_Comment(values, currentPage, pageSize, user) {
             method: "GET"
         })
             .then(function (response) {
-                if (response.status == 401) {
-                    //dispatch(_logout());
-                } else if (response.status != 200) {
+                if (response.status != 200) {
                     dispatch(_seach_CommentError());
                 } else {
                     return response.json();

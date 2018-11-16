@@ -21,10 +21,10 @@ import { connect } from "react-redux";
 import { Grid, Col, Row } from "react-native-easy-grid";
 import I18n from "../../i18n/i18n";
 import HeaderContent from "../../components/Header_content";
-import * as qrCodeScannerAction from '../../store/actions/containers/qrCodeScanner_action';
+import * as qrCodeProductScannerAction from '../../store/actions/containers/qrcode_product_action';
 import * as eventListAction from '../../store/actions/containers/eventList_action';
 import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
-import QRCodeScanner from 'react-native-qrcode-scanner';
+import QrCodeScanner from 'react-native-qrcode-scanner';
 import Loading from "../../components/Loading";
 import Beacons from 'react-native-beacons-manager'
 import Header_content from "../../components/Header_content";
@@ -32,7 +32,7 @@ const currentQrCode = null;
 import * as helper from '../../helper';
 const current_uuid = null;
 const eventBeacons = null;
-class qrCodeScanner extends Component {
+class QrCodeProductScanner extends Component {
 
     static navigationOptions = {
         header: null
@@ -62,13 +62,9 @@ class qrCodeScanner extends Component {
     }
 
     componentDidMount() {
-        const { checkInByQrCode } = this.props.qrCodeScannerAction;
-        const { isLoading } = this.props.qrCodeScannerReducer;
+
+        const { isLoading } = this.props.qrCodeProductScannerReducer;
         const { user } = this.props.loginReducer;
-        // const { beacon } = this.props;
-        // if (beacon) {
-        //     checkInByQrCode({ barcode: beacon.uuid + beacon.major + beacon.minor }, user)
-        // }
     }
 
     componentWillUnmount() {
@@ -88,52 +84,32 @@ class qrCodeScanner extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { search_CHECK_CHECKIN } = this.props.eventListAction;
         const { user } = this.props.loginReducer;
-        const { clearCHECKIN_BY_QRCODEError } = this.props.qrCodeScannerAction;
-        const { searchErorr, checkInQrCode, checked } = this.props.qrCodeScannerReducer;
+        const { clearProduct_BY_QRCODEError } = this.props.qrCodeProductScannerAction;
+        const { objProduct, searchErorr } = this.props.qrCodeProductScannerReducer;
         if (searchErorr) {
-            Alert.alert(I18n.t('report'), I18n.t('checkinFail'), [{
+            Alert.alert(I18n.t('report'), I18n.t('getProductByQrcodeFail'), [{
                 text: 'Ok',
                 onPress: (e) => {
-                    clearCHECKIN_BY_QRCODEError();
-                    Actions.pop();
+                    clearProduct_BY_QRCODEError();
                 }
             }],
                 { cancelable: false })
         }
-        else if (checked) {
-            Alert.alert(I18n.t('report'), I18n.t('checked'), [{
-                text: 'Ok',
-                onPress: (e) => {
-                    clearCHECKIN_BY_QRCODEError();
-                    search_CHECK_CHECKIN(null, user)
-                    Actions.pop();
-                }
-            }],
-                { cancelable: false })
-        }
-        else if (checkInQrCode) {
-            Alert.alert(I18n.t('report'), I18n.t('checkinSuccess'), [{
-                text: 'Ok',
-                onPress: (e) => {
-                    clearCHECKIN_BY_QRCODEError();
-                    search_CHECK_CHECKIN(null, user)
-                    Actions.pop();
-                }
-            }],
-                { cancelable: false })
+        else if (objProduct != null) {
+            Actions.home({ screenId: 'productDetail', product: objProduct, listProduct: [] })
+            clearProduct_BY_QRCODEError();
         }
     }
 
     onSuccess(e) {
-        const { checkInByQrCode } = this.props.qrCodeScannerAction;
-        const { isLoading } = this.props.qrCodeScannerReducer;
+        const { searchProductByQrCode } = this.props.qrCodeProductScannerAction;
+        const { isLoading } = this.props.qrCodeProductScannerReducer;
         const { user } = this.props.loginReducer;
         if (!isLoading) {
             currentQrCode = e.data;
             Alert.alert(I18n.t('report'), e.data);
-            checkInByQrCode({ barcode: e.data }, user)
+            searchProductByQrCode({ qrCode: e.data }, user)
             setTimeout(() => {
                 currentQrCode = null;
             }, 1000)
@@ -144,22 +120,20 @@ class qrCodeScanner extends Component {
     }
 
     render() {
-        const { isLoading } = this.props.qrCodeScannerReducer;
+        const { isLoading } = this.props.qrCodeProductScannerReducer;
         const { beacon } = this.props;
         return (
             <Container style={{ paddingTop: getStatusBarHeight(true) }}>
-                <HeaderContent headerTitle={I18n.t("checkin")}
-                    showButtonLeft={true}
-                    hideRightButton={true}></HeaderContent>
                 {beacon ? <Text>Checkin bằng beacon...</Text> :
-                    <QRCodeScanner
+                    <QrCodeScanner
                         style={{ height: 200 }}
                         onRead={this.onSuccess.bind(this)}
                         showMarker={true}
-                        reactivate={false}
+                        reactivate={true}
+                        reactivateTimeout={3000}
                         topContent={
                             <Text style={styles.centerText}>
-                                {I18n.t('checkinText')}
+                                Lấy thông tin sản phẩm
                             </Text>
                         }
                         bottomContent={
@@ -182,16 +156,15 @@ class qrCodeScanner extends Component {
 }
 function mapStateToProps(state, props) {
     return {
-        qrCodeScannerReducer: state.qrCodeScannerReducer,
+        qrCodeProductScannerReducer: state.qrCodeProductScannerReducer,
         loginReducer: state.loginReducer
     };
 }
 function mapToDispatch(dispatch) {
     return {
-        qrCodeScannerAction: bindActionCreators(qrCodeScannerAction, dispatch),
-        eventListAction: bindActionCreators(eventListAction, dispatch)
+        qrCodeProductScannerAction: bindActionCreators(qrCodeProductScannerAction, dispatch)
     };
 }
 
-qrCodeScanner = connect(mapStateToProps, mapToDispatch)(qrCodeScanner);
-export default qrCodeScanner;
+QrCodeProductScanner = connect(mapStateToProps, mapToDispatch)(QrCodeProductScanner);
+export default QrCodeProductScanner;

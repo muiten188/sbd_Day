@@ -110,7 +110,7 @@ class Guests extends Component {
             <Col style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
                 <View onPress={() => { Actions.home({ screenId: 'guestsDetail' }) }}>
                     <Text>
-                        {item.lastName + ' ' + item.firstName}
+                        {item.fullName}
                     </Text>
                 </View>
                 <Text style={{ fontStyle: 'italic',color:'#666666' }}>{I18n.t('Company')}: {item.companyName}</Text>
