@@ -6,7 +6,7 @@ export function getQuestion(user) {
   return async dispatch => {
     dispatch(_searching_Question());
     var _header = await helper.buildHeader(user);
-    _header.CURRENT_USER_ID = user.id;
+    _header.CURRENT_USER_ID = user.userId;
 
     fetch(`${AppConfig.GET_QUESTION}`, {
       headers: _header,
