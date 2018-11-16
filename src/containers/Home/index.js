@@ -274,7 +274,11 @@ class Home extends Component {
                     {/* <Notification /> */}
                   </Tab>
 
+<<<<<<< HEAD
                   {user && user.accountType !== 'GUESTS' &&
+=======
+                  {user && user.accountType === 'COORDINATOR' && 
+>>>>>>> e69016542224767c8931f3b3d9fcfc3963090317
                     <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
                       <Grid>
                         <Row style={styles.iconTab}>
