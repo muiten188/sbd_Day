@@ -31,6 +31,7 @@ import { Actions, Router, Scene, Stack } from 'react-native-router-flux';
 import * as helper from '../../helper';
 import * as appConfig from '../../config/app_config';
 import ImageZoom from 'react-native-image-pan-zoom';
+import getDirections from 'react-native-google-maps-directions'
 class MapDetail extends Component {
 
     static navigationOptions = {
@@ -50,6 +51,7 @@ class MapDetail extends Component {
         const { user } = this.props.loginReducer;
         const { map } = this.props;
         getMapsById({ mapsId: map.mapsId }, user);
+
     }
 
     async loadSetting() {
@@ -76,23 +78,60 @@ class MapDetail extends Component {
         }
     }
 
+    componentWillUnmount() {
+        const { clearErrorSearch } = this.props.mapDetailAction;
+        clearErrorSearch();
+    }
+
     render() {
         const { news } = this.props;
+        var indoor = null;
         const { mapDetail, searchErorr, isLoading } = this.props.mapDetailReducer;
         var mapImageUrl = null;
-        if (mapDetail.path && mapDetail.path != "") {
+        if (mapDetail&&mapDetail.path && mapDetail.path != "") {
             mapImageUrl = `${appConfig.API_HOST_BASE}${mapDetail.path}`;
+        }
+        if (!mapDetail) {
+            return (<Container></Container>)
+        }
+        if (mapDetail.mapType == "OUTDOOR") {
+            this.handleGetDirections(mapDetail.latitude,mapDetail.longtitude);
+            indoor = false;
+        }
+        else {
+            indoor = true;
         }
         return (
             <Container>
-                <ImageZoom cropWidth={Dimensions.get('window').width}
+                {indoor ? <ImageZoom cropWidth={Dimensions.get('window').width}
                     cropHeight={Dimensions.get('window').height}
                     imageWidth={Dimensions.get('window').width}
                     imageHeight={Dimensions.get('window').height}>
                     <Image style={{ flex: 1, resizeMode: 'contain', marginTop: -100 }} source={{ uri: mapImageUrl ? mapImageUrl : 'http://www.uwgb.edu/UWGBCMS/media/Maps/images/map-icon.jpg' }}></Image>
-                </ImageZoom>
+                </ImageZoom> : <Text>Bản đồ hiện trong google map.</Text>}
             </Container>
         );
+    }
+
+    handleGetDirections = (latitude,longtitude) => {
+        const data = {
+            destination: {
+                latitude: latitude,
+                longitude: longtitude
+            },
+            params: [
+                // {
+                //     key: "travelmode",
+                //     value: "driving"        // may be "walking", "bicycling" or "transit" as well
+                // },
+                // {
+                //     key: "dir_action",
+                //     value: "navigate"       // this instantly initializes navigation using the given travel mode 
+                // }
+            ]
+        }
+
+        getDirections(data)
     }
 }
 function mapStateToProps(state, props) {

@@ -274,11 +274,7 @@ class Home extends Component {
                     {/* <Notification /> */}
                   </Tab>
 
-<<<<<<< HEAD
-                  {user && user.accountType !== 'GUESTS' &&
-=======
-                  {user && user.accountType === 'COORDINATOR' && 
->>>>>>> e69016542224767c8931f3b3d9fcfc3963090317
+                  {user && user.accountType === 'COORDINATOR' ? 
                     <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
                       <Grid>
                         <Row style={styles.iconTab}>
@@ -290,7 +286,7 @@ class Home extends Component {
                       </Grid>
                     </TabHeading>}>
                       {this.renderListQuestionsTab()}
-                    </Tab>
+                    </Tab>:null
                   }
 
 
@@ -324,7 +320,6 @@ class Home extends Component {
 
   renderProfileTab() {
     switch (this.props.screenId) {
-      case "notification":
       case null:
       case undefined:
         return (
@@ -350,20 +345,18 @@ class Home extends Component {
       case undefined:
       case "qrScanerProduct":
         return (<QrCodeProductScanner></QrCodeProductScanner>)
-      case "notification":
-        return (
-          <Notification />
-        )
-        break;
-      case 'notifiDetail':
-        return (
-          <NotificationDetail />
-        )
-        break;
+      // case "notification":
+      //   return (
+      //     <Notification />
+      //   )
+      //   break;
+      // case 'notifiDetail':
+      //   return (
+      //     <NotificationDetail />
+      //   )
+         break;
       default:
-        return (
-          <Notification />
-        )
+      return (<QrCodeProductScanner></QrCodeProductScanner>) 
         break;
     }
   }

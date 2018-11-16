@@ -105,19 +105,17 @@ class Guests extends Component {
 
     renderFlatListItem(dataItem) {
         const item = dataItem.item;
-        return (<Grid style={{ width: '100%', minHeight: 80, marginBottom: 6, paddingLeft: 10, paddingRight: 10, paddingTop: 5, paddingBottom: 10, borderBottomWidth: 0.5,
-        borderBottomColor: '#cecece' }}>
+        return (<Grid style={{
+            width: '100%', minHeight: 80, marginBottom: 6, paddingLeft: 10, paddingRight: 10, paddingTop: 5, paddingBottom: 10, borderBottomWidth: 0.5,
+            borderBottomColor: '#cecece'
+        }}>
             <Col style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
                 <View onPress={() => { Actions.home({ screenId: 'guestsDetail' }) }}>
                     <Text>
-<<<<<<< HEAD
                         {item.fullName}
-=======
-                        {item.fullname}
->>>>>>> e69016542224767c8931f3b3d9fcfc3963090317
                     </Text>
                 </View>
-                <Text style={{ fontStyle: 'italic',color:'#666666' }}>{I18n.t('Company')}: {item.companyName}</Text>
+                <Text style={{ fontStyle: 'italic', color: '#666666' }}>{I18n.t('Company')}: {item.companyName}</Text>
                 {/* {item.phoneNumber && <Text style={{ fontStyle: 'italic',color:'#666666' }}>{I18n.t('Phone')}: {item.phoneNumber}</Text>}
                 {item.email && <Text style={{ fontStyle: 'italic',color:'#666666' }}>{I18n.t('Email')}: {item.email}</Text>} */}
             </Col>

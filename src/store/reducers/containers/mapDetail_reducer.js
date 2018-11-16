@@ -1,7 +1,7 @@
 import * as types from "../../constants/action_types";
 const initState = {
   isLoading: false,
-  mapDetail:{},
+  mapDetail: null,
   searchErorr: false,
 };
 
@@ -27,6 +27,7 @@ export default function (state = initState, action = {}) {
     case types.MAP_DETAIL_ALL_CLEAR_ERROR:
       return {
         ...state,
+        mapDetail: initState.mapDetail,
         searchErorr: initState.searchErorr,
         isLoading: initState.isLoading
       };
