@@ -56,6 +56,7 @@ export default {
   Content: 'Nội dung',
   Title: 'Tiêu đề',
   QuestionFor: 'Câu hỏi cho',
+  QuestionFrom: 'Người hỏi',
   NoQuestion: 'Chưa có câu hỏi',
   ListQuestion: 'Danh sách câu hỏi',
   Time: 'Thời gian',

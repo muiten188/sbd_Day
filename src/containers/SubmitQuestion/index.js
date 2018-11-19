@@ -60,6 +60,7 @@ class SubmitQuestion extends Component {
       languageSelect: "vi",
       text: "",
       textTitle: "",
+      textEmail: "",
     };
     this.loadSetting();
     this.selectedIndex = 0;
@@ -151,10 +152,23 @@ class SubmitQuestion extends Component {
         <Loading isShow={isLoading} />
         <ScrollView>
           <Textarea
-          bordered
+            bordered
+            multiline={false}
             onChangeText={textTitle => this.setState({ textTitle })}
             value={this.state.textTitle}
             placeholder="Nhập tiêu đề"
+            style={{
+              margin: 5,
+              marginBottom: 10,
+              padding: 20,
+            }}
+          />
+          <Textarea
+          bordered
+            onChangeText={textEmail => this.setState({ textEmail })}
+            value={this.state.textEmail}
+            multiline={false}
+            placeholder="Nhập email người gửi"
             style={{
               margin: 5,
               marginBottom: 10,
@@ -188,6 +202,7 @@ class SubmitQuestion extends Component {
                   {
                     content: this.state.text,
                     title: this.state.textTitle,
+                    email: this.state.textEmail,
                     questionFor: listScheduler[this.selectedIndex].author,
                     scheduleId: listScheduler[this.selectedIndex].scheduleId,
                   },
@@ -196,6 +211,7 @@ class SubmitQuestion extends Component {
                     this.setState({
                       text: "",
                       textTitle: "",
+                      textEmail: "",
                     });
                     this.props.question_action.getQuestion(this.props.loginReducer.user);;
                   }
