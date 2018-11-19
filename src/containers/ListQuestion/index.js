@@ -111,7 +111,7 @@ class ListQuestion extends Component {
       >
       <ScrollView>
         <View style={{ backgroundColor: '#357db2', margin: 5, marginBottom: 10, padding: 20 }}>
-          <Text style={{ color: 'white', fontWeight: 'bold', marginBottom: 20, fontSize: 20 }}>{item.title.toUpperCase()}</Text>
+          <Text style={{ color: 'white', fontWeight: 'bold', marginBottom: 20, fontSize: 18 }}>{item.title.toUpperCase()}</Text>
           <Text style={{ color: 'white', fontStyle: 'italic', marginBottom: 10 }}>{item.author}</Text>
           <Text style={{ color: '#aaa', marginBottom: 5 }}>{`${I18n.t('LocationQ')}: ${item.location}`}</Text>
           <Text style={{ color: '#aaa', marginBottom: 5 }}>{`${I18n.t('Time')}: ${new Date(item.targetDate).toLocaleTimeString()}   ${new Date(item.targetDate).toLocaleDateString()}`}</Text>
