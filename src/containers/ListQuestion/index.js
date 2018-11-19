@@ -146,7 +146,6 @@ class ListQuestion extends Component {
       <Col style={{ justifyContent: 'center', alignItems: 'flex-start', padding: 6, marginBottom: 15 }}>
         <View>
           <Text style={{ fontWeight: 'bold' }}>{`${I18n.t('Title')}: ${item.title}`}</Text>
-          <Text style={{ marginTop: 6 }}>{`${I18n.t('QuestionFor')}: ${item.questionFor}`}</Text>
           <Text style={{ marginTop: 6 }}>{`${I18n.t('QuestionFrom')}: ${item.email}`}</Text>
           <Text style={{ marginBottom: 20, marginTop: 6 }}>{`${I18n.t('Content')}: ${item.content}`}</Text>
         </View>
