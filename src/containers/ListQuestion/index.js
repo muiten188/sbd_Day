@@ -146,6 +146,7 @@ class ListQuestion extends Component {
         <View>
           <Text style={{ fontWeight: 'bold' }}>{`${I18n.t('Title')}: ${item.title}`}</Text>
           <Text style={{ marginTop: 6 }}>{`${I18n.t('QuestionFor')}: ${item.questionFor}`}</Text>
+          <Text style={{ marginTop: 6 }}>{`${I18n.t('QuestionFrom')}: ${item.email}`}</Text>
           <Text style={{ marginBottom: 20, marginTop: 6 }}>{`${I18n.t('Content')}: ${item.content}`}</Text>
         </View>
         <View style={{ position: 'absolute', bottom: -5, right: 0 }}>

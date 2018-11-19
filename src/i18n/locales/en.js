@@ -53,6 +53,7 @@ export default {
   Content: 'Content',
   Title: 'Title',
   QuestionFor: 'Question for',
+  QuestionFrom: 'Question from',
   NoQuestion: 'No question',
   ListQuestion: 'Questions',
   Time: 'Time',
