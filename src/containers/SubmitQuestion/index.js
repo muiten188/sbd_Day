@@ -126,15 +126,14 @@ class SubmitQuestion extends Component {
       e => e.scheduleType === "PRESENTATION"
     );
     listScheduler.forEach(e => {
-      e.listQuestions = listQuestions.filter(
-        question => question.questionTopicId === e.scheduleId
-      );
+      e.listQuestions = listQuestions.filter(question => e.author && question.questionFor && question.questionFor.toLowerCase() == e.author.toLowerCase());
     });
     const { postSubmitQuestion } = this.props.postSubmitQuestion;
 
     return (
       <Container>
         <FlatList
+        style={{height: 225}}
           data={listScheduler}
           keyExtractor={this._keyExtractor}
           renderItem={this.renderFlatListItem.bind(this)}
@@ -150,7 +149,7 @@ class SubmitQuestion extends Component {
           }}
         />
         <Loading isShow={isLoading} />
-        <ScrollView>
+        {/* <ScrollView> */}
           <Textarea
             bordered
             multiline={false}
@@ -158,9 +157,9 @@ class SubmitQuestion extends Component {
             value={this.state.textTitle}
             placeholder="Nhập tiêu đề"
             style={{
+              height: 40,
               margin: 5,
-              marginBottom: 10,
-              padding: 20,
+              padding: 20
             }}
           />
           <Textarea
@@ -170,15 +169,16 @@ class SubmitQuestion extends Component {
             multiline={false}
             placeholder="Nhập email người gửi"
             style={{
+              height: 40,
               margin: 5,
               marginBottom: 10,
-              padding: 20,
+              padding: 20
             }}
           />
           <Textarea
             onChangeText={text => this.setState({ text })}
             value={this.state.text}
-            rowSpan={7}
+            rowSpan={5}
             bordered
             placeholder="Nội dung câu hỏi"
             style={{
@@ -221,7 +221,7 @@ class SubmitQuestion extends Component {
           >
             <Text>SEND</Text>
           </Button>
-        </ScrollView>
+        {/* </ScrollView> */}
       </Container>
     );
   }
@@ -229,6 +229,7 @@ class SubmitQuestion extends Component {
   renderFlatListItem({ item }) {
     console.log("dsadsa ", item);
     return (
+      <ScrollView>
       <View
         style={{
           backgroundColor: "#fff",
@@ -271,6 +272,7 @@ class SubmitQuestion extends Component {
           ).toLocaleDateString()}`}</Text>
         </View>
       </View>
+      </ScrollView>
     );
   }
 

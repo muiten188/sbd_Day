@@ -80,7 +80,8 @@ class ListQuestion extends Component {
     });
     listScheduler = listScheduler.filter(e => e.scheduleType === 'PRESENTATION');
     listScheduler.forEach(e => {
-      e.listQuestions = listQuestions.filter(question => question.questionTopicId === e.scheduleId);
+      console.log('bambine', e, listQuestions);
+      e.listQuestions = listQuestions.filter(question => e.author && question.questionFor && question.questionFor.toLowerCase() == e.author.toLowerCase());
     });
 
     return (
