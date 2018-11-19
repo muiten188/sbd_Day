@@ -22,6 +22,7 @@ console.log('xac nhan');
         "content": values.content,
         "questionFor": values.questionFor,
         "scheduleId": values.scheduleId,
+        "email": values.email,
         "title": values.title
       }),
     })
