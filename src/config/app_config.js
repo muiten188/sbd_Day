@@ -1,6 +1,6 @@
 export const API_HOST_BASE = 'http://smartevent2311.saobacdau.vn/event-manager-api/';//'http://event.easylink.vn/event-manager-api/'
 export const API_HOST = `${API_HOST_BASE}mobile/`;
-export const API_SURVEY=`http://smartevent2311.saobacdau.vn/survey.html#!/survey`;
+export const API_SURVEY=`http://smartevent2311.saobacdau.vn/event-admin/survey.html#!/survey`;
 export const GET_Eventlist = `${API_HOST}api/mobile/museum/`;
 export const GET_PARTIES = `${API_HOST}company/getParties`;
 export const GET_SCHEDULE = `${API_HOST}/event/getAll`;
