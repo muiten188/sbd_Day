@@ -4,7 +4,8 @@ import {
   View,
   FlatList,
   Dimensions,
-  Alert
+  Alert,
+  ScrollView
 } from "react-native";
 import {
   Container,
@@ -108,6 +109,7 @@ class ListQuestion extends Component {
           width: screenWidth,
         }}
       >
+      <ScrollView>
         <View style={{ backgroundColor: '#357db2', margin: 5, marginBottom: 10, padding: 20 }}>
           <Text style={{ color: 'white', fontWeight: 'bold', marginBottom: 20, fontSize: 20 }}>{item.title.toUpperCase()}</Text>
           <Text style={{ color: 'white', fontStyle: 'italic', marginBottom: 10 }}>{item.author}</Text>
@@ -129,6 +131,7 @@ class ListQuestion extends Component {
           /> ||    <Text style={{ marginBottom: 10, color: '#aaa' }}>{I18n.t('NoQuestion')}</Text>
           }
         </View>
+      </ScrollView>
       </View>
     );
   }
