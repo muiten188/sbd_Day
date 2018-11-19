@@ -115,6 +115,9 @@ class login extends React.Component {
     };
     I18n.defaultLocale = "vn";
     I18n.locale = "vn";
+    const { loginReducer } = this.props;
+      loginReducer.Logged = null
+      loginReducer.Loging= false
     // I18n.currentLocale();
     // AccessToken.getCurrentAccessToken().then(
     //   (data) => {

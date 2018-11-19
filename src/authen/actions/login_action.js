@@ -11,14 +11,14 @@ export function login_Socail(user, typeSocail) {
     if (typeSocail == "GOOGLE") {
       _user.firstName = user.givenName;
       _user.lastName = user.familyName;
-      _user.socialIdentification=user.id;
+      _user.socialIdentification = user.id;
       _user.loginMethod = typeSocail;
       _user.name = user.name;
     }
-    else if(typeSocail=="FACEBOOK"){
+    else if (typeSocail == "FACEBOOK") {
       _user.firstName = user.first_name;
       _user.lastName = user.last_name;
-      _user.socialIdentification=user.id;
+      _user.socialIdentification = user.id;
       _user.loginMethod = typeSocail;
       _user.name = user.name;
     }
@@ -64,15 +64,15 @@ export function login(user) {
     Keyboard.dismiss();
     //Actions.home()
     dispatch(_loging());
-    var _header=await  helper.buildHeader();
+    var _header = await helper.buildHeader();
     let error = false;
-    fetch(`${AppConfig.LOGIN}?${helper.getQueryString(user)}`, {
+    fetch(`${AppConfig.LOGIN}`, {
       method: "POST",
       headers: {
-        headers: _header,
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify(user)
     })
       .then(function (response) {
         if (response.status != 200) {

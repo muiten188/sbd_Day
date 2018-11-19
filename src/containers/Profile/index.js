@@ -154,7 +154,7 @@ class Profile extends Component {
     const { handleSubmit } = this.props;
     return (
       <Container style={styles.container}>
-        {user ? <View style={{flex:1}}><User user={user} onLogout={this.onLogout.bind(this)}></User><Grid style={styles.Grid}>
+        {user ? <View style={{ flex: 1 }}><User user={user} onLogout={this.onLogout.bind(this)}></User><Grid style={styles.Grid}>
           <Content>
             <Row style={styles.row}>
               <Col size={1}>
@@ -218,16 +218,8 @@ class Profile extends Component {
                   <Text>{I18n.t("Company")}</Text>
                 </View>
               </Col>
-              <Col size={2}>
-                <View style={{ flex: 1, marginTop: 5, borderColor: '#cecece' }}>
-                  <Field
-                    name="companyName"
-                    placeholder={''}
-                    label={I18n.t("Company")}
-                    component={InputField}
-                    disabled
-                  />
-                </View>
+              <Col size={2} >
+                <Text style={{ paddingLeft: 6, paddingRight: 6 }}>{user.companyName}</Text>
               </Col>
             </Row>
 

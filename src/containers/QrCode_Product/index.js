@@ -133,14 +133,14 @@ class QrCodeProductScanner extends Component {
                         reactivateTimeout={3000}
                         topContent={
                             <Text style={styles.centerText}>
-                                Lấy thông tin sản phẩm
+                                Quét mã QR Code quầy booth
                             </Text>
                         }
-                        bottomContent={
-                            <TouchableOpacity style={styles.buttonTouchable}>
-                                <Text style={styles.buttonText}>OK</Text>
-                            </TouchableOpacity>
-                        }
+                        // bottomContent={
+                        //     <TouchableOpacity style={styles.buttonTouchable}>
+                        //         <Text style={styles.buttonText}>OK</Text>
+                        //     </TouchableOpacity>
+                        // }
                     />}
                 <Loading isShow={isLoading}></Loading>
             </Container>

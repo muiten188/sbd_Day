@@ -88,7 +88,7 @@ export default class extends Component {
             </Col>
             : null
           }
-          {!hideRightButton ?
+          {!hideRightButton&&false ?
             <Col style={styles.itemHeaderEnd}>
               <Button transparent onPress={() => { Actions.qrScanner() }}>
                 <Image style={{ width: 24, height: 24 }} source={require('../../resources/assets/icon/QRCode.png')}></Image>
