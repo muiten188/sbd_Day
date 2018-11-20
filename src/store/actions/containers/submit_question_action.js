@@ -11,13 +11,20 @@ export function postSubmitQuestion(values, user, onDonefunc = () => {}) {
     let error = false;
 console.log('xac nhan');
 
-    fetch(`${AppConfig.GET_SUBMIT_QUESTION}`, {
-      method: "POST", 
-      headers: {
+    let headers = {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json"
+    };
+    if(user.jSessionId) {
+      headers = {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
         "JSESSIONID": user.jSessionId
-      },
+      };
+    }
+    fetch(`${AppConfig.GET_SUBMIT_QUESTION}`, {
+      method: "POST", 
+      headers,
       body: JSON.stringify({
         "content": values.content,
         "questionFor": values.questionFor,
