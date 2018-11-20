@@ -159,7 +159,8 @@ class SubmitQuestion extends Component {
             style={{
               height: 40,
               margin: 5,
-              padding: 20
+              paddingLeft: 10,
+              paddingRight: 10,
             }}
           />
           <Textarea
@@ -172,7 +173,8 @@ class SubmitQuestion extends Component {
               height: 40,
               margin: 5,
               marginBottom: 10,
-              padding: 20
+              paddingLeft: 10,
+              paddingRight: 10,
             }}
           />
           <Textarea
