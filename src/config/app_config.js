@@ -21,7 +21,7 @@ export const GET_PRODUCT_BY_QRCODE=`${API_HOST}product/scanner`
 export const CHECK_CHECKIN=`${API_HOST}/authenticate/findExistsCheckIn`;
 export const GET_PRESENTATION=`${API_HOST}/presenter/getAll`;
 export const GET_GUESTS=`${API_HOST}/invitee/getAll`;
-export const GET_QUESTION=`${API_HOST}/questionTopic/getAllQuestionTopic`;
+export const GET_QUESTION=`http://smartevent2311.saobacdau.vn:8080/event-manager-api/mobile/questionTopic/getAllQuestionTopic`;
 export const GET_SUBMIT_QUESTION=`${API_HOST}/questionTopic/pushQuestionTopic`;
 
 export const LOGIN_SOCAIL = `${API_HOST}api/mobile/login/social`;
