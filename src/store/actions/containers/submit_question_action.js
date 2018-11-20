@@ -15,7 +15,7 @@ console.log('xac nhan');
       Accept: "application/json, text/plain, */*",
       "Content-Type": "application/json"
     };
-    if(user.jSessionId) {
+    if(user && user.jSessionId) {
       headers = {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
