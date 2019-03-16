@@ -5,6 +5,7 @@ export function getProducts(values, user) {
     let dataPost = values || {};
     return async (dispatch) => {
         dispatch(_QUICK_SEARCHing_ALL());
+        debugger;
         var _header = await helper.buildHeader(user);
         fetch(`${AppConfig.GET_PRODUCTS}?${helper.getQueryString(dataPost)}`, {
             headers: _header,

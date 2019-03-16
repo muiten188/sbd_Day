@@ -39,20 +39,22 @@ import * as helper from "../../../helper";
 const username = "";
 const password = "";
 const confirmPassword = "";
-const firstName = "";
-const lastName = "";
+const name = "";
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+    'Invalid email address' : undefined
 const validate = values => {
   const error = {};
   error.username = "";
   error.password = "";
   error.confirmPassword = "";
-  error.firstName = "";
-  error.lastName = "";
+  error.name = "";
+  error.email = "";
   var username = values.username;
   var password = values.password;
   var confirmPassword = values.confirmPassword;
-  var firstName = values.firstName;
-  var lastName = values.lastName;
+  var name = values.name;
+  var email = values.email;
   if (values.username === undefined) {
     username = "";
   }
@@ -62,11 +64,11 @@ const validate = values => {
   if (values.confirmPassword === undefined) {
     confirmPassword = "";
   }
-  if (values.firstName === undefined) {
-    firstName = "";
+  if (values.name === undefined) {
+    name = "";
   }
-  if (values.lastName === undefined) {
-    lastName = "";
+  if (values.email === undefined) {
+    email = "";
   }
   if (username.length == 0 || username == "") {
     error.username = "trống";
@@ -80,11 +82,11 @@ const validate = values => {
   if (confirmPassword !== password) {
     error.confirmPassword = "không khớp";
   }
-  if (firstName.length == 0 || firstName == "") {
-    error.firstName = "trống";
+  if (name.length == 0 || name == "") {
+    error.name = "trống";
   }
-  if (lastName.length == 0 || lastName == "") {
-    error.lastName = "trống";
+  if (email.length == 0 || email == "") {
+    error.email = "trống";
   }
   return error;
 };
@@ -169,108 +171,97 @@ class register extends Component {
 
         <Loading isShow={registerReducer.registing} />
         {/* background */}
-        <Image
+        {/* <Image
           source={require("../../../resources/assets/splash1.png")}
           style={[styles.backgroundImage]}
-        />
-
-        <View style={styles.screen}>
+        /> */}
+        <Content contentContainerStyle={{ justifyContent: 'center', alignItems: "center"}}>
           <View style={styles.loginform}>
-            <Grid style={{ width: '100%' }}>
-              <Row style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <Form style={styles.form}>
-                  <View style={styles.item}>
-                    {/* <Icon active name="person" /> */}
-                    <Row>
-                      <Col>
-                        <Field
-                          icon="user-circle-o"
-                          name="firstName"
-                          placeholder={I18n.t("firstName", {
-                            locale: locale ? locale : "vi"
-                          })}
-                          component={InputField}
-                        />
-                      </Col>
-                      <Col>
-                        <Field
-                          icon="user-circle-o"
-                          name="lastName"
-                          placeholder={I18n.t("lastName", {
-                            locale: locale ? locale : "vi"
-                          })}
-                          component={InputField}
-                        />
-                      </Col>
-                    </Row>
-                  </View>
-                  <View style={styles.item}>
-                    {/* <Icon active name="person" /> */}
-                    <Field
-                      icon="user-circle-o"
-                      name="username"
-                      placeholder={I18n.t("account", {
-                        locale: locale ? locale : "vi"
-                      })}
-                      component={InputField}
-                    />
-                  </View>
-                  <View style={styles.item}>
-                    {/* <Icon active name="lock" /> */}
-                    <Field
-                      icon="key"
-                      name="password"
-                      placeholder={I18n.t("password", {
-                        locale: locale ? locale : "vi"
-                      })}
-                      secureTextEntry={true}
-                      component={InputField}
-                    />
-                  </View>
-                  <View style={styles.item}>
-                    {/* <Icon active name="lock" /> */}
-                    <Field
-                      icon="key"
-                      name="confirmPassword"
-                      placeholder={I18n.t("confirmPassword", {
-                        locale: locale ? locale : "vi"
-                      })}
-                      secureTextEntry={true}
-                      component={InputField}
-                    />
-                  </View>
-                  <Button
-                    full
-                    style={[styles.buttonLogin, { backgroundColor: '#007db7' }]}
-                    onPress={handleSubmit(registerAction.register)}
-                  >
-                    <Text>
-                      {I18n.t("register", {
-                        locale: this.state.languageSelect
-                          ? this.state.languageSelect
-                          : "vi"
-                      })}
-                    </Text>
-                  </Button>
-                  <Grid>
-                    <Row>
-                      <Button transparent block dark style={[styles.buttonLogin]}
-                        onPress={() => {
-                          Actions.reset('login');
-                        }}>
-                        <Text uppercase={false} >
-                          {I18n.t("login", {
-                            locale: this.state.languageSelect
-                              ? this.state.languageSelect
-                              : "vi"
-                          })}
-                        </Text>
-                      </Button>
-                    </Row>
-                  </Grid>
-                </Form>
-              </Row>
-            </Grid>
+            <Form style={styles.form}>
+              <View style={styles.item}>
+                {/* <Icon active name="person" /> */}
+                <Field
+                  icon="user-circle-o"
+                  name="name"
+                  placeholder={I18n.t("lastName", {
+                    locale: locale ? locale : "vi"
+                  })}
+                  component={InputField}
+                />
+              </View>
+              <View style={styles.item}>
+                {/* <Icon active name="person" /> */}
+                <Field
+                  icon="user-circle-o"
+                  name="email"
+                  placeholder={I18n.t("email", {
+                    locale: locale ? locale : "vi"
+                  })}
+                  validate={email}
+                  component={InputField}
+                />
+              </View>
+              <View style={styles.item}>
+                {/* <Icon active name="person" /> */}
+                <Field
+                  icon="user-circle-o"
+                  name="username"
+                  placeholder={I18n.t("account", {
+                    locale: locale ? locale : "vi"
+                  })}
+                  component={InputField}
+                />
+              </View>
+              <View style={styles.item}>
+                {/* <Icon active name="lock" /> */}
+                <Field
+                  icon="key"
+                  name="password"
+                  placeholder={I18n.t("password", {
+                    locale: locale ? locale : "vi"
+                  })}
+                  secureTextEntry={true}
+                  component={InputField}
+                />
+              </View>
+              <View style={styles.item}>
+                {/* <Icon active name="lock" /> */}
+                <Field
+                  icon="key"
+                  name="confirmPassword"
+                  placeholder={I18n.t("confirmPassword", {
+                    locale: locale ? locale : "vi"
+                  })}
+                  secureTextEntry={true}
+                  component={InputField}
+                />
+              </View>
+              <Button
+                full
+                style={[styles.buttonLogin, { backgroundColor: '#007db7' }]}
+                onPress={handleSubmit(registerAction.register)}
+              >
+                <Text>
+                  {I18n.t("register", {
+                    locale: this.state.languageSelect
+                      ? this.state.languageSelect
+                      : "vi"
+                  })}
+                </Text>
+              </Button>
+              <Button transparent block dark style={[styles.buttonLogin]}
+                onPress={() => {
+                  Actions.login()
+                }}>
+                <Text uppercase={false} >
+                  {I18n.t("login", {
+                    locale: this.state.languageSelect
+                      ? this.state.languageSelect
+                      : "vi"
+                  })}
+                </Text>
+              </Button>
+            </Form>
             {/* <GoogleSigninButton
             style={{ width: 212, height: 48 }}
             size={GoogleSigninButton.Size.Standard}
@@ -278,8 +269,7 @@ class register extends Component {
             onPress={this._googleSignIn.bind(this)}
           /> */}
           </View>
-        </View>
-
+        </Content>
       </Container>
     );
   }
@@ -291,8 +281,7 @@ function mapStateToProps(state, props) {
     initialValues: state.registerReducer.userForm
       ? state.registerReducer.userForm
       : {
-        firstName: "",//"Bùi đình"
-        lastName: "",//'Bách'
+        name: "",//"Bùi đình"
         username: "",//"bachbd"
         password: "",//"123456a@"
         confirmPassword: ""//'123456a@'
@@ -306,7 +295,7 @@ function mapToDispatch(dispatch) {
 }
 
 register = reduxForm({
-  form: "LoginForm",
+  form: "RegisterForm",
   validate,
   enableReinitialize: true
 })(register);

@@ -24,6 +24,10 @@ import {
   H3,
   Tab, Tabs, TabHeading
 } from "native-base";
+
+import Register from '../../authen/containers/Register';
+import Login from '../../authen/containers/Login';
+
 import styles from "./styles";
 import HeaderForm from "../../components/Header_form";
 import HeaderContent from "../../components/Header_content";
@@ -97,8 +101,8 @@ class Home extends Component {
     console.log('home construct')
     this.state = {
       languageSelect: 'vn',
-      currentTab: this.props.screenId == "notification" ? 1 : 0,
-      initialPage: this.props.screenId == "notification" ? 1 : 0
+      currentTab: this.props.screenId == "login"||this.props.screenId == "register" ? 2 : 0,
+      initialPage: this.props.screenId == "login"||this.props.screenId == "register" ? 2 : 0
     };
     this.loadSetting();
   }
@@ -274,7 +278,7 @@ class Home extends Component {
                     {/* <Notification /> */}
                   </Tab>
 
-                  {user && user.accountType === 'COORDINATOR' ? 
+                  {/* {user && user.accountType === 'COORDINATOR' ? 
                     <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
                       <Grid>
                         <Row style={styles.iconTab}>
@@ -287,7 +291,7 @@ class Home extends Component {
                     </TabHeading>}>
                       {this.renderListQuestionsTab()}
                     </Tab>:null
-                  }
+                  } */}
 
 
                   <Tab heading={<TabHeading style={styles.tabHeading}>
@@ -301,7 +305,6 @@ class Home extends Component {
                     </Grid>
                   </TabHeading>}>
                     {this.renderProfileTab()}
-
                   </Tab>
                 </Tabs>
                 <Loading
@@ -326,6 +329,12 @@ class Home extends Component {
           <Profile />
         )
         break;
+      case 'register':
+        return (<Register></Register>)
+        break;
+      case 'login':
+        return (<Login></Login>)
+        break;
       case 'changePassword':
         return (
           <ChangePassword />
@@ -345,18 +354,18 @@ class Home extends Component {
       case undefined:
       case "qrScanerProduct":
         return (<QrCodeProductScanner></QrCodeProductScanner>)
-      // case "notification":
-      //   return (
-      //     <Notification />
-      //   )
-      //   break;
-      // case 'notifiDetail':
-      //   return (
-      //     <NotificationDetail />
-      //   )
-         break;
+        // case "notification":
+        //   return (
+        //     <Notification />
+        //   )
+        //   break;
+        // case 'notifiDetail':
+        //   return (
+        //     <NotificationDetail />
+        //   )
+        break;
       default:
-      return (<QrCodeProductScanner></QrCodeProductScanner>) 
+        return (<QrCodeProductScanner></QrCodeProductScanner>)
         break;
     }
   }

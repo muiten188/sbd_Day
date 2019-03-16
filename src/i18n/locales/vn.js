@@ -96,5 +96,6 @@ export default {
   checkin:'Check in',
   didCheckin:'Đã Check in',
   getGuestsFail:"Lấy thông tin khách mời thất bại",
-  getProductByQrcodeFail:'Lấy thông tin sản phẩm thất bại do sai QRcode'
+  getProductByQrcodeFail:'Lấy thông tin sản phẩm thất bại do sai QRcode',
+  back:'Quay lại'
 };

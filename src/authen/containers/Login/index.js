@@ -221,8 +221,8 @@ class login extends React.Component {
 
         <View style={styles.screen}>
           <View style={styles.loginform}>
-            <Grid style={{ width: '100%' }}>
-              <Row style={{ alignItems: 'center', justifyContent: 'center' }}>
+            {/* <Grid style={{ width: '100%' }}> */}
+              {/* <Row style={{ alignItems: 'center', justifyContent: 'center' }}> */}
                 <Form style={styles.form}>
                   <View style={styles.item}>
                     {/* <Icon active name="person" /> */}
@@ -252,6 +252,15 @@ class login extends React.Component {
                       {I18n.t("login")}
                     </Text>
                   </Button>
+                  <Button
+                    transparent block dark style={[styles.buttonLogin]}
+             
+                    onPress={()=>{Actions.pop()}}
+                  >
+                    <Text>
+                      {I18n.t("back")}
+                    </Text>
+                  </Button>
                   {/* <Grid>
                     <Col>
                       <Button transparent dark style={[styles.buttonLogin]}
@@ -274,7 +283,7 @@ class login extends React.Component {
 
 
                 </Form>
-              </Row>
+              {/* </Row> */}
               {/* <Row style={{ height: 50 }}>
                 <Col style={{ paddingRight: 2 }}>
                   <Button block onPress={this._fbAuth.bind(this)} style={[styles.buttonLogin, styles.buttonLoginFb]}>
@@ -287,7 +296,7 @@ class login extends React.Component {
                   </Button>
                 </Col>
               </Row> */}
-            </Grid>
+            {/* </Grid> */}
             {/* <GoogleSigninButton
             style={{ width: 212, height: 48 }}
             size={GoogleSigninButton.Size.Standard}

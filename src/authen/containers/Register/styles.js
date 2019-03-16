@@ -13,18 +13,19 @@ export default {
   },
   loginform: {
     width: '80%',
-    height: 350,
-    marginTop:78,
+    marginTop:100,
     backgroundColor: "transparent",
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
   backgroundImage: {
-    flex: 1,
-    width: undefined,
-    height: undefined,
-    resizeMode: "stretch"
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    resizeMode: "cover"
   },
   item: {
     marginBottom: 10,
@@ -39,7 +40,7 @@ export default {
     paddingLeft:4,
     paddingRight:4,
     width:'100%',
-    marginBottom:15,
+    marginBottom:5,
     height:35,
   },
   buttonLoginFb:{
@@ -58,7 +59,6 @@ export default {
     padding: 20,
     borderRadius: 5,
     width:'100%',
-    height:330,
     borderWidth: 0.5,
     borderColor:'#ccc',
     backgroundColor: "#fff"

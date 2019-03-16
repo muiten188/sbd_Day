@@ -128,7 +128,12 @@ class RootNavigation extends React.Component {
                         title="preview"
                         initial={false}>
                     </Scene>
-
+                    <Scene key="profile"
+                        component={Profile}
+                        title="profile"
+                        initial={false}>
+                    </Scene>
+                    
                 </Stack>
             </Router>
         );

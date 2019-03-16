@@ -13,8 +13,6 @@ export default {
   },
   loginform: {
     width: '80%',
-    height: 350,
-    marginTop:78,
     backgroundColor: "transparent",
     flexDirection: 'column',
     justifyContent: 'flex-end',
@@ -57,7 +55,6 @@ export default {
     padding: 20,
     borderRadius: 5,
     width:'100%',
-    height:215,
     borderWidth: 0.5,
     borderColor:'#ccc',
     backgroundColor: "#fff"

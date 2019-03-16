@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-
+import Register from '../../authen/containers/Register';
+import Login from '../../authen/containers/Login';
 import {
   Container,
   Text,
@@ -269,13 +270,10 @@ class Profile extends Component {
           <Row style={{ position: 'absolute', bottom: 20 }}>
             <Button block style={{ width: '98%', marginLeft: 5, backgroundColor: '#007db7' }} onPress={this.onLogout.bind(this)}><Text>Đăng xuất</Text></Button>
           </Row></View> :
-          <Button full
-            onPress={() => {
-              Actions.login();
-            }}
-            style={{ margin: 15 }}>
-            <Text>Đăng nhập</Text>
-          </Button>}
+            <Register></Register>
+            // <Login></Login>
+          
+        }
 
       </Container >
     );
