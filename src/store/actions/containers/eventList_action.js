@@ -9,7 +9,7 @@ export function search_HOT_NEWS(values, user) {
     return async (dispatch) => {
         dispatch(_searching_HOT_NEWS());
         //var _header = await helper.buildHeader(user);
-        fetch(`${AppConfig.GET_PROFILE}`, {
+        fetch(`${AppConfig.GET_HOT_PRODUCT}`, {
             // headers: _header,
             method: "GET"
         })

@@ -36,13 +36,31 @@ export default class extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.state = {
+      indexSlider: 0
+    }
   }
 
   componentWillReceiveProps(nextProps) {
+    let { data } = nextProps;
+    if (data && data.length > 1) {
+      if(_intervalSlider){
+        clearInterval(_intervalSlider);
+      }
+      _intervalSlider=setInterval(() => {
+        this.setState({ indexSlider: this.state.indexSlider == data.length - 1 ? 0 : this.state.indexSlider + 1 })
+        try {
+          this.list.scrollToItem({ item: data[this.state.indexSlider], animated: true })
+        }
+        catch (e) {
+          //error 
+        }
+      }, 4000)
+    }
   }
 
   componentDidMount() {
-
+    
   }
 
   componentWillUnmount() {
@@ -55,7 +73,10 @@ export default class extends PureComponent {
 
   render() {
     const { key, avatarUrl, item, data } = this.props;
-
+    var _data=[];
+    if(data.length>0){
+      _data=data;
+    }
     return (
       <View key={key} style={styles.itemList}>
         <FlatList
@@ -63,7 +84,7 @@ export default class extends PureComponent {
             this.list = ref;
           }}
           style={{ width: '100%' }}
-          data={data}
+          data={_data}
           keyExtractor={this._keyExtractor}
           renderItem={this.buildMenuItem.bind(this)}
           horizontal={true}
@@ -76,23 +97,21 @@ export default class extends PureComponent {
     var index = dataItem.index;
     var item = dataItem.item;
     const { data } = this.props;
-    var _newsImage = null;
-    if (item.type == "IMAGE" && item.path) {
-      _newsImage = `${AppConfig.API_HOST_BASE}${item.path}`;
+    var productAvatar = null;
+    if (item.avatar) {
+      productAvatar = `${AppConfig.API_HOST_BASE}${item.avatar}`;
     }
     console.log('item render')
     return (
       <TouchableOpacity
         style={{ padding: 1, borderRadius: 5, marginRight: 10, height: 180, width: width }}
         onPress={() => {
-          if (item.type == "IMAGE") {
-            Actions.preview({ data: item })
-          }
+          Actions.home({ screenId: 'productDetail', product: item, listProduct: data });
         }}>
-        {item.type == "VIDEO" ?
-          <Image style={{ width:width,height:'100%', borderRadius: 5,resizeMode:'stretch',backgroundColor:'red' }} source={_newsImage?{ uri:_newsImage  }:require("../../resources/assets/Image_VideoTrailerSBDDay.png")}></Image>
+        {item.avatar ?
+          <Image style={{ width: width, height: '100%', borderRadius: 5, resizeMode: 'stretch' }} source={{ uri: productAvatar }}></Image>
           :
-          <Image style={{ width: width, height: '100%', borderRadius: 5 }} source={{ uri: _newsImage }}></Image>
+          <Image style={{ width: width, height: '100%', borderRadius: 5, resizeMode: 'stretch' }} source={require("../../resources/assets/Image_VideoTrailerSBDDay.png")}></Image>
         }
       </TouchableOpacity>
     )

@@ -20,7 +20,7 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
-        
+        google()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
@@ -30,10 +30,16 @@ allprojects {
             name 'Google'
         }
         jcenter()
-        // configurations.all {
+        configurations.all {
         //     resolutionStrategy {
         //         force 'com.facebook.android:facebook-android-sdk:4.28.0'
         //     }
-        // }
+            resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'com.android.support'
+                        && !details.requested.name.contains('multidex') ) {
+                    details.useVersion "26.1.0"
+                }
+            }
+        }
     }
 }

@@ -56,21 +56,21 @@ class Eventlist extends Component {
 
     async detectBeacons() {
         // Tells the library to detect iBeacons
-        if(Platform.OS === 'ios'){
+        if (Platform.OS === 'ios') {
             // const region = {
             //     identifier: 'Estimotes',
             //     uuid: 'b9407f30-f5f8-466e-aff9-25556b57fe6d'
             // };
-            
+
             // // Request for authorization while the app is open
             // Beacons.requestWhenInUseAuthorization();
-            
+
             // Beacons.startMonitoringForRegion(region);
             // Beacons.startRangingBeaconsInRegion(region);
-            
+
             // Beacons.startUpdatingLocation();
         }
-        else{
+        else {
             Beacons.detectIBeacons()
             //Beacons.requestWhenInUseAuthorization();
             // Start detecting all iBeacons in the nearby
@@ -80,7 +80,7 @@ class Eventlist extends Component {
             } catch (err) {
                 console.log(`Beacons ranging not started, error: ${error}`)
             }
-        }  
+        }
     }
 
     async stopDetectBeacon() {
@@ -238,14 +238,14 @@ class Eventlist extends Component {
         const { getProducts } = this.props;
         const { user } = this.props.loginReducer;
         search_HOT_NEWS(null, user)
-        if(user){
-            
+        if (user) {
+
             search_CHECK_CHECKIN(null, user)
             AppState.addEventListener('change', this._handleAppStateChange.bind(this));
             // this.onEventBeacon();
             // this.detectBeacons();
         }
-        
+
     }
     componentDidUpdate(prevProps, prevState) {
 
@@ -266,21 +266,7 @@ class Eventlist extends Component {
                 <Grid>{/* marginBottom: 45 */}
 
                     <Row style={{ height: 190, marginBottom: 6 }}>
-                        {listHotNews.length == 1 ?
-                            <YouTube
-                                videoId={listHotNews[0].path}   // The YouTube video ID listHotNews[0].path
-                                play={false}             // control playback of video with true/false
-                                fullscreen={false}       // control whether the video should play in fullscreen or inline
-                                loop={true}             // control whether the video should loop when ended
-                                apiKey={"AIzaSyCpumcHqM6clMWURCg2hwW0MefeA11hpfA"}
-                                onReady={() => { setTimeout(() => this.setState({ height: 190 }), 200) }}
-                                //onChangeState={e => this.setState({ status: e.state })}
-                                //onChangeQuality={e => this.setState({ quality: e.quality })}
-                                //onError={e => this.setState({ error: e.error })}
-                                controls={1}
-                                style={{ alignSelf: 'stretch', width: '100%', height: this.state.height }}
-                            /> :
-                            <ProfileSlider data={listHotNews}></ProfileSlider>}
+                        <ProfileSlider data={listHotNews}></ProfileSlider>
                     </Row>
                     <Row>
                         <FlatList
@@ -311,12 +297,19 @@ class Eventlist extends Component {
                 width: '50%',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderWidth: 0,
                 borderColor: '#cecece',
-            }]}
+            }, index % 2 == 0 ? {
+                borderRightWidth: 0.2,
+                borderBottomWidth: 0.25
+            } : {borderLeftWidth: 0.2,
+                borderBottomWidth: 0.25}]}
                 onPress={() => {
-                    if ((!didCheckin && item.mName == "Checkin")) {
-                        Actions.qrScanner()
+                    if (item.disable) {
+                        Alert.alert('Thông báo', 'Tính năng sắp ra mắt.');
+                        return;
+                    }
+                    if ((!didCheckin && item.mName == "qrcode")) {
+                        Actions.qrScannerProduct()
                     }
                     else if (item.mName != "Checkin") {
                         Actions.home({ screenId: item.routerName })

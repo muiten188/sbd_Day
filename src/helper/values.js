@@ -7,12 +7,12 @@ export const list_Menu = [
     //     mID:'checkIn',
     //     routerName:'profile'
     // },
-    {
-        mName: 'Schedule',
-        IconName: require('../resources/assets/icon/LichSuKien.png'),
-        mID: 'schedule',
-        routerName: 'schedule'
-    },
+    // {
+    //     mName: 'Schedule',
+    //     IconName: require('../resources/assets/icon/LichSuKien.png'),
+    //     mID: 'schedule',
+    //     routerName: 'schedule'
+    // },
     // {
     //     mName: '_presentation',
     //     IconName: 'user',
@@ -20,13 +20,14 @@ export const list_Menu = [
     //     mID: 'presentation',
     //     routerName: 'presentation'
     // },
-    {
-        mName: 'Introduction',
-        IconName: 'user',
-        isIcon: true,
-        mID: 'introduction',
-        routerName: 'introduction'
-    },
+    // {
+    //     mName: 'Introduction',
+    //     IconName: 'user',
+    //     disable:true,
+    //     isIcon: true,
+    //     mID: 'introduction',
+    //     routerName: 'introduction'
+    // },
     {
         mName: 'Product',
         IconName: require('../resources/assets/icon/SanPhamTrungBay.png'),
@@ -34,11 +35,19 @@ export const list_Menu = [
         routerName: 'product'
     },
     {
-        mName: 'Parties',
+        mName: 'Beacon',
         IconName: 'group',
+        disable:true,
         isIcon: true,
-        mID: 'parties',
-        routerName: 'parties'
+        mID: 'beacon',
+        routerName: 'beacon'
+    },
+    {
+        mName: 'qrcode',
+        IconName: "qrcode",
+        isIcon: true,
+        mID: 'qrScanner',
+        routerName: 'qrScanner'
     },
     // {
     //     mName:'News',
@@ -54,22 +63,56 @@ export const list_Menu = [
     // },
 
 
-    {
-        mName: 'Survey',
-        IconName: require('../resources/assets/icon/KhaoSat.png'),
-        mID: 'survey',
-        routerName: 'survey'
-    },
+    // {
+    //     mName: 'Survey',
+    //     IconName: require('../resources/assets/icon/KhaoSat.png'),
+    //     mID: 'survey',
+    //     routerName: 'survey'
+    // },
     //  {
     //     mName: 'Map',
     //     IconName: require('../resources/assets/icon/BanDo.png'),
+    //     disable:true,
     //     mID: 'location',
     //     routerName: 'location'
     // },
-    {
-        mName: 'SubmitQuestion',
-        IconName: require('../resources/assets/icon/DatCauHoi.png'),
-        mID: 'submit_question',
-        routerName: 'submit_question'
+     {
+        mName: 'ProductCost',
+        IconName: "contao",
+        isIcon: true,
+        disable:true,
+        mID: 'productCost',
+        routerName: 'productCost'
     },
+    {
+        mName: 'RegisterTest',
+        IconName: 'car',
+        isIcon: true,
+        disable:true,
+        mID: 'registerTest',
+        routerName: 'registerTest'
+    },
+    {
+        mName: 'RegisterGuarantee',
+        IconName: 'car',
+        isIcon: true,
+        disable:true,
+        mID: 'registerGuarantee',
+        routerName: 'registerGuarantee'
+    },
+    {
+        mName: 'HelpService',
+        IconName: 'ambulance',
+        isIcon: true,
+        disable:true,
+        mID: 'helpService',
+        routerName: 'helpService'
+    },
+    
+    // {
+    //     mName: 'SubmitQuestion',
+    //     IconName: require('../resources/assets/icon/DatCauHoi.png'),
+    //     mID: 'submit_question',
+    //     routerName: 'submit_question'
+    // },
 ]

@@ -108,7 +108,7 @@ class QrCodeProductScanner extends Component {
         const { user } = this.props.loginReducer;
         if (!isLoading) {
             currentQrCode = e.data;
-            Alert.alert(I18n.t('report'), e.data);
+            // Alert.alert(I18n.t('report'), e.data);
             searchProductByQrCode({ qrCode: e.data }, user)
             setTimeout(() => {
                 currentQrCode = null;
@@ -133,7 +133,7 @@ class QrCodeProductScanner extends Component {
                         reactivateTimeout={3000}
                         topContent={
                             <Text style={styles.centerText}>
-                                Quét mã QR Code quầy booth
+                                Quét mã QR Code để lấy thông tin sản phẩm
                             </Text>
                         }
                         // bottomContent={

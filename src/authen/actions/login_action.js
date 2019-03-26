@@ -64,8 +64,9 @@ export function login(user) {
     Keyboard.dismiss();
     //Actions.home()
     dispatch(_loging());
-    var _header = await helper.buildHeader();
+    // var _header = await helper.buildHeader();
     let error = false;
+    debugger;
     fetch(`${AppConfig.LOGIN}`, {
       method: "POST",
       headers: {

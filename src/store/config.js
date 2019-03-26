@@ -29,8 +29,8 @@ export default function storeConfig(callback) {
             window.devToolsExtension ? window.devToolsExtension() : x => x
         )
     )
-    callback(store)
-    // persistStore(store, { storage: AsyncStorage }, () => callback(store))
+    // callback(store)
+    persistStore(store, { storage: AsyncStorage }, () => callback(store))
     // let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
     // let store1 = createStoreWithMiddleware(reducers, initialState);
     //return store;

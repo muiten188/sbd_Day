@@ -1,4 +1,3 @@
-import { Left } from "native-base";
 
 export default {
   container: {
@@ -12,6 +11,16 @@ export default {
     alignItems: "center",
     paddingLeft:6,
     
+  },
+  backgroundImage: {
+    position:'absolute',
+    top:0,
+    left:0,
+    bottom:0,
+    right:0,
+    width:'100%',
+    height:'100%',
+    resizeMode: "contain"
   },
   row:{
     height:50,

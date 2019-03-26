@@ -166,7 +166,7 @@ class Product extends Component {
         return (<Grid style={{ width: '100%', height: 75, marginBottom: 4 }}>
             <Col style={{ width: 80, marginTop: 10 }}>
                 <View style={{ width: 60, height: 60, borderWidth: 0.5, borderColor: '#cecece' }}>
-                    <Image style={{ flex: 1 }} source={urlAvartar ?  { uri: urlAvartar}:require('../../resources/assets/associate.png')}></Image>
+                    <Image style={{ flex: 1,resizeMode:'contain' }} source={urlAvartar ?  { uri: urlAvartar}:require('../../resources/assets/Honda-Logo.jpg')}></Image>
                 </View>
             </Col>
             <Col style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
@@ -177,8 +177,8 @@ class Product extends Component {
                     </Text>
 
                     <Text style={{ fontStyle: "italic" }}>
-                        <Text style={{}}>{I18n.t('Company')}: </Text>
-                        <Text style={{}}>{this.textEclipse(item.company, 30)}</Text>
+                        {/* <Text style={{}}>{I18n.t('Company')}: </Text>
+                        <Text style={{}}>{this.textEclipse(item.company, 30)}</Text> */}
                     </Text>
                 </TouchableOpacity>
             </Col>

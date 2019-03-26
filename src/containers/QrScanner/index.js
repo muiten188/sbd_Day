@@ -132,7 +132,7 @@ class qrCodeScanner extends Component {
         const { user } = this.props.loginReducer;
         if (!isLoading) {
             currentQrCode = e.data;
-            Alert.alert(I18n.t('report'), e.data);
+            // Alert.alert(I18n.t('report'), e.data);
             checkInByQrCode({ barcode: e.data }, user)
             setTimeout(() => {
                 currentQrCode = null;

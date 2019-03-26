@@ -37,7 +37,7 @@ export default {
   Guests: 'Danh sách khách mời',
   News: 'Tin tức',
   Speech: 'Speech',
-  Product: 'Sản phẩm trưng bày',
+  Product: 'Sản phẩm',
   Location: 'Vị trí',
   Survey: 'Khảo sát',
   SubmitQuestion: 'Đặt câu hỏi',
@@ -97,5 +97,12 @@ export default {
   didCheckin:'Đã Check in',
   getGuestsFail:"Lấy thông tin khách mời thất bại",
   getProductByQrcodeFail:'Lấy thông tin sản phẩm thất bại do sai QRcode',
-  back:'Quay lại'
+  back:'Quay lại',
+  Beacon:"Beacon",
+  ProductCost:'Chi phí mua xe',
+  RegisterTest:'Đăng ký lái thử',
+  RegisterGuarantee:'Đăng ký bảo dưỡng',
+  HelpService:'Dịch vụ ứng cứu',
+  backButton:'Quay lại',
+  description:'Mô tả'
 };

@@ -38,7 +38,7 @@ import * as types from "../../../store/constants/action_types";
 import * as helper from "../../../helper";
 const username = "";
 const password = "";
-const confirmPassword = "";
+const rePassword = "";
 const name = "";
 const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
@@ -47,12 +47,12 @@ const validate = values => {
   const error = {};
   error.username = "";
   error.password = "";
-  error.confirmPassword = "";
+  error.rePassword = "";
   error.name = "";
   error.email = "";
   var username = values.username;
   var password = values.password;
-  var confirmPassword = values.confirmPassword;
+  var rePassword = values.rePassword;
   var name = values.name;
   var email = values.email;
   if (values.username === undefined) {
@@ -61,8 +61,8 @@ const validate = values => {
   if (values.password === undefined) {
     password = "";
   }
-  if (values.confirmPassword === undefined) {
-    confirmPassword = "";
+  if (values.rePassword === undefined) {
+    rePassword = "";
   }
   if (values.name === undefined) {
     name = "";
@@ -76,11 +76,11 @@ const validate = values => {
   if (password.length == 0 || password == "") {
     error.password = "trống";
   }
-  if (confirmPassword.length == 0 || confirmPassword == "") {
-    error.confirmPassword = "trống";
+  if (rePassword.length == 0 || rePassword == "") {
+    error.rePassword = "trống";
   }
-  if (confirmPassword !== password) {
-    error.confirmPassword = "không khớp";
+  if (rePassword !== password) {
+    error.rePassword = "không khớp";
   }
   if (name.length == 0 || name == "") {
     error.name = "trống";
@@ -106,8 +106,8 @@ class register extends Component {
         items: []
       }
     };
-    I18n.defaultLocale = "vi";
-    I18n.locale = "vi";
+    I18n.defaultLocale = "vn";
+    I18n.locale = "vn";
     I18n.currentLocale();
   }
 
@@ -143,7 +143,7 @@ class register extends Component {
           text: 'Ok',
           onPress: (e) => {
             registerAction.clearRegister();
-            Actions.reset('login');
+            Actions.login();
           }
         }],
           { cancelable: false });
@@ -171,11 +171,11 @@ class register extends Component {
 
         <Loading isShow={registerReducer.registing} />
         {/* background */}
-        {/* <Image
+        <Image
           source={require("../../../resources/assets/splash1.png")}
           style={[styles.backgroundImage]}
-        /> */}
-        <Content contentContainerStyle={{ justifyContent: 'center', alignItems: "center"}}>
+        />
+        <Content contentContainerStyle={{ justifyContent: 'center', alignItems: "center" }}>
           <View style={styles.loginform}>
             <Form style={styles.form}>
               <View style={styles.item}>
@@ -184,7 +184,7 @@ class register extends Component {
                   icon="user-circle-o"
                   name="name"
                   placeholder={I18n.t("lastName", {
-                    locale: locale ? locale : "vi"
+                    locale: locale ? locale : "vn"
                   })}
                   component={InputField}
                 />
@@ -195,7 +195,7 @@ class register extends Component {
                   icon="user-circle-o"
                   name="email"
                   placeholder={I18n.t("email", {
-                    locale: locale ? locale : "vi"
+                    locale: locale ? locale : "vn"
                   })}
                   validate={email}
                   component={InputField}
@@ -207,7 +207,7 @@ class register extends Component {
                   icon="user-circle-o"
                   name="username"
                   placeholder={I18n.t("account", {
-                    locale: locale ? locale : "vi"
+                    locale: locale ? locale : "vn"
                   })}
                   component={InputField}
                 />
@@ -218,7 +218,7 @@ class register extends Component {
                   icon="key"
                   name="password"
                   placeholder={I18n.t("password", {
-                    locale: locale ? locale : "vi"
+                    locale: locale ? locale : "vn"
                   })}
                   secureTextEntry={true}
                   component={InputField}
@@ -228,9 +228,9 @@ class register extends Component {
                 {/* <Icon active name="lock" /> */}
                 <Field
                   icon="key"
-                  name="confirmPassword"
+                  name="rePassword"
                   placeholder={I18n.t("confirmPassword", {
-                    locale: locale ? locale : "vi"
+                    locale: locale ? locale : "vn"
                   })}
                   secureTextEntry={true}
                   component={InputField}
@@ -245,22 +245,38 @@ class register extends Component {
                   {I18n.t("register", {
                     locale: this.state.languageSelect
                       ? this.state.languageSelect
-                      : "vi"
+                      : "vn"
                   })}
                 </Text>
               </Button>
-              <Button transparent block dark style={[styles.buttonLogin]}
-                onPress={() => {
-                  Actions.login()
-                }}>
-                <Text uppercase={false} >
-                  {I18n.t("login", {
-                    locale: this.state.languageSelect
-                      ? this.state.languageSelect
-                      : "vi"
-                  })}
-                </Text>
-              </Button>
+              <Grid>
+                <Row>
+                  <Col>
+                    <Button transparent block dark style={[styles.buttonLogin]}
+                      onPress={() => {
+                        Actions.login()
+                      }}>
+                      <Text uppercase={false} >
+                        {I18n.t("login", {
+                          locale: this.state.languageSelect
+                            ? this.state.languageSelect
+                            : "vn"
+                        })}
+                      </Text>
+                    </Button></Col>
+                  <Col>
+                    <Button transparent block dark style={[styles.buttonLogin]}
+                      onPress={() => {
+                        Actions.pop()
+                      }}>
+                      <Text uppercase={false} >
+                        {I18n.t("backButton")}
+                      </Text>
+                    </Button></Col>
+                </Row>
+              </Grid>
+
+
             </Form>
             {/* <GoogleSigninButton
             style={{ width: 212, height: 48 }}
@@ -283,8 +299,9 @@ function mapStateToProps(state, props) {
       : {
         name: "",//"Bùi đình"
         username: "",//"bachbd"
+        email: '',
         password: "",//"123456a@"
-        confirmPassword: ""//'123456a@'
+        rePassword: ""//'123456a@'
       }
   };
 }

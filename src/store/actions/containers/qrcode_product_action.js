@@ -6,6 +6,7 @@ import * as helper from '../../../helper';
 export function searchProductByQrCode(values, user) {
     let data = [];
     let dataPost = {};
+    debugger;
     dataPost = values ? values : {};
     var error = false;
     return async (dispatch) => {

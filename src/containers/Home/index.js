@@ -101,8 +101,8 @@ class Home extends Component {
     console.log('home construct')
     this.state = {
       languageSelect: 'vn',
-      currentTab: this.props.screenId == "login"||this.props.screenId == "register" ? 2 : 0,
-      initialPage: this.props.screenId == "login"||this.props.screenId == "register" ? 2 : 0
+      currentTab: this.props.screenId == "login"||this.props.screenId == "register" ? 1 : 0,
+      initialPage: this.props.screenId == "login"||this.props.screenId == "register" ? 1 : 0
     };
     this.loadSetting();
   }
@@ -264,7 +264,7 @@ class Home extends Component {
 
 
 
-                  <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
+                  {/* <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>
                     <Grid>
                       <Row style={styles.iconTab}>
                         <Image style={{ width: 18, height: 18 }} source={require('../../resources/assets/icon/qr-code.png')} ></Image>
@@ -275,8 +275,7 @@ class Home extends Component {
                     </Grid>
                   </TabHeading>}>
                     {this.renderNotifiTab()}
-                    {/* <Notification /> */}
-                  </Tab>
+                  </Tab> */}
 
                   {/* {user && user.accountType === 'COORDINATOR' ? 
                     <Tab activeTabStyle={{ backgroundColor: "yellow" }} heading={<TabHeading style={styles.tabHeading}>

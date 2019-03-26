@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
+  Image
 } from "react-native";
 import Register from '../../authen/containers/Register';
 import Login from '../../authen/containers/Login';
@@ -23,7 +24,6 @@ import {
   H2,
   H3,
   ListItem,
-  Left,
   CheckBox,
   Icon,
   Right,
@@ -155,6 +155,10 @@ class Profile extends Component {
     const { handleSubmit } = this.props;
     return (
       <Container style={styles.container}>
+        {user ?null:<Image
+                  source={require("../../resources/assets/Honda-Logo.jpg")}
+                  style={[styles.backgroundImage]}
+        />}
         {user ? <View style={{ flex: 1 }}><User user={user} onLogout={this.onLogout.bind(this)}></User><Grid style={styles.Grid}>
           <Content>
             <Row style={styles.row}>
@@ -166,7 +170,7 @@ class Profile extends Component {
               <Col size={2}>
                 <View style={{ flex: 1, marginTop: 5, borderColor: '#cecece' }}>
                   <Field
-                    name="fullName"
+                    name="name"
                     placeholder={''}
                     label={I18n.t("fullName")}
                     component={InputField}
@@ -178,30 +182,11 @@ class Profile extends Component {
             <Row style={styles.row}>
               <Col size={1}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
-                  <Text>{I18n.t("phone")}</Text>
-                </View>
-              </Col>
-              <Col size={2}>
-                <View style={{ flex: 1, marginTop: 5, borderColor: '#cecece' }}>
-                  <Field
-                    name="phoneNumber"
-                    placeholder={''}
-                    label={I18n.t("phone")}
-                    component={InputField}
-                    disabled
-                  />
-                </View>
-              </Col>
-            </Row>
-
-            <Row style={styles.row}>
-              <Col size={1}>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
                   <Text>{I18n.t("email")}</Text>
                 </View>
               </Col>
               <Col size={2}>
-                <View style={{ flex: 1, marginTop: 5, borderWidth: 0, borderColor: '#cecece' }}>
+                <View style={{ flex: 1, marginTop: 5, borderColor: '#cecece' }}>
                   <Field
                     name="email"
                     placeholder={''}
@@ -210,17 +195,6 @@ class Profile extends Component {
                     disabled
                   />
                 </View>
-              </Col>
-            </Row>
-
-            <Row style={styles.row}>
-              <Col size={1}>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
-                  <Text>{I18n.t("Company")}</Text>
-                </View>
-              </Col>
-              <Col size={2} >
-                <Text style={{ paddingLeft: 6, paddingRight: 6 }}>{user.companyName}</Text>
               </Col>
             </Row>
 
@@ -270,9 +244,27 @@ class Profile extends Component {
           <Row style={{ position: 'absolute', bottom: 20 }}>
             <Button block style={{ width: '98%', marginLeft: 5, backgroundColor: '#007db7' }} onPress={this.onLogout.bind(this)}><Text>Đăng xuất</Text></Button>
           </Row></View> :
-            <Register></Register>
-            // <Login></Login>
-          
+          <Grid>
+            <Row>
+              
+            </Row>
+            <Row style={{ height: 50, marginTop: 20}}>
+              <Col>
+                <Button block style={{ width: '98%', marginLeft: 5, backgroundColor: '#007db7' }} onPress={() => {
+                  Actions.login()
+                }}><Text>Đăng nhập</Text></Button>
+              </Col>
+              <Col>
+                <Button block style={{ width: '98%', marginLeft: 5, backgroundColor: '#007db7' }} onPress={() => {
+                  Actions.register()
+                }}><Text>Đăng ký</Text></Button>
+              </Col>
+
+            </Row>
+          </Grid>
+          // <Register></Register>
+          // <Login></Login>
+
         }
 
       </Container >

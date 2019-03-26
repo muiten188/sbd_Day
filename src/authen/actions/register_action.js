@@ -3,7 +3,7 @@ import { Keyboard } from "react-native";
 import * as types from "../../store/constants/action_types";
 import * as AppConfig from "../../config/app_config";
 import { Actions } from 'react-native-router-flux';
-
+import DeviceInfo from 'react-native-device-info';
 function getQueryString(params) {
   return Object.keys(params)
     .map(k => {
@@ -19,47 +19,51 @@ function getQueryString(params) {
 }
 
 export function register(user) {
-
+  debugger;
   return dispatch => {
     //dispatch(_register(true, user));
     Keyboard.dismiss();
     //Actions.home()
     dispatch(_registing());
-    let error = false;
-    fetch(`${AppConfig.REGISTER}?${getQueryString(user)}`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(function (response) {
-        
-        if (response.status != 200) {
-          dispatch(_register(false));
-          error = true;
-        } else {
-          return response.json();
-        }
+    DeviceInfo.getMACAddress().then(mac => {
+      user.macId = mac;
+      let error = false;
+      fetch(`${AppConfig.REGISTER}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
       })
-      .then(function (responseJson) {
-        if (responseJson) {
-          var oUser = responseJson;
-          dispatch(_register(true, oUser));
+        .then(function (response) {
 
-        }
-        else {
-          if (!error) {
+          if (response.status != 200) {
             dispatch(_register(false));
+            error = true;
+          } else {
+            return response.json();
           }
-        }
-      })
-      .catch(function (error) {
-        dispatch(_register(false));
-      });
-  };
-}
+        })
+        .then(function (responseJson) {
+          if (responseJson) {
+            var oUser = responseJson;
+            dispatch(_register(true, oUser));
 
+          }
+          else {
+            if (!error) {
+              dispatch(_register(false));
+            }
+          }
+        })
+        .catch(function (error) {
+          dispatch(_register(false));
+        });
+    });
+
+  }
+}
 export function _registing() {
   return {
     type: types.REGISTING,
@@ -82,7 +86,7 @@ export function _register(status, user) {
   }
 }
 
-export function clearRegister(){
+export function clearRegister() {
   return {
     type: types.REGISTER_CLEAR,
   };

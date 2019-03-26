@@ -102,7 +102,7 @@ class ProductDetail extends Component {
                         <Row>
                             <View style={styles.Item}>
                                 <Text>
-                                    <Text style={{ fontWeight: '500' }}>{I18n.t('Company') + " : "}</Text> {productDetail.company}
+                                    <Text style={{ fontWeight: '500' }}>{I18n.t('description') + " : "}</Text> {productDetail.company}
                                 </Text>
                             </View>
                         </Row>
