@@ -1,4 +1,4 @@
-export const API_HOST_BASE = 'http://172.28.42.112:8090/';//'http://event.easylink.vn/event-manager-api/'http://113.171.23.144:8080/honda-api/
+export const API_HOST_BASE = 'http://113.171.23.202/honda-api/';//http://172.28.42.112:8090///'http://event.easylink.vn/event-manager-api/'http://113.171.23.144:8080/honda-api/
 export const API_HOST = `${API_HOST_BASE}mobile/`;
 export const API_SURVEY=`http://event.easylink.vn/event-admin/survey.html#!/survey`;
 export const GET_Eventlist = `${API_HOST}api/mobile/museum/`;

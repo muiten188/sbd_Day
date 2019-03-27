@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:423620750614:android:8c221a3bf197f8a6",
         "android_client_info": {
-          "package_name": "com.saobacdau_event"
+          "package_name": "com.saobacdau_honda"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "423620750614-kkcsf6gi7f0hoi4g6d7ua3n5r4a6j8qe.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.saobacdau_event",
+            "package_name": "com.saobacdau_honda",
             "certificate_hash": "4748b6adc001a8bb0c3ef284b20149a86ff650a8"
           }
         },
@@ -26,7 +26,7 @@
           "client_id": "423620750614-vh5edkevd3dpftup4a1vd7hhhn89g1go.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.saobacdau_event",
+            "package_name": "com.saobacdau_honda",
             "certificate_hash": "46a77cb91f44e7e5e6190533e0dd947e3e2584bb"
           }
         },
@@ -34,7 +34,7 @@
           "client_id": "423620750614-p14c5n4dunleff0i5kt7nohbdplul20k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.saobacdau_event",
+            "package_name": "com.saobacdau_honda",
             "certificate_hash": "a86cfdd669ec26c1d547015522e6ba0aa80683c0"
           }
         },
